@@ -292,6 +292,8 @@ hi link DefinitionCount  Red
 hi link ReferencesCount  Red
 " Telescope
 hi link TelescopeBorder FloatBorder
+hi link TelescopeNormal Pmenu
+hi link TelescopeMultiSelection PmenuSel
 " Git
 hi link diffAdded DiffAdd
 hi link diffChanged DiffChange
@@ -321,3 +323,7 @@ hi link CmpItemKindFolderDefault Brown
 hi link CmpItemKindOperatorDefault Operator
 hi link CmpItemKindSnippetDefault Macro
 ]])
+
+hi("TelescopeSelection", "LightHighlight", "Grey", "bold")
+hi("TelescopeMatching", "LightOrange")
+hi("TelescopePromptPrefix", "LightHighlight")
