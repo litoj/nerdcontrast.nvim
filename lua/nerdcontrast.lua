@@ -172,7 +172,7 @@ augroup hi_ft
 	au FileType markdown hi link markdownLinkTextDelimiter Delimiter
 	au FileType markdown hi link markdownLinkDelimiter Delimiter
 	au FileType markdown hi link markdownEscape SpecialChar
-	au FileType markdown hi link markdownCode LightOlive
+	au FileType markdown hi link markdownCode Cyan
 	au FileType markdown hi link markdownCodeBlock LightGrey
 	au FileType markdown hi link markdownItalicDelimiter Delimiter
 	au FileType markdown hi link markdownBoldDelimiter Delimiter
