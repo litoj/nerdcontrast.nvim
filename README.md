@@ -74,7 +74,7 @@ vim.cmd "colorscheme nerdcontrast"
 
 ## Wider usage
 
-For more colour customization use global `colours["Colour name"][0]`
+For more colour customization use global `colours["Colour name"][1]`
 You can link other colours to the same name as in the table.
 Create customized highlights using `hi` method like:
 
