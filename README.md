@@ -39,38 +39,24 @@ vim.cmd "colorscheme nerdcontrast"
 ![Markdown](https://user-images.githubusercontent.com/54900518/150679390-89653466-d66a-4286-8288-29c58faa096a.png)
 ![Lua](https://user-images.githubusercontent.com/54900518/150679516-f89dbcd1-f789-457c-a290-7934af949624.png)
 
-
 ## Available colours
 
-| Name         | Code    |
-| ------------ | ------- |
-| None         | NONE    |
-| Black        | #222222 |
-| Violet       | #9040a8 |
-| Magenta      | #ad30a8 |
-| Pink         | #c06680 |
-| Red          | #cc2815 |
-| Brown        | #885515 |
-| Orange       | #cc6415 |
-| Yellow       | #cfa815 |
-| Olive        | #99a015 |
-| Green        | #54a015 |
-| Cyan         | #32a08d |
-| Blue         | #3a6dad |
-| Grey         | #5a5856 |
-| LightGrey    | #969390 |
-| LightViolet  | #ad4dd0 |
-| LightMagenta | #bd40b7 |
-| LightPink    | #e7909a |
-| LightRed     | #f03522 |
-| LightOrange  | #f09322 |
-| LightYellow  | #f0e822 |
-| LightOlive   | #c0e022 |
-| LightGreen   | #85f022 |
-| LightCyan    | #80f0c8 |
-| LightBlue    | #40a3e0 |
-| MarineBlue   | #88c0e0 |
-| White        | #f0eeea |
+| DarkName | Code    | BrightName   | Code    |
+| -------- | ------- | ------------ | ------- |
+| Black    | #222222 | LightGrey    | #969390 |
+| Violet   | #9040a8 | LightViolet  | #ad4dd0 |
+| Magenta  | #ad30a8 | LightMagenta | #bd40b7 |
+| Pink     | #c06680 | LightPink    | #e7909a |
+| Red      | #cc2815 | LightRed     | #f03522 |
+| Brown    | #885515 | None         | NONE    |
+| Orange   | #cc6415 | LightOrange  | #f09322 |
+| Yellow   | #cfa815 | LightYellow  | #f0e822 |
+| Olive    | #99a015 | LightOlive   | #c0e022 |
+| Green    | #54a015 | LightGreen   | #85f022 |
+| Cyan     | #32a08d | LightCyan    | #80f0c8 |
+| Blue     | #3a6dad | LightBlue    | #40a3e0 |
+| None     | NONE    | MarineBlue   | #88c0e0 |
+| Grey     | #5a5856 | White        | #f0eeea |
 
 ## Wider usage
 
