@@ -154,7 +154,6 @@ hi link commentTSConstant Constant
 hi link TSTagAttribute Parameter
 
 augroup hi_ft
-	au FileType lua hi link luaParen Delimiter
 	au FileType lua hi link luaTSConstructor Delimiter
 	"au FileType lua hi link luaTSField Normal
 
@@ -178,16 +177,19 @@ augroup hi_ft
 	au FileType markdown hi link markdownItalicDelimiter Delimiter
 	au FileType markdown hi link markdownBoldDelimiter Delimiter
 	au FileType markdown hi link markdownBoldItalicDelimiter Delimiter
-
-	au FileType sh,markdown hi link shDeref Variable
-	au FileType sh,markdown hi link shShellVariables Variable
-	au FileType sh,markdown hi link shVariable Variable
-	au FileType sh,markdown hi link shQuote String
-	au FileType sh,markdown hi link shPosnParm Delimiter
-	au FileType sh,markdown hi link shArithmetic Operator
-	au FileType sh,markdown hi link shExpr Operator
-	au FileType sh,markdown hi link shOption Parameter
-	au FileType sh,markdown hi link shStatement Normal
+	au FileType markdown hi link shDeref Variable
+	au FileType markdown hi link shShellVariables Variable
+	au FileType markdown hi link shVariable Variable
+	au FileType markdown hi link shQuote String
+	au FileType markdown hi link shPosnParm Delimiter
+	au FileType markdown hi link shArithmetic Operator
+	au FileType markdown hi link shExpr Operator
+	au FileType markdown hi link shOption Parameter
+	au FileType markdown hi link shStatement Normal
+	au FileType markdown hi link luaConstant Keyword
+	au FileType markdown hi link luaTable Delimiter
+	au FileType markdown hi link luaIn Repeat
+	au FileType markdown hi link luaFunction Keyword
 
 	au FileType xml,markdown hi link xmlAttrib Type
 	au FileType xml,markdown hi link xmlEqual Operator
