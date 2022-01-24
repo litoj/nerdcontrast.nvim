@@ -54,7 +54,7 @@ vim.cmd "colorscheme nerdcontrast"
 | Olive    | #99a015 | LightOlive   | #c0e022 |
 | Green    | #54a015 | LightGreen   | #85f022 |
 | Cyan     | #32a08d | LightCyan    | #80f0c8 |
-| Blue     | #3a6dad | LightBlue    | #40a3e0 |
+| Blue     | #326dcd | LightBlue    | #40a3e0 |
 | None     | NONE    | MarineBlue   | #88c0e0 |
 | Grey     | #5a5856 | White        | #f0eeea |
 
