@@ -7,7 +7,7 @@ _G.colours = {
 	Red = {"#cc2815", "1"},
 	Brown = {"#885515", "3"},
 	Orange = {"#cc6415", "3"},
-	Yellow = {"#cfa815", "11"},
+	Yellow = {"#cfa815", "3"},
 	Olive = {"#99a015", "2"},
 	Green = {"#54a015", "2"},
 	Cyan = {"#32a08d", "6"},
@@ -18,7 +18,7 @@ _G.colours = {
 	LightMagenta = {"#bd40b7", "5"},
 	LightPink = {"#e7909a", "13"},
 	LightRed = {"#f03522", "9"},
-	LightOrange = {"#f09322", "3"},
+	LightOrange = {"#f09322", "11"},
 	LightYellow = {"#f0e822", "11"},
 	LightOlive = {"#c0e022", "10"},
 	LightGreen = {"#85f022", "10"},
@@ -58,20 +58,14 @@ function _G.hi(group, fg, bg, extra, extra_colour)
 	vim.cmd(string.format("hi %s%s%s%s%s", group, fg, bg, extra, extra_colour))
 end
 
-for i, val in pairs(colours) do
-	vim.cmd(string.format("hi %s guifg=%s ctermfg=%s", i, val[1], val[2]))
-end
-
 colours.Highlight = colours.Green -- highlight
 colours.LightHighlight = colours.LightGreen -- highlight
 colours.Contrast = colours.Magenta -- contrast
 colours.LightContrast = colours.LightMagenta -- contrast
-vim.cmd([[
-hi link Highlight Green
-hi link LightHighlight LightGreen
-hi link Contrast Magenta
-hi link LightContrast LightMagenta
-]])
+
+for i, val in pairs(colours) do
+	vim.cmd(string.format("hi %s guifg=%s ctermfg=%s", i, val[1], val[2]))
+end
 
 hi("Pmenu", "White", "None")
 hi("PmenuSel", "Black", "Highlight")
@@ -106,6 +100,7 @@ hi("DiffDelete", "Red", "Black", "NONE")
 hi("DiffText", "Yellow", "Black", "NONE")
 hi("Underlined", "LightBlue", "None", "underline", "LightBlue")
 hi("Url", "LightGrey", "None", "italic")
+hi("Constant", "Magenta", "None", "italic")
 vim.cmd([[
 hi link FloatBorder Magenta
 hi clear LineNr
@@ -137,8 +132,6 @@ hi link String Yellow
 hi link Character LightYellow
 hi link Number LightPink
 hi link Boolean Keyword
-hi clear Constant
-hi link Constant LightViolet
 hi clear Identifier
 hi link Identifier Normal
 hi link Variable Green
@@ -199,6 +192,7 @@ augroup hi_ft
 	au FileType yaml hi link yamlTSField TSKeyword
 
 	au FileType sh,bash hi link bashTSConstant TSVariable
+	au FileType sh,bash hi bashTSConstant gui=italic
 	au FileType sh,bash hi link bashTSNone TSString
 " Packer
 	au FileType packer hi link packerSuccess Title
@@ -226,6 +220,14 @@ augroup hi_ft
 	au FileType startify hi link StartifySlash LightGrey
 	au FileType startify hi link StartifyFile White
 augroup END
+
+hi link BufferVisible White
+hi link BufferVisibleMod LightRed
+hi link BufferVisibleSign LightContrast
+hi link BufferCurrentSign LightHighlight
+hi link BufferInactive LightGrey
+hi link BufferInactiveMod Orange
+hi link BufferInactiveSign LightGrey
 ]])
 
 -- NvimTree
@@ -239,15 +241,6 @@ hi("NvimTreeOpenedFile", "Violet", nil, "bold")
 hi("BufferCurrent", "White", nil, "bold")
 hi("BufferCurrentMod", "LightRed", nil, "bold")
 hi("BufferTabPages", "White", nil, "bold")
-vim.cmd([[
-hi link BufferVisible White
-hi link BufferVisibleMod LightRed
-hi link BufferVisibleSign LightContrast
-hi link BufferCurrentSign LightHighlight
-hi link BufferInactive LightGrey
-hi link BufferInactiveMod Orange
-hi link BufferInactiveSign LightGrey
-]])
 
 -- hi("ReferenceRead", nil, "Grey", "bold")
 -- hi("ReferenceText", nil, "Grey", "bold")
