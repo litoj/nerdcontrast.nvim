@@ -146,6 +146,8 @@ hi link TSKeywordOperator Keyword
 hi link commentTSConstant Constant
 hi link TSEnvironmentName Constant
 hi link TSTagAttribute Parameter
+hi link latexTSFunction TSVariable
+hi link latexTSEnvironment Command
 
 augroup hi_ft
 	au FileType lua hi link luaTSConstructor Delimiter
@@ -191,9 +193,6 @@ augroup hi_ft
 	au FileType xml,markdown hi link xmlTagName Keyword
 
 	au FileType yaml hi link yamlTSField TSKeyword
-
-	au FileType tex hi link latexTSFunction Variable
-	au FileType tex hi link latexTSEnvironment TSKeyword
 
 	au FileType sh,bash hi link bashTSConstant TSVariable
 	au FileType sh,bash hi bashTSConstant gui=italic
