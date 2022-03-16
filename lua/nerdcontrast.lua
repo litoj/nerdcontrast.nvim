@@ -267,6 +267,7 @@ hi link DiagnosticInfo LightOlive
 hi clear DiagnosticHint
 hi link DiagnosticHint LightGrey
 " Lspsaga
+hi link LspSagaLightBulbSign LightYellow
 hi link LspFloatWinBorder FloatBorder
 hi link LspSagaCodeActionBorder LspFloatWinBorder
 hi link LspSagaCodeActionTruncateLine LspFloatWinBorder
