@@ -149,81 +149,80 @@ hi link TSTagAttribute Parameter
 hi link latexTSFunction TSVariable
 hi link latexTSEnvironment Command
 
-augroup hi_ft
-	au FileType lua hi link luaTSConstructor Delimiter
-	"au FileType lua hi link luaTSField Normal
+hi link luaTSConstructor Delimiter
+"hi link luaTSField Normal
 
-	au FileType sql hi link sqlType String
-	au FileType sql hi link sqlStatement Command
-	au FileType sql hi link sqlOperator Operator
+hi link sqlType String
+hi link sqlStatement Command
+hi link sqlOperator Operator
 
-	au FileType cmake hi link cmakeVariableValue Variable
-	au FileType cmake hi link cmakeVariable Variable
-	au FileType cmake hi link cmakeEnvironment Constant
-	au FileType cmake hi link cmakeArguments Olive
-	au FileType cmake hi link cmakeEscaped SpecialChar
+hi link cmakeVariableValue Variable
+hi link cmakeVariable Variable
+hi link cmakeEnvironment Constant
+hi link cmakeArguments Olive
+hi link cmakeEscaped SpecialChar
 
-	au FileType markdown hi link markdownUrl Url
-	au FileType markdown hi link markdownListMarker Delimiter
-	au FileType markdown hi link markdownLinkTextDelimiter Delimiter
-	au FileType markdown hi link markdownLinkDelimiter Delimiter
-	au FileType markdown hi link markdownEscape SpecialChar
-	au FileType markdown hi link markdownCode Cyan
-	au FileType markdown hi link markdownCodeBlock LightGrey
-	au FileType markdown hi link markdownItalicDelimiter Delimiter
-	au FileType markdown hi link markdownBoldDelimiter Delimiter
-	au FileType markdown hi link markdownBoldItalicDelimiter Delimiter
-	au FileType markdown hi link shDeref Variable
-	au FileType markdown hi link shShellVariables Variable
-	au FileType markdown hi link shVariable Variable
-	au FileType markdown hi link shQuote String
-	au FileType markdown hi link shPosnParm Delimiter
-	au FileType markdown hi link shArithmetic Operator
-	au FileType markdown hi link shExpr Operator
-	au FileType markdown hi link shOption Parameter
-	au FileType markdown hi link shStatement Normal
-	au FileType markdown hi link luaConstant Keyword
-	au FileType markdown hi link luaTable Delimiter
-	au FileType markdown hi link luaIn Repeat
-	au FileType markdown hi link luaFunction Keyword
+hi link markdownUrl Url
+hi link markdownListMarker Delimiter
+hi link markdownLinkTextDelimiter Delimiter
+hi link markdownLinkDelimiter Delimiter
+hi link markdownEscape SpecialChar
+hi link markdownCode Cyan
+hi link markdownCodeBlock LightGrey
+hi link markdownItalicDelimiter Delimiter
+hi link markdownBoldDelimiter Delimiter
+hi link markdownBoldItalicDelimiter Delimiter
+hi link shDeref Variable
+hi link shShellVariables Variable
+hi link shVariable Variable
+hi link shQuote String
+hi link shPosnParm Delimiter
+hi link shArithmetic Operator
+hi link shExpr Operator
+hi link shOption Parameter
+hi link shStatement Normal
+hi link luaConstant Keyword
+hi link luaTable Delimiter
+hi link luaIn Repeat
+hi link luaFunction Keyword
 
-	au FileType xml,markdown hi link xmlAttrib Type
-	au FileType xml,markdown hi link xmlEqual Operator
-	au FileType xml,markdown hi link xmlTag Delimiter
-	au FileType xml,markdown hi link xmlTagName Keyword
+hi link xmlAttrib Type
+hi link xmlEqual Operator
+hi link xmlTag Delimiter
+hi link xmlTagName Keyword
 
-	au FileType yaml hi link yamlTSField TSKeyword
+hi link yamlTSField TSKeyword
 
-	au FileType sh,bash hi link bashTSConstant TSVariable
-	au FileType sh,bash hi bashTSConstant gui=italic
-	au FileType sh,bash hi link bashTSNone TSString
+hi link bashTSConstant TSVariable
+hi bashTSConstant gui=italic
+hi link bashTSNone TSString
+
 " Packer
-	au FileType packer hi link packerSuccess Title
-	au FileType packer hi link packerPackageName Title
-	au FileType packer hi link packerProgress Number
+hi link packerSuccess Title
+hi link packerPackageName Title
+hi link packerProgress Number
 " NvimTree
-	au FileType NvimTree hi! link NvimTreeIndentMarker Contrast
-	au FileType NvimTree hi! link NvimTreeImageFile Yellow
-	au FileType NvimTree hi! link NvimTreeGitDirty LightOrange
-	au FileType NvimTree hi! link NvimTreeGitDeleted DiffDelete
-	au FileType NvimTree hi! link NvimTreeGitMerge DiffChange
-	au FileType NvimTree hi! link NvimTreeGitRenamed DiffChange
-	au FileType NvimTree hi! link NvimTreeGitStaged DiffAdd
-	au FileType NvimTree hi! link NvimTreeGitNew DiffAdd
-	au FileType NvimTree hi! link NvimTreeRootFolder LightContrast
-	au FileType NvimTree hi! link NvimTreeFolderIcon Highlight
+hi! link NvimTreeIndentMarker Contrast
+hi! link NvimTreeImageFile Yellow
+hi! link NvimTreeGitDirty LightOrange
+hi! link NvimTreeGitDeleted DiffDelete
+hi! link NvimTreeGitMerge DiffChange
+hi! link NvimTreeGitRenamed DiffChange
+hi! link NvimTreeGitStaged DiffAdd
+hi! link NvimTreeGitNew DiffAdd
+hi! link NvimTreeRootFolder LightContrast
+hi! link NvimTreeFolderIcon Highlight
 "Startify
-	au FileType startify hi link StartifyHeader LightContrast
-	au FileType startify hi link StartifySection LightHighlight
-	au FileType startify hi link StartifyBracket Grey
-	au FileType startify hi link StartifyNumber Red
-	au FileType startify hi link StartifySpecial Black
-	au FileType startify hi link StartifyFooter Black
-	au FileType startify hi link StartifyPath LightGrey
-	au FileType startify hi link StartifySlash LightGrey
-	au FileType startify hi link StartifyFile White
-augroup END
-
+hi link StartifyHeader LightContrast
+hi link StartifySection LightHighlight
+hi link StartifyBracket Grey
+hi link StartifyNumber Red
+hi link StartifySpecial Black
+hi link StartifyFooter Black
+hi link StartifyPath LightGrey
+hi link StartifySlash LightGrey
+hi link StartifyFile White
+"Barbar
 hi link BufferVisible White
 hi link BufferVisibleMod LightRed
 hi link BufferVisibleSign LightContrast
