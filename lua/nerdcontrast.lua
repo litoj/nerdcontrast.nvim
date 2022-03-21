@@ -146,6 +146,7 @@ hi link TSKeywordOperator Keyword
 hi link commentTSConstant Constant
 hi link TSEnvironmentName Constant
 hi link TSTagAttribute Parameter
+
 hi link latexTSFunction TSVariable
 hi link latexTSEnvironment Command
 
