@@ -18,17 +18,17 @@ if exists("b:current_syntax")
 endif
 
 " define the config syntax
-syn match   configdelimiter "[()\[\];,]"
+syn match   configdelimiter "[()\[\];,:{}]"
 syn match   configoperator  "[=|&\*\+\<\>]"
 syn match   configcomment   "\(dnl.*\)\|\(#.*\)" contains=configDnl,@Spell
 syn match   configfunction  "\<[A-Z_][A-Z0-9_]*\>"
-syn match   confignumber    "[-+]\=\<\d\+\(\.\d*\)\=\>" contained
+syn match   confignumber    "[-+ ]*\d[.0-9]*" contained contains=configoperator
 syn keyword configDnl   	dnl contained
-syn keyword configkeyword   if then else fi test for in do done
+syn keyword configkeyword   if then else fi test for in do done true false
 syn keyword configspecial   cat rm eval
-syn match   configvalue    ".*$" contained contains=confignumber,configoperator,configdelimiter
-syn match   configlabel    "^[a-zA-Z-_]\+" contained
-syn match   configline     "^[a-zA-Z-_]\+=.*$" contains=configlabel,configvalue
+syn match   configvalue    "[^=]*$" contained contains=confignumber,configoperator,configdelimiter,configkeyword
+syn match   configlabel    "[a-zA-Z-_ \t]*=" contained contains=configoperator
+syn match   configline     "^[a-zA-Z-_ \t]\+=.*$" contains=configlabel,configvalue,configdelimiter,confignumber
 
 " This shortens the script, see syn-ext-match..
 syn region  configstring    start=+\z(["'`]\)+ skip=+\\\z1+ end=+\z1+ contains=@Spell
@@ -50,7 +50,7 @@ hi def link configkeyword   Keyword
 hi def link configlabel     Keyword
 hi def link configspecial   Special
 hi def link configstring    String
-hi def link configvalue    String
+hi def link configvalue     String
 hi def link configmsg       String
 
 
