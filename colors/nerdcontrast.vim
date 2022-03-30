@@ -1,1 +1,1 @@
-lua require("nerdcontrast")
+lua require("nerdcontrast")()

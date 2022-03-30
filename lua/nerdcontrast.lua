@@ -1,4 +1,4 @@
-_G.colours = {
+_G.colors = {
 	None = {"NONE", "NONE"},
 	Black = {"#222222", "0"},
 	Violet = {"#9040a8", "5"},
@@ -29,75 +29,88 @@ _G.colours = {
 }
 
 -- name=text type=fg/bg
-local function genColour(name, type)
-	return string.format(" gui%s=%s cterm%s=%s", type, colours[name][1], type, colours[name][2])
+local function genColor(name, type)
+	return string.format(" gui%s=%s cterm%s=%s", type, colors[name][1], type, colors[name][2])
 end
 
-function _G.hi(group, fg, bg, extra, extra_colour)
+function _G.hi(group, fg, bg, extra, extra_color)
 	if fg then
-		fg = genColour(fg, "fg")
+		fg = genColor(fg, "fg")
 	else
 		fg = ""
 	end
 	if bg then
-		bg = genColour(bg, "bg")
+		bg = genColor(bg, "bg")
 	else
 		bg = ""
 	end
 	if extra then
 		extra = string.format(" gui=%s cterm=%s", extra, extra)
-		if extra_colour then
-			extra_colour = " guisp=" .. colours[extra_colour][1]
+		if extra_color then
+			extra_color = " guisp=" .. colors[extra_color][1]
 		else
-			extra_colour = ""
+			extra_color = ""
 		end
 	else
 		extra = ""
-		extra_colour = ""
+		extra_color = ""
 	end
-	vim.cmd(string.format("hi %s%s%s%s%s", group, fg, bg, extra, extra_colour))
+	vim.cmd(string.format("hi %s%s%s%s%s", group, fg, bg, extra, extra_color))
 end
 
-colours.Highlight = colours.Green -- highlight
-colours.LightHighlight = colours.LightGreen -- highlight
-colours.Contrast = colours.Magenta -- contrast
-colours.LightContrast = colours.LightMagenta -- contrast
+for i, val in pairs(colors) do vim.cmd(string.format("hi %s guifg=%s ctermfg=%s", i, val[1], val[2])) end
 
-for i, val in pairs(colours) do
-	vim.cmd(string.format("hi %s guifg=%s ctermfg=%s", i, val[1], val[2]))
+colors.Bg = colors.Black
+colors.Fg = colors.White
+
+colors.Highlight = colors.Green -- highlight
+colors.LightHighlight = colors.LightGreen -- highlight
+colors.Contrast = colors.Magenta -- contrast
+colors.LightContrast = colors.LightMagenta -- contrast
+
+vim.cmd([[
+hi link Highlight Green
+hi link LightHighlight LightGreen
+hi link Contrast Magenta
+hi link LightContrast LightMagenta
+]])
+
+local highlights = {
+	{"Pmenu", "Fg", "None"},
+	{"PmenuSel", "Bg", "Highlight"},
+	{"Visual", nil, "Bg", "reverse"},
+	{"Search", "Bg", "LightOlive", "bold"},
+	{"IncSearch", "Bg", "LightOlive", "bold"},
+	{"FoldColumn", "Bg", "None"},
+	{"Folded", "LightGrey", "Bg", "bold"},
+	{"CursorColumn", "None", "Bg"},
+	{"CursorLine", "None", "Bg"},
+	{"CursorLineNR", "LightGrey", "Bg", "NONE"},
+	{"VertSplit", "LightGrey", "Bg", "NONE"},
+	{"StatusLineNC", "Bg", "LightGrey"},
+	{"Todo", "Bg", "Contrast", "bold"},
+	{"DiffAdd", "Green", "Bg", "NONE"},
+	{"DiffChange", "Cyan", "Bg", "NONE"},
+	{"DiffDelete", "Red", "Bg", "NONE"},
+	{"DiffText", "Yellow", "Bg", "NONE"},
+	-- {"luaTSField", "Fg"},
+}
+
+function _G.hiTheme(group, fg, bg, extra, extra_color)
+	table.insert(highlights, {group, fg, bg, extra, extra_color})
 end
 
-hi("Pmenu", "White", "None")
-hi("PmenuSel", "Black", "Highlight")
 hi("PmenuSbar", nil, "None")
 hi("PmenuThumb", nil, "Highlight")
 
-hi("Normal", "White", "None")
-hi("Title", "LightHighlight", nil, "NONE")
-hi("Search", "Black", "LightOlive", "bold")
-hi("IncSearch", "Black", "LightOlive", "bold")
-hi("Visual", nil, "Black", "reverse")
 hi("SignColumn", "Grey", "None")
-hi("FoldColumn", "Black", "None")
-hi("Folded", "LightGrey", "Black", "bold")
-hi("CursorColumn", nil, "Black")
-hi("CursorLine", nil, "Black")
-hi("CursorLineNR", "LightGrey", "Black", "NONE")
-hi("ColorColumn", nil, "Black")
-hi("Function", "White", nil) -- , "bold")
 hi("Comment", "LightGrey", nil, "italic")
+hi("Title", "LightHighlight", nil, "NONE")
 hi("MatchParen", "LightYellow", "None", "italic,bold")
-hi("VertSplit", "LightGrey", "Black", "NONE")
-hi("StatusLineNC", "Black", "LightGrey")
 hi("ErrorMsg", "LightRed", "None", "bold")
 hi("WarningMsg", "LightOrange", "None", "bold")
 hi("Question", "LightYellow", "None", "bold")
 hi("Error", "None", "None", "undercurl", "LightRed")
-hi("Todo", "Black", "Magenta", "bold,underline", "Blue")
-hi("DiffAdd", "Green", "Black", "NONE")
-hi("DiffChange", "Cyan", "Black", "NONE")
-hi("DiffDelete", "Red", "Black", "NONE")
-hi("DiffText", "Yellow", "Black", "NONE")
 hi("Underlined", "LightBlue", "None", "underline", "LightBlue")
 hi("Url", "LightGrey", "None", "italic")
 hi("Constant", "Magenta", "None", "italic")
@@ -113,6 +126,7 @@ hi clear SpecialKey
 hi link SpecialKey NonText
 hi clear Type
 hi link Type Normal
+hi link Function Normal
 hi link Keyword Blue
 hi clear Special
 hi link Special Keyword
@@ -151,7 +165,6 @@ hi link latexTSFunction TSVariable
 hi link latexTSEnvironment Command
 
 hi link luaTSConstructor Delimiter
-"hi link luaTSField Normal
 
 hi link sqlType String
 hi link sqlStatement Command
@@ -218,13 +231,13 @@ hi link StartifyHeader LightContrast
 hi link StartifySection LightHighlight
 hi link StartifyBracket Grey
 hi link StartifyNumber Red
-hi link StartifySpecial Black
-hi link StartifyFooter Black
+hi link StartifySpecial Bg
+hi link StartifyFooter Bg
 hi link StartifyPath LightGrey
 hi link StartifySlash LightGrey
-hi link StartifyFile White
+hi link StartifyFile Fg
 "Barbar
-hi link BufferVisible White
+hi link BufferVisible Fg
 hi link BufferVisibleMod LightRed
 hi link BufferVisibleSign LightContrast
 hi link BufferCurrentSign LightHighlight
@@ -241,13 +254,13 @@ hi("NvimTreeSpecialFile", "Pink", nil, "bold")
 hi("NvimTreeOpenedFile", "Violet", nil, "bold")
 
 -- Barbar
-hi("BufferCurrent", "White", nil, "bold")
+hiTheme("BufferCurrent", "Fg", nil, "bold")
 hi("BufferCurrentMod", "LightRed", nil, "bold")
-hi("BufferTabPages", "White", nil, "bold")
+vim.cmd("hi link BufferTabPager BufferCurrent")
 
--- hi("ReferenceRead", nil, "Grey", "bold")
--- hi("ReferenceText", nil, "Grey", "bold")
--- hi("ReferenceWrite", nil, "Grey", "bold")
+-- hiTheme("ReferenceRead", nil, "Grey", "bold")
+-- hiTheme("ReferenceText", nil, "Grey", "bold")
+-- hiTheme("ReferenceWrite", nil, "Grey", "bold")
 hi("DiagnosticVirtualTextError", "Red", nil, "italic,bold")
 hi("DiagnosticVirtualTextWarn", "Orange", nil, "italic")
 hi("DiagnosticVirtualTextHint", "LightGrey", nil, "italic")
@@ -256,7 +269,6 @@ hi("DiagnosticUnderlineError", nil, nil, "undercurl", "Red")
 hi("DiagnosticUnderlineWarn", nil, nil, "undercurl", "Orange")
 hi("DiagnosticUnderlineInfo", nil, nil, "undercurl", "LightGrey")
 hi("DiagnosticUnderlineHint", nil, nil, "underline", "LightGrey")
-hi("Todo", nil, "Contrast", "bold")
 vim.cmd([[
 hi clear DiagnosticError
 hi link DiagnosticError Red
@@ -302,6 +314,9 @@ hi link diffRemoved DiffRemove
 hi link gitcommitSummary Title
 hi link gitcommitHeader Title
 " Cmp
+hi link CmpItemMenuDefault Pmenu
+hi link CmpItemAbbrDefault Pmenu
+hi link CmpItemAbbrMatch Pmenu
 hi link CmpItemKindDefault Delimiter
 hi link CmpItemKindTextDefault String
 hi link CmpItemKindKeywordDefault Keyword
@@ -326,3 +341,28 @@ hi link CmpItemKindSnippetDefault Macro
 hi("TelescopeSelection", "LightHighlight", "Grey", "bold")
 hi("TelescopeMatching", "LightOrange")
 hi("TelescopePromptPrefix", "LightHighlight")
+
+return function()
+	if vim.g.WhiteTheme then
+		colors.Fg = colors.Black
+		colors.Bg = colors.White
+		vim.g.terminal_color_15 = colors.Black[1]
+		vim.g.terminal_color_0 = colors.White[1]
+		vim.cmd([[
+hi link Fg Black
+hi link Bg White
+]])
+		vim.cmd("hi Normal ctermfg=0 ctermbg=15 guifg=#000000 guibg=#ffffff")
+	else
+		colors.Bg = colors.Black
+		colors.Fg = colors.White
+		vim.g.terminal_color_0 = colors.Black[1]
+		vim.g.terminal_color_15 = colors.White[1]
+		vim.cmd([[
+hi link Bg Black
+hi link Fg White
+		]])
+		vim.cmd("hi Normal ctermfg=15 ctermbg=0 guifg=#f0eeea guibg=NONE")
+	end
+	for _, v in pairs(highlights) do hi(v[1], v[2], v[3], v[4], v[5]) end
+end

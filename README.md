@@ -1,6 +1,8 @@
 # nerdcontrast.nvim
 
-A dark colourscheme with optimal contrast based on default light theme of NetBeans IDE
+A colourscheme with optimal contrast based on default light theme of NetBeans IDE
+
+**Light** and **Dark** variants
 
 ## Requirements
 
@@ -20,8 +22,24 @@ end)
 Put this near the top of your `init.lua`.
 
 ```lua
+vim.g.WhiteTheme = true -- defaults to dark theme (value = false)
 vim.cmd "colorscheme nerdcontrast"
 ```
+
+For change based on daylight, use this:
+
+```lua
+local time = tonumber(os.date("%H"))
+vim.g.WhiteTheme = time > 6 and time < 21
+```
+
+An optional keybind toggle:
+
+```vim
+nnoremap <Leader>c <Cmd>lua vim.g.WhiteTheme=not vim.g.WhiteTheme<CR><Cmd>colorscheme nerdcontrast<CR>
+```
+
+If you use `galaxyline`, also add `<Cmd>luafile ~/.config/nvim/lua/galaxyline-s.lua<CR>` at the end.
 
 ## Support
 
@@ -60,10 +78,23 @@ vim.cmd "colorscheme nerdcontrast"
 
 ## Wider usage
 
-For more colour customization use global `colours["Colour name"][1]`
+For more colour customization use global `colors["Color name"][1]`
 You can link other colours to the same name as in the table.
 Create customized highlights using `hi` method like:
 
 ```lua
-hi("toSet", "fgColour", "bgColour", "bold,undercurl,NONE", "underlineColour")
+hi("toSet", "fgColor", "bgColor", "bold,undercurl,NONE", "underlineColor")
 ```
+
+For ease of use, the main used colours are linked as shortcuts to allow simple change:
+
+| Link           | Color       |
+| -------------- | ------------ |
+| Highlight      | Green        |
+| LightHighlight | LightGreen   |
+| Contrast       | Magenta      |
+| LightContrast  | LightMagenta |
+
+For Dark/Light independency, `Bg` and `Fg` colour links are also available. If you wish to use them
+and are expecting to be using the toggle shortcut, please refer to them through Vim's `hi link`
+feature or dedicated `hiTheme()` method.
