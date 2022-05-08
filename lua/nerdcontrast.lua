@@ -352,7 +352,7 @@ return function()
 hi link Fg Black
 hi link Bg White
 ]])
-		vim.cmd("hi Normal ctermfg=0 ctermbg=15 guifg=#000000 guibg=#ffffff")
+		vim.cmd("hi Normal ctermfg=0 ctermbg=15 guifg=#000000 guibg=#fafaff")
 	else
 		colors.Bg = colors.Black
 		colors.Fg = colors.White
