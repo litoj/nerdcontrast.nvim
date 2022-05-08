@@ -47,7 +47,7 @@ hi def link configDnl       Comment
 hi def link configfunction  Function
 hi def link confignumber    Number
 hi def link configkeyword   Keyword
-hi def link configlabel     Keyword
+hi def link configlabel     Variable
 hi def link configspecial   Special
 hi def link configstring    String
 hi def link configvalue     String
