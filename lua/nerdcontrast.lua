@@ -270,6 +270,7 @@ hi("DiagnosticUnderlineWarn", nil, nil, "undercurl", "Orange")
 hi("DiagnosticUnderlineInfo", nil, nil, "undercurl", "LightGrey")
 hi("DiagnosticUnderlineHint", nil, nil, "underline", "LightGrey")
 vim.cmd([[
+hi link i3ConfigCommand Command
 hi clear DiagnosticError
 hi link DiagnosticError Red
 hi clear DiagnosticWarn
