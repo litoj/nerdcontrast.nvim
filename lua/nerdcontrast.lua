@@ -1,7 +1,7 @@
 _G.colors = {
 	None = {"NONE", "NONE"},
 	Black = {"#222222", "0"},
-	Violet = {"#9040a8", "5"},
+	Violet = {"#8040ad", "5"},
 	Magenta = {"#ad30a8", "5"}, -- 9d2098
 	Pink = {"#c06680", "13"},
 	Red = {"#cc2815", "1"},
@@ -14,7 +14,7 @@ _G.colors = {
 	Blue = {"#3268ad", "4"},
 	Grey = {"#5a5856", "8"},
 	LightGrey = {"#969390", "7"},
-	LightViolet = {"#ad4dd0", "5"},
+	LightViolet = {"#a04ddd", "5"},
 	LightMagenta = {"#bd40b7", "5"},
 	LightPink = {"#e7909a", "13"},
 	LightRed = {"#f03522", "9"},
@@ -353,7 +353,7 @@ return function()
 hi link Fg Black
 hi link Bg White
 ]])
-		vim.cmd("hi Normal ctermfg=0 ctermbg=15 guifg=#000000 guibg=#fafaff")
+		vim.cmd("hi Normal ctermfg=0 ctermbg=15 guifg=#000000 guibg=#fffaf8")
 	else
 		colors.Bg = colors.Black
 		colors.Fg = colors.White
