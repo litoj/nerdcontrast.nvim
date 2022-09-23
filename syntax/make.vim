@@ -29,7 +29,7 @@ syn match makeInclKeyword /^include/ contained
 syn match makeInclude /^include [^ ]\+$/ contains=makeInclKeyword
 
 syn match makeDeps /:.*$/ contains=makeSep,makeVarCall contained
-syn match makeTarget /^[a-zA-Z\$()_.-]\+:.*/ contains=makeDeps,makeVarCall
+syn match makeTarget /^\([a-z_.-]\+\|\$([A-Z_]\+)\):.*/ contains=makeDeps,makeVarCall
 
 " Command
 syn match makeSilent "^\t@" contained
