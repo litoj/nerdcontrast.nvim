@@ -30,7 +30,7 @@ For change based on daylight, use this:
 
 ```lua
 local time = tonumber(os.date("%H"))
-vim.g.WhiteTheme = time > 6 and time < 21
+vim.g.WhiteTheme = time > 6 and time < 20
 ```
 
 An optional keybind toggle:
@@ -83,12 +83,13 @@ You can link other colours to the same name as in the table.
 Create customized highlights using `hi` method like:
 
 ```lua
-hi("toSet", "fgColor", "bgColor", "bold,undercurl,NONE", "underlineColor")
+hi("toSet", {fg="fgColor", bg="bgColor", sp="underlineColor"}, {bold=true, undercurl=true, ...})
+hl("group", "groupToLink")
 ```
 
 For ease of use, the main used colours are linked as shortcuts to allow simple change:
 
-| Link           | Color       |
+| Link           | Color        |
 | -------------- | ------------ |
 | Highlight      | Green        |
 | LightHighlight | LightGreen   |
