@@ -28,296 +28,306 @@ _G.colors = {
 	White = {"#f0eeea", 15},
 }
 
-function _G.hi(group, opts, extra)
-	if not extra then extra = {} end
-	if opts.fg then
-		extra.fg = _G.colors[opts.fg][1]
-		extra.ctermfg = _G.colors[opts.fg][2]
-	end
-	if opts.bg then
-		extra.bg = _G.colors[opts.bg][1]
-		extra.ctermbg = _G.colors[opts.bg][2]
-	end
-	if opts.sp then extra.sp = _G.colors[opts.sp][1] end
-	vim.api.nvim_set_hl(0, group, extra)
-end
-
-function _G.hl(group, link) vim.api.nvim_set_hl(0, group, {link = link}) end
-
-for i, val in pairs(colors) do vim.api.nvim_set_hl(0, i, {fg = val[1], ctermfg = val[2]}) end
-
-colors.Bg = colors.Black
-colors.Fg = colors.White
-
 colors.Highlight = colors.Green -- highlight
 colors.LightHighlight = colors.LightGreen -- highlight
 colors.Contrast = colors.Magenta -- contrast
 colors.LightContrast = colors.LightMagenta -- contrast
 
-hl("Highlight", "Green")
-hl("LightHighlight", "LightGreen")
-hl("Contrast", "Magenta")
-hl("LightContrast", "LightMagenta")
-
-local highlights = {
-	{"Pmenu", {fg = "Fg", bg = "None"}},
-	{"PmenuSel", {fg = "Bg", bg = "Highlight"}},
-	{"Visual", {bg = "Bg"}, {reverse = true}},
-	{"Search", {fg = "Bg", bg = "LightOlive"}, {bold = true}},
-	{"IncSearch", {fg = "Bg", bg = "LightOlive"}, {bold = true}},
-	{"FoldColumn", {fg = "Bg", bg = "None"}},
-	{"Folded", {fg = "LightGrey", bg = "Bg"}, {bold = true}},
-	{"CursorColumn", {fg = "None", bg = "Bg"}},
-	{"CursorLine", {fg = "None", bg = "Bg"}},
-	{"CursorLineNR", {fg = "LightGrey", bg = "Bg"}},
-	{"VertSplit", {fg = "LightGrey", bg = "Bg"}},
-	{"StatusLineNC", {fg = "Bg", bg = "LightGrey"}},
-	{"Todo", {fg = "Bg", bg = "Contrast"}, {bold = true}},
-	{"DiffAdd", {fg = "Green", bg = "Bg"}},
-	{"DiffChange", {fg = "Cyan", bg = "Bg"}},
-	{"DiffDelete", {fg = "Red", bg = "Bg"}},
-	{"DiffText", {fg = "Yellow", bg = "Bg"}},
-	{"LspReferenceRead", {bg = "Bg"}, {bold = true}},
-	{"LspReferenceText", {bg = "Bg"}, {bold = true}},
-	{"LspReferenceWrite", {bg = "Bg"}, {bold = true}},
+local themeDep = {
+	Pmenu = {{fg = "Fg"}},
+	PmenuSel = {{fg = "Bg", bg = "Highlight"}},
+	Visual = {{bg = "Bg", reverse = true}},
+	Search = {{fg = "Bg", bg = "LightOlive"}, {bold = true}},
+	IncSearch = {{fg = "Bg", bg = "LightOlive"}, {bold = true}},
+	FoldColumn = {{fg = "Bg"}},
+	Folded = {{fg = "LightGrey", bg = "Bg"}, {bold = true}},
+	CursorColumn = {{bg = "Bg"}},
+	CursorLine = {{bg = "Bg"}},
+	CursorLineNR = {{fg = "LightGrey", bg = "Bg"}},
+	VertSplit = {{fg = "LightGrey", bg = "Bg"}},
+	StatusLineNC = {{fg = "Bg", bg = "LightGrey"}},
+	Todo = {{fg = "Bg", bg = "Contrast"}, {bold = true}},
+	DiffAdd = {{fg = "Green", bg = "Bg"}},
+	DiffChange = {{fg = "Cyan", bg = "Bg"}},
+	DiffDelete = {{fg = "Red", bg = "Bg"}},
+	DiffText = {{fg = "Yellow", bg = "Bg"}},
+	LspReferenceRead = {{bg = "Bg"}, {bold = true}},
+	LspReferenceText = {{bg = "Bg"}, {bold = true}},
+	LspReferenceWrite = {{bg = "Bg"}, {bold = true}},
+	BufferCurrent = {{fg = "Fg"}, {bold = true}},
 }
 
-function _G.hiTheme(group, opts, extra) table.insert(highlights, {group, opts, extra}) end
+local highlights = {
+	Highlight = "Green",
+	LightHighlight = "LightGreen",
+	Contrast = "Magenta",
+	LightContrast = "LightMagenta",
+	-- Basics
+	PmenuSbar = {},
+	PmenuThumb = {bg = "Highlight"},
+	SignColumn = {fg = "Grey"},
+	Comment = {fg = "LightGrey", italic = true},
+	Title = {fg = "LightHighlight"},
+	MatchParen = {fg = "LightYellow", italic = true, bold = true},
+	ErrorMsg = {fg = "LightRed", bold = true},
+	WarningMsg = {fg = "LightOrange", bold = true},
+	Question = {fg = "LightYellow", bold = true},
+	Error = {sp = "LightRed", undercurl = true},
+	Underlined = {fg = "LightBlue", sp = "LightBlue", underline = true},
+	Url = {fg = "LightGrey", italic = true},
+	Constant = {fg = "Magenta", italic = true},
+	FloatBorder = "Magenta",
+	LineNr = "Grey",
+	StatusLine = "LightGrey",
+	NonText = "Violet",
+	SpecialKey = "NonText",
+	Type = "Fg",
+	Function = "Fg",
+	Keyword = "Blue",
+	Special = "Keyword",
+	SpecialChar = "Orange",
+	Delimiter = "LightRed",
+	Operator = "Red",
+	Statement = "Keyword",
+	PreProc = "Cyan",
+	Command = "LightBlue",
+	Define = "PreProc",
+	Conditional = "Command",
+	Repeat = "Command",
+	Include = "Keyword",
+	String = "Yellow",
+	Character = "LightYellow",
+	Number = "LightPink",
+	Boolean = "Keyword",
+	Identifier = "Normal",
+	Variable = "Green",
+	Field = "LightGreen",
+	Parameter = "Olive",
+	-- TreeSitter
+	TSField = "Field",
+	TSVariable = "Variable",
+	TSMath = "Number",
+	TSConstructor = "Identifier",
+	TSParameter = "Parameter",
+	TSKeywordOperator = "Keyword",
+	TSEnvironmentName = "Constant",
+	TSTagAttribute = "Parameter",
+	-- TreeSitter language highlight changes
+	["@constant.comment"] = "Constant",
+	["@function.latex"] = "TSVariable",
+	["@environment.latex"] = "Command",
+	["@constructor.lua"] = "Delimiter",
+	["@field.yaml"] = "TSKeyword",
+	["@constant.bash"] = {fg = "LightGreen", italic = true},
+	["@none.bash"] = "TSString",
+	-- Vim syntax highlight changes
+	sqlType = "String",
+	sqlStatement = "Command",
+	sqlOperator = "Operator",
 
-hi("PmenuSbar", {bg = "None"})
-hi("PmenuThumb", {bg = "Highlight"})
-hi("SignColumn", {fg = "Grey", bg = "None"})
-hi("Comment", {fg = "LightGrey"}, {italic = true})
-hi("Title", {fg = "LightHighlight"})
-hi("MatchParen", {fg = "LightYellow", bg = "None"}, {italic = true, bold = true})
-hi("ErrorMsg", {fg = "LightRed", bg = "None"}, {bold = true})
-hi("WarningMsg", {fg = "LightOrange", bg = "None"}, {bold = true})
-hi("Question", {fg = "LightYellow", bg = "None"}, {bold = true})
-hi("Error", {fg = "None", bg = "None", sp = "LightRed"}, {undercurl = true})
-hi("Underlined", {fg = "LightBlue", bg = "None", sp = "LightBlue"}, {underline = true})
-hi("Url", {fg = "LightGrey", bg = "None"}, {italic = true})
-hi("Constant", {fg = "Magenta", bg = "None"}, {italic = true})
-hl("FloatBorder", "Magenta")
-hl("LineNr", "Grey")
-hl("StatusLine", "LightGrey")
-hl("NonText", "Violet")
-hl("SpecialKey", "NonText")
-hl("Type", "Fg")
-hl("Function", "Fg")
-hl("Keyword", "Blue")
-hl("Special", "Keyword")
-hl("SpecialChar", "Orange")
-hl("Delimiter", "LightRed")
-hl("Operator", "Red")
-hl("Statement", "Keyword")
-hl("PreProc", "Cyan")
-hl("Command", "LightBlue")
-hl("Define", "PreProc")
-hl("Conditional", "Command")
-hl("Repeat", "Command")
-hl("Include", "Keyword")
-hl("String", "Yellow")
-hl("Character", "LightYellow")
-hl("Number", "LightPink")
-hl("Boolean", "Keyword")
-vim.cmd "hi clear Identifier"
-hl("Variable", "Green")
-hl("Field", "LightGreen")
-hl("Parameter", "Olive")
-hl("TSField", "Field")
-hl("TSVariable", "Variable")
-hl("TSMath", "Number")
-hl("TSConstructor", "Identifier")
-hl("TSParameter", "Parameter")
-hl("TSKeywordOperator", "Keyword")
-hl("@constant.comment", "Constant")
-hl("TSEnvironmentName", "Constant")
-hl("TSTagAttribute", "Parameter")
+	cmakeVariableValue = "Variable",
+	cmakeVariable = "Variable",
+	cmakeEnvironment = "Constant",
+	cmakeArguments = "Olive",
+	cmakeEscaped = "SpecialChar",
 
-hl("@function.latex", "TSVariable")
-hl("@environment.latex", "Command")
+	markdownUrl = "Url",
+	markdownListMarker = "Delimiter",
+	markdownLinkTextDelimiter = "Delimiter",
+	markdownLinkDelimiter = "Delimiter",
+	markdownEscape = "SpecialChar",
+	markdownCode = "Cyan",
+	markdownCodeBlock = "LightGrey",
+	markdownItalicDelimiter = "Delimiter",
+	markdownBoldDelimiter = "Delimiter",
+	markdownBoldItalicDelimiter = "Delimiter",
+	shDeref = "Variable",
+	shShellVariables = "Variable",
+	shVariable = "Variable",
+	shQuote = "String",
+	shPosnParm = "Delimiter",
+	shArithmetic = "Operator",
+	shExpr = "Operator",
+	shOption = "Parameter",
+	shStatement = "Fg",
 
-hl("@constructor.lua", "Delimiter")
+	xmlAttrib = "Type",
+	xmlEqual = "Operator",
+	xmlTag = "Delimiter",
+	xmlTagName = "Keyword",
 
-hl("sqlType", "String")
-hl("sqlStatement", "Command")
-hl("sqlOperator", "Operator")
+	i3ConfigCommand = "Command",
 
-hl("cmakeVariableValue", "Variable")
-hl("cmakeVariable", "Variable")
-hl("cmakeEnvironment", "Constant")
-hl("cmakeArguments", "Olive")
-hl("cmakeEscaped", "SpecialChar")
+	diffAdded = "DiffAdd",
+	diffChanged = "DiffChange",
+	diffDiffer = "DiffChange",
+	diffBDiffer = "diffDiffer",
+	diffRemoved = "DiffRemove",
+	gitcommitSummary = "Title",
+	gitcommitHeader = "Title",
 
-hl("markdownUrl", "Url")
-hl("markdownListMarker", "Delimiter")
-hl("markdownLinkTextDelimiter", "Delimiter")
-hl("markdownLinkDelimiter", "Delimiter")
-hl("markdownEscape", "SpecialChar")
-hl("markdownCode", "Cyan")
-hl("markdownCodeBlock", "LightGrey")
-hl("markdownItalicDelimiter", "Delimiter")
-hl("markdownBoldDelimiter", "Delimiter")
-hl("markdownBoldItalicDelimiter", "Delimiter")
-hl("shDeref", "Variable")
-hl("shShellVariables", "Variable")
-hl("shVariable", "Variable")
-hl("shQuote", "String")
-hl("shPosnParm", "Delimiter")
-hl("shArithmetic", "Operator")
-hl("shExpr", "Operator")
-hl("shOption", "Parameter")
-hl("shStatement", "Fg")
+	-- Packer
+	packerSuccess = "Title",
+	packerPackageName = "Title",
+	packerProgress = "Number",
+	-- NvimTree
+	NvimTreeIndentMarker = "Contrast",
+	NvimTreeImageFile = "Yellow",
+	NvimTreeGitDirty = "LightOrange",
+	NvimTreeGitDeleted = "DiffDelete",
+	NvimTreeGitMerge = "DiffChange",
+	NvimTreeGitRenamed = "DiffChange",
+	NvimTreeGitStaged = "DiffAdd",
+	NvimTreeGitNew = "DiffAdd",
+	NvimTreeRootFolder = "LightContrast",
+	NvimTreeFolderIcon = "Highlight",
+	-- Startify
+	StartifyHeader = "LightContrast",
+	StartifySection = "LightHighlight",
+	StartifyBracket = "Grey",
+	StartifyNumber = "Red",
+	StartifySpecial = "Bg",
+	StartifyFooter = "Bg",
+	StartifyPath = "LightGrey",
+	StartifySlash = "LightGrey",
+	StartifyFile = "Fg",
+	-- Barbar
+	BufferVisible = "Fg",
+	BufferVisibleMod = "LightRed",
+	BufferVisibleSign = "LightContrast",
+	BufferCurrentSign = "LightHighlight",
+	BufferInactive = "LightGrey",
+	BufferInactiveMod = "Orange",
+	BufferInactiveSign = "LightGrey",
+	-- NvimTree
+	NvimTreeExecFile = {fg = "LightGreen", bold = true},
+	Directory = {fg = "Green", bold = true},
+	NvimTreeSymlink = {fg = "Cyan", bold = true},
+	NvimTreeSpecialFile = {fg = "Pink", bold = true},
+	NvimTreeOpenedFile = {fg = "Violet", bold = true},
+	-- Barbar
+	BufferCurrentMod = {fg = "LightRed", bold = true},
+	BufferTabPager = "BufferCurrent",
+	-- Lsp
+	DiagnosticVirtualTextError = {fg = "Red", italic = true, bold = true},
+	DiagnosticVirtualTextWarn = {fg = "Orange", italic = true},
+	DiagnosticVirtualTextHint = {fg = "LightGrey", italic = true},
+	DiagnosticVirtualTextInfo = {fg = "LightGrey", italic = true},
+	DiagnosticUnderlineError = {sp = "Red", undercurl = true},
+	DiagnosticUnderlineWarn = {sp = "Orange", undercurl = true},
+	DiagnosticUnderlineInfo = {sp = "LightGrey", undercurl = true},
+	DiagnosticUnderlineHint = {sp = "LightGrey", underline = true},
+	DiagnosticError = "Red",
+	DiagnosticWarn = "Orange",
+	DiagnosticInfo = "LightOlive",
+	DiagnosticHint = "LightGrey",
+	-- Lspsaga
+	LspSagaLightBulbSign = "LightYellow",
+	LspFloatWinBorder = "FloatBorder",
+	LspSagaCodeActionBorder = "LspFloatWinBorder",
+	LspSagaCodeActionTruncateLine = "LspFloatWinBorder",
+	LspSagaDefPreviewBorder = "LspFloatWinBorder",
+	LspSagaDocTruncateLine = "LspFloatWinBorder",
+	LspSagaDiagnosticBorder = "LspFloatWinBorder",
+	LspSagaDiagnosticTruncateLine = "LspFloatWinBorder",
+	LspSagaHoverBorder = "LspFloatWinBorder",
+	LspSagaLspFinderBorder = "LspFloatWinBorder",
+	LspSagaRenameBorder = "LspFloatWinBorder",
+	LspSagaSignatureHelpBorder = "LspFloatWinBorder",
+	LspSagaShTruncateLine = "LspFloatWinBorder",
+	LspSagaAutoPreview = "LightOlive",
+	DefinitionPreviewTitle = "LightOlive",
+	TargetWord = "LightOlive",
+	LspSagaCodeActionTitle = "LightOlive",
+	LspSagaCodeActionContent = "Olive",
+	LspSagaDiagnosticHeader = "LightOlive",
+	LspSagaFinderSelection = "LightOlive",
+	DefinitionCount = "Red",
+	ReferencesCount = "Red",
+	-- Telescope
+	TelescopeBorder = "FloatBorder",
+	TelescopeNormal = "Pmenu",
+	TelescopeMultiSelection = "PmenuSel",
+	TelescopeSelection = {fg = "LightHighlight", bg = "Grey", bold = true},
+	TelescopeMatching = {fg = "LightOrange"},
+	TelescopePromptPrefix = {fg = "LightHighlight"},
+	-- Cmp
+	CmpItemMenuDefault = "Pmenu",
+	CmpItemAbbrDefault = "Pmenu",
+	CmpItemAbbrMatch = "Pmenu",
+	CmpItemKindDefault = "Delimiter",
+	CmpItemKindTextDefault = "String",
+	CmpItemKindKeywordDefault = "Keyword",
+	CmpItemKindFunctionDefault = "Command",
+	CmpItemKindMethodDefault = "Command",
+	CmpItemKindTableDefault = "Parameter",
+	CmpItemKindFieldDefault = "Field",
+	CmpItemKindVariableDefault = "Variable",
+	CmpItemKindEnumDefault = "Constant",
+	CmpItemKindEnumMemberDefault = "Constant",
+	CmpItemKindConstantDefault = "Constant",
+	CmpItemKindPropertyDefault = "String",
+	CmpItemKindUnitDefault = "Number",
+	CmpItemKindValueDefault = "Number",
+	CmpItemKindFileDefault = "Brown",
+	CmpItemKindFolderDefault = "Brown",
+	CmpItemKindOperatorDefault = "Operator",
+	CmpItemKindSnippetDefault = "Macro",
+}
 
-hl("xmlAttrib", "Type")
-hl("xmlEqual", "Operator")
-hl("xmlTag", "Delimiter")
-hl("xmlTagName", "Keyword")
+function _G.hi_exec(group, opts, extra) end
 
-hl("@field.yaml", "TSKeyword")
-
-hi("@constant.bash", {fg = "LightGreen"}, {italic = true})
-hl("@none.bash", "TSString")
-
--- Packer
-hl("packerSuccess", "Title")
-hl("packerPackageName", "Title")
-hl("packerProgress", "Number")
--- NvimTree
-hl("NvimTreeIndentMarker", "Contrast")
-hl("NvimTreeImageFile", "Yellow")
-hl("NvimTreeGitDirty", "LightOrange")
-hl("NvimTreeGitDeleted", "DiffDelete")
-hl("NvimTreeGitMerge", "DiffChange")
-hl("NvimTreeGitRenamed", "DiffChange")
-hl("NvimTreeGitStaged", "DiffAdd")
-hl("NvimTreeGitNew", "DiffAdd")
-hl("NvimTreeRootFolder", "LightContrast")
-hl("NvimTreeFolderIcon", "Highlight")
--- Startify
-hl("StartifyHeader", "LightContrast")
-hl("StartifySection", "LightHighlight")
-hl("StartifyBracket", "Grey")
-hl("StartifyNumber", "Red")
-hl("StartifySpecial", "Bg")
-hl("StartifyFooter", "Bg")
-hl("StartifyPath", "LightGrey")
-hl("StartifySlash", "LightGrey")
-hl("StartifyFile", "Fg")
--- Barbar
-hl("BufferVisible", "Fg")
-hl("BufferVisibleMod", "LightRed")
-hl("BufferVisibleSign", "LightContrast")
-hl("BufferCurrentSign", "LightHighlight")
-hl("BufferInactive", "LightGrey")
-hl("BufferInactiveMod", "Orange")
-hl("BufferInactiveSign", "LightGrey")
-
--- NvimTree
-hi("NvimTreeExecFile", {fg = "LightGreen"}, {bold = true})
-hi("Directory", {fg = "Green"}, {bold = true})
-hi("NvimTreeSymlink", {fg = "Cyan"}, {bold = true})
-hi("NvimTreeSpecialFile", {fg = "Pink"}, {bold = true})
-hi("NvimTreeOpenedFile", {fg = "Violet"}, {bold = true})
-
--- Barbar
-hiTheme("BufferCurrent", {fg = "Fg"}, {bold = true})
-hi("BufferCurrentMod", {fg = "LightRed"}, {bold = true})
-hl("BufferTabPager", "BufferCurrent")
-
-hi("DiagnosticVirtualTextError", {fg = "Red"}, {italic = true, bold = true})
-hi("DiagnosticVirtualTextWarn", {fg = "Orange"}, {italic = true})
-hi("DiagnosticVirtualTextHint", {fg = "LightGrey"}, {italic = true})
-hi("DiagnosticVirtualTextInfo", {fg = "LightGrey"}, {italic = true})
-hi("DiagnosticUnderlineError", {sp = "Red"}, {undercurl = true})
-hi("DiagnosticUnderlineWarn", {sp = "Orange"}, {undercurl = true})
-hi("DiagnosticUnderlineInfo", {sp = "LightGrey"}, {undercurl = true})
-hi("DiagnosticUnderlineHint", {sp = "LightGrey"}, {underline = true})
-hl("i3ConfigCommand", "Command")
-hl("DiagnosticError", "Red")
-hl("DiagnosticWarn", "Orange")
-hl("DiagnosticInfo", "LightOlive")
-hl("DiagnosticHint", "LightGrey")
--- Lspsaga
-hl("LspSagaLightBulbSign", "LightYellow")
-hl("LspFloatWinBorder", "FloatBorder")
-hl("LspSagaCodeActionBorder", "LspFloatWinBorder")
-hl("LspSagaCodeActionTruncateLine", "LspFloatWinBorder")
-hl("LspSagaDefPreviewBorder", "LspFloatWinBorder")
-hl("LspSagaDocTruncateLine", "LspFloatWinBorder")
-hl("LspSagaDiagnosticBorder", "LspFloatWinBorder")
-hl("LspSagaDiagnosticTruncateLine", "LspFloatWinBorder")
-hl("LspSagaHoverBorder", "LspFloatWinBorder")
-hl("LspSagaLspFinderBorder", "LspFloatWinBorder")
-hl("LspSagaRenameBorder", "LspFloatWinBorder")
-hl("LspSagaSignatureHelpBorder", "LspFloatWinBorder")
-hl("LspSagaShTruncateLine", "LspFloatWinBorder")
-hl("LspSagaAutoPreview", "LightOlive")
-hl("DefinitionPreviewTitle", "LightOlive")
-hl("TargetWord", "LightOlive")
-hl("LspSagaCodeActionTitle", "LightOlive")
-hl("LspSagaCodeActionContent", "Olive")
-hl("LspSagaDiagnosticHeader", "LightOlive")
-hl("LspSagaFinderSelection", "LightOlive")
-hl("DefinitionCount", "Red")
-hl("ReferencesCount", "Red")
--- Telescope
-hl("TelescopeBorder", "FloatBorder")
-hl("TelescopeNormal", "Pmenu")
-hl("TelescopeMultiSelection", "PmenuSel")
--- Git
-hl("diffAdded", "DiffAdd")
-hl("diffChanged", "DiffChange")
-hl("diffDiffer", "DiffChange")
-hl("diffBDiffer", "diffDiffer")
-hl("diffRemoved", "DiffRemove")
-hl("gitcommitSummary", "Title")
-hl("gitcommitHeader", "Title")
--- Cmp
-hl("CmpItemMenuDefault", "Pmenu")
-hl("CmpItemAbbrDefault", "Pmenu")
-hl("CmpItemAbbrMatch", "Pmenu")
-hl("CmpItemKindDefault", "Delimiter")
-hl("CmpItemKindTextDefault", "String")
-hl("CmpItemKindKeywordDefault", "Keyword")
-hl("CmpItemKindFunctionDefault", "Command")
-hl("CmpItemKindMethodDefault", "Command")
-hl("CmpItemKindKeywordDefault", "Keyword")
-hl("CmpItemKindTableDefault", "Parameter")
-hl("CmpItemKindFieldDefault", "Field")
-hl("CmpItemKindVariableDefault", "Variable")
-hl("CmpItemKindEnumDefault", "Constant")
-hl("CmpItemKindEnumMemberDefault", "Constant")
-hl("CmpItemKindConstantDefault", "Constant")
-hl("CmpItemKindPropertyDefault", "String")
-hl("CmpItemKindUnitDefault", "Number")
-hl("CmpItemKindValueDefault", "Number")
-hl("CmpItemKindFileDefault", "Brown")
-hl("CmpItemKindFolderDefault", "Brown")
-hl("CmpItemKindOperatorDefault", "Operator")
-hl("CmpItemKindSnippetDefault", "Macro")
-
-hi("TelescopeSelection", {fg = "LightHighlight", bg = "Grey"}, {bold = true})
-hi("TelescopeMatching", {fg = "LightOrange"})
-hi("TelescopePromptPrefix", {fg = "LightHighlight"})
+for i, v in pairs(colors) do vim.api.nvim_set_hl(0, i, {fg = v[1], ctermfg = v[2]}) end
+for i, v in pairs(highlights) do
+	if type(v) == "string" then
+		vim.api.nvim_set_hl(0, i, {link = v})
+	else
+		if v.fg then
+			v.ctermfg = _G.colors[v.fg][2]
+			v.fg = _G.colors[v.fg][1]
+		end
+		if v.bg then
+			v.ctermbg = _G.colors[v.bg][2]
+			v.bg = _G.colors[v.bg][1]
+		end
+		if v.sp then v.sp = _G.colors[v.sp][1] end
+		vim.api.nvim_set_hl(0, i, v)
+	end
+end
 
 return function()
+	vim.g.colors_name = "nerdcontrast"
+	if vim.fn.exists("syntax_on") then vim.cmd("syntax reset") end
 	if vim.g.WhiteTheme then
+		vim.o.background = "light"
 		colors.Fg = colors.Black
 		colors.Bg = colors.White
 		vim.g.terminal_color_15 = colors.Black[1]
 		vim.g.terminal_color_0 = colors.White[1]
-		hl("Fg", "Black")
-		hl("Bg", "White")
-		vim.cmd("hi Normal ctermfg=0 ctermbg=15 guifg=#000000 guibg=#ffffff")
+		vim.api.nvim_set_hl(0, "Fg", {link = "Black"})
+		vim.api.nvim_set_hl(0, "Bg", {link = "White"})
+		vim.api.nvim_set_hl(0, "Normal", {ctermfg = 0, ctermbg = 15, fg = "#000000", bg = "#ffffff"})
 	else
+		vim.o.background = "dark"
 		colors.Bg = colors.Black
 		colors.Fg = colors.White
 		vim.g.terminal_color_0 = colors.Black[1]
 		vim.g.terminal_color_15 = colors.White[1]
-		hl("Bg", "Black")
-		hl("Fg", "White")
-		vim.cmd("hi Normal ctermfg=15 ctermbg=0 guifg=#f0eeea guibg=NONE")
+		vim.api.nvim_set_hl(0, "Fg", {link = "White"})
+		vim.api.nvim_set_hl(0, "Bg", {link = "Black"})
+		vim.api.nvim_set_hl(0, "Normal", {ctermbg = 0, ctermfg = 15, fg = "#f0eeea", bg = "NONE"})
 	end
-	for _, v in pairs(highlights) do hi(v[1], v[2], v[3]) end
+	for i, v in pairs(themeDep) do
+		if not v[2] then v[2] = {} end
+		if v[1].fg then
+			v[2].fg = _G.colors[v[1].fg][1]
+			v[2].ctermfg = _G.colors[v[1].fg][2]
+		end
+		if v[1].bg then
+			v[2].bg = _G.colors[v[1].bg][1]
+			v[2].ctermbg = _G.colors[v[1].bg][2]
+		end
+		if v[1].sp then v[2].sp = _G.colors[v[1].sp][1] end
+		vim.api.nvim_set_hl(0, i, v[2])
+	end
 end

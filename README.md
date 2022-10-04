@@ -78,13 +78,12 @@ If you use `galaxyline`, also add `<Cmd>luafile ~/.config/nvim/lua/galaxyline-s.
 
 ## Wider usage
 
-For more colour customization use global `colors["Color name"][1]`
+For more colour customization use global `colors["Colour name"][1]`
 You can link other colours to the same name as in the table.
-Create customized highlights using `hi` method like:
 
 ```lua
-hi("toSet", {fg="fgColor", bg="bgColor", sp="underlineColor"}, {bold=true, undercurl=true, ...})
-hl("group", "groupToLink")
+vim.api.nvim_set_hl(0, "GroupName", {fg=colors["Colourname"][1], bg="hex", bold=true...})
+vim.api.nvim_set_hl(0, "GroupName", {link="LinkedGroupName"})
 ```
 
 For ease of use, the main used colours are linked as shortcuts to allow simple change:
