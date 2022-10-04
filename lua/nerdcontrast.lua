@@ -306,7 +306,7 @@ return function()
 		vim.g.terminal_color_0 = colors.White[1]
 		vim.api.nvim_set_hl(0, "Fg", {link = "Black"})
 		vim.api.nvim_set_hl(0, "Bg", {link = "White"})
-		vim.api.nvim_set_hl(0, "Normal", {ctermfg = 0, ctermbg = 15, fg = "#000000", bg = "#ffffff"})
+		vim.api.nvim_set_hl(0, "Normal", {ctermfg = 0, ctermbg = 15, fg = "#000000", bg = "#faf8ff"})
 	else
 		vim.o.background = "dark"
 		colors.Bg = colors.Black
