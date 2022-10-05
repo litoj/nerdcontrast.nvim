@@ -36,7 +36,7 @@ colors.LightContrast = colors.LightMagenta -- contrast
 local themeDep = {
 	Pmenu = {{fg = "Fg"}},
 	PmenuSel = {{fg = "Bg", bg = "Highlight"}},
-	Visual = {{bg = "Bg", reverse = true}},
+	Visual = {{bg = "Bg"}, {reverse = true}},
 	Search = {{fg = "Bg", bg = "LightOlive"}, {bold = true}},
 	IncSearch = {{fg = "Bg", bg = "LightOlive"}, {bold = true}},
 	FoldColumn = {{fg = "Bg"}},
