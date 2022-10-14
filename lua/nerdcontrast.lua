@@ -7,7 +7,7 @@ _G.colors = {
 	Red = {"#cc2815", 1},
 	Brown = {"#885515", 3},
 	Orange = {"#cc6415", 3},
-	Yellow = {"#cfa815", 3},
+	Yellow = {"#cca815", 3},
 	Olive = {"#99a015", 2},
 	Green = {"#54a015", 2},
 	Cyan = {"#32a08d", 6},
@@ -19,7 +19,7 @@ _G.colors = {
 	LightPink = {"#e7909a", 13},
 	LightRed = {"#f03522", 9},
 	LightOrange = {"#f09322", 11},
-	LightYellow = {"#f0e822", 11},
+	LightYellow = {"#e8d822", 11},
 	LightOlive = {"#c0e022", 10},
 	LightGreen = {"#77dd22", 10},
 	LightCyan = {"#80f0c8", 14}, -- 50e8b0"
@@ -118,7 +118,7 @@ local highlights = {
 	["@environment.latex"] = "Command",
 	["@constructor.lua"] = "Delimiter",
 	["@field.yaml"] = "TSKeyword",
-	["@constant.bash"] = {fg = "LightGreen", italic = true},
+	["@constant.bash"] = {fg = "Green", italic = true},
 	["@none.bash"] = "TSString",
 	-- Vim syntax highlight changes
 	sqlType = "String",

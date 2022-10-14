@@ -17,6 +17,8 @@ if exists("b:current_syntax")
   finish
 endif
 
+setlocal commentstring=#%s
+
 " define the config syntax
 syn match   configdelimiter "[()\[\];,:{}]"
 syn match   configoperator  "[=|&\*\+\<\>]"
