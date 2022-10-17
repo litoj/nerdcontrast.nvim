@@ -25,12 +25,13 @@ syn match   configoperator  "[=|&\*\+\<\>]"
 syn match   configcomment   "\(dnl.*\)\|\(#.*\)" contains=configDnl,@Spell
 syn match   configfunction  "\<[A-Z_][A-Z0-9_]*\>"
 syn match   confignumber    "[-+ ]*\d[.0-9]*" contained contains=configoperator
+syn match   confighex       "[a-f0-9]\{6\}" contained
 syn keyword configDnl   	dnl contained
 syn keyword configkeyword   if then else fi test for in do done true false
 syn keyword configspecial   cat rm eval
-syn match   configvalue    "[^=]*$" contained contains=confignumber,configoperator,configdelimiter,configkeyword
-syn match   configlabel    "[a-zA-Z-_ \t]*=" contained contains=configoperator
-syn match   configline     "^[a-zA-Z-_ \t]\+=.*$" contains=configlabel,configvalue,configdelimiter,confignumber
+syn match   configvalue    "[^=]*$" contained contains=confignumber,configoperator,configdelimiter,configkeyword,confighex
+syn match   configlabel    "[a-zA-Z0-9-_ \t]*=" contained contains=configoperator
+syn match   configline     "^[a-zA-Z0-9-_ \t]\+=.*$" contains=configlabel,configvalue,configdelimiter,confignumber
 
 " This shortens the script, see syn-ext-match..
 syn region  configstring    start=+\z(["'`]\)+ skip=+\\\z1+ end=+\z1+ contains=@Spell
@@ -52,6 +53,7 @@ hi def link configkeyword   Keyword
 hi def link configlabel     Variable
 hi def link configspecial   Special
 hi def link configstring    String
+hi def link confighex       Constant
 hi def link configvalue     String
 hi def link configmsg       String
 
