@@ -202,16 +202,15 @@ local highlights = {
 	BufferInactive = "Fg3",
 	BufferInactiveMod = "Orange",
 	BufferInactiveSign = "Fg3",
+	BufferCurrentMod = {fg = "LightRed", bold = true},
+	BufferTabpages = "Cyan",
+	BufferTabpageFill = "None",
 	-- NvimTree
 	NvimTreeExecFile = {fg = "LightGreen", bold = true},
 	Directory = "Fg4",
 	NvimTreeSymlink = {fg = "Cyan", bold = true},
 	NvimTreeSpecialFile = {fg = "Pink", bold = true},
 	NvimTreeOpenedFile = {fg = "Violet", bold = true},
-	-- Barbar
-	BufferCurrentMod = {fg = "LightRed", bold = true},
-	BufferTabpages = "Cyan",
-	BufferTabpageFill = "Bg",
 	-- Lsp
 	DiagnosticVirtualTextError = {fg = "Red", italic = true, bold = true},
 	DiagnosticVirtualTextWarn = {fg = "Orange", italic = true},
