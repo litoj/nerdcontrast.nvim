@@ -1,10 +1,10 @@
+vim.o.termguicolors = os.getenv("TERM") ~= "linux"
 local M = {}
 local colors = {
 	None = {"NONE", "NONE"},
 	Black = {"#222222", 0},
 	Black2 = {"#3a3a3a", 0},
-	Violet = {"#8040ad", 5},
-	Magenta = {"#ad30a8", 5}, -- 9d2098
+	Magenta = {"#a030a8", 5}, -- 9d2098
 	Pink = {"#c06680", 13},
 	Red = {"#cc2815", 1},
 	Brown = {"#885515", 3},
@@ -13,21 +13,20 @@ local colors = {
 	Olive = {"#99a015", 2},
 	Green = {"#54a015", 2},
 	Cyan = {"#32a08d", 6},
-	Blue = {"#3268ad", 4},
+	Blue = {"#3870c0", 4},
 	Grey = {"#5a5856", 8},
 	Grey2 = {"#7a7876", 8},
 	LightGrey2 = {"#969390", 7},
 	LightGrey = {"#bdbcbb", 7},
-	LightViolet = {"#a04ddd", 5},
-	LightMagenta = {"#bd40b7", 5},
+	LightMagenta = {"#c850e0", 5},
 	LightPink = {"#e7909a", 13},
 	LightRed = {"#f03522", 9},
 	LightOrange = {"#f09322", 11},
 	LightYellow = {"#e8d822", 11},
 	LightOlive = {"#b0cd22", 10},
-	LightGreen = {"#77dd22", 10},
+	LightGreen = {"#66d022", 10},
 	LightCyan = {"#66e0c0", 14}, -- 50e8b0"
-	LightBlue = {"#40a3e0", 12},
+	LightBlue = {"#50a8f0", 12},
 	White2 = {"#e0ddda", 15},
 	White = {"#f0eeea", 15},
 }
@@ -39,12 +38,9 @@ colors.Contrast = colors.Magenta -- contrast
 colors.LightContrast = colors.LightMagenta -- contrast
 
 M.themeDep = {
-	Folded = {{fg = "Fg2", bg = "Bg"}, {bold = true}},
+	Folded = {{fg = "Fg2"}, {italic = true}},
 	CursorLineNR = {{fg = "Fg3", bg = "Bg"}},
 	Todo = {{fg = "Bg", bg = "Contrast"}, {bold = true}},
-	FIXME = {{fg = "Bg", bg = "Orange"}, {bold = true}},
-	DELETE = {{fg = "Bg", bg = "Red"}, {bold = true}},
-	IMPORTANT = {{fg = "Bg", bg = "Red"}, {bold = true, underline = true}},
 	OPTIONAL = {{fg = "Bg", bg = "Green"}, {bold = true}},
 	DiffAdd = {{fg = "Green", bg = "Bg"}},
 	DiffChange = {{fg = "Cyan", bg = "Bg"}},
@@ -55,7 +51,8 @@ M.themeDep = {
 	LspReferenceWrite = {{bg = "Bg"}, {bold = true}},
 	BufferCurrent = {{fg = "Fg"}, {bold = true}},
 	Comment = {{fg = "Fg4"}, {italic = true}},
-	Url = {{fg = "Fg3"}, {italic = true}},
+	Underlined = {{fg = "Fg3"}, {underline = true}},
+	Link = {{fg = "Fg4"}, {italic = true}},
 }
 
 local highlights = {
@@ -64,11 +61,11 @@ local highlights = {
 	Contrast = "Magenta",
 	LightContrast = "LightMagenta",
 	-- Basics
-	Search = "Title",
+	Search = {fg = "LightMagenta", bold = true},
 	IncSearch = "Search",
 	VertSplit = "Fg6",
 	StatusLine = "Bg",
-	StatusLineNc = "Bg2",
+	StatusLineNC = "Bg2",
 	Pmenu = "Bg",
 	PmenuSel = "Bg2",
 	PmenuSbar = "Bg2",
@@ -81,21 +78,22 @@ local highlights = {
 	WarningMsg = {fg = "LightOrange", bold = true},
 	Question = {fg = "LightYellow", bold = true},
 	Error = {sp = "LightRed", undercurl = true},
-	Underlined = {fg = "LightBlue", sp = "LightBlue", underline = true},
+	Url = {fg = "LightBlue", sp = "LightBlue", underline = true},
 	Constant = {fg = "Magenta", italic = true},
 	FloatBorder = "Contrast",
+	NormalFloat = "Fg",
 	CursorColumn = "Bg",
 	CursorLine = "Bg",
 	LineNr = "Fg5",
 	NonText = "Fg8",
-	SpecialKey = "Violet",
+	SpecialKey = "Orange",
 	Keyword = "Blue",
 	Include = "Keyword",
 	Boolean = "Keyword",
 	PreProc = "Cyan",
 	Define = "PreProc",
 	Statement = "Keyword",
-	Special = "Keyword",
+	Special = "Magenta",
 	SpecialChar = "Orange",
 	Delimiter = "LightRed",
 	Operator = "Red",
@@ -105,46 +103,63 @@ local highlights = {
 	String = "Yellow",
 	Character = "LightYellow",
 	Number = "LightPink",
+	Identifier = "Fg",
 	Type = "Fg",
 	Function = "Fg",
-	Identifier = "Fg",
 	Variable = "Green",
 	Parameter = "Olive",
 	-- TreeSitter
-	["@field"] = "Fg",
+	["@field"] = "LightGreen",
 	["@variable"] = "Variable",
 	["@parameter"] = "Parameter",
-	["@constructor"] = "Identifier",
+	["@constructor"] = "Type",
 	["@keyword.operator"] = "Keyword",
 	["@environment"] = "Constant",
 	["@attribute"] = "Parameter",
-	["@tag"] = "Statement", -- HTML
+	["@storageclass"] = "Keyword",
+	["@type.builtin"] = "Keyword",
+	["@variable.builtin"] = "Keyword",
+	["@constant.builtin"] = "Keyword",
+	["@function.builtin"] = "Keyword",
 	-- TreeSitter language highlight changes
+	["@property"] = "@field", -- C/CPP
+	["@include.cpp"] = "PreProc",
+	["@property.css"] = "Parameter",
+	["@type.qualifier"] = "Keyword", -- Java
+	["@attribute.java"] = "PreProc",
+	["@tag"] = "Statement", -- HTML
 	["@tag.delimiter"] = "Delimiter", -- HTML
 	["@tag.attribute"] = "Parameter", -- XML
 	["@string.special"] = "LightOrange", -- Vim regex
 	["@constructor.lua"] = "Delimiter",
 	["@field.yaml"] = "Variable",
 	["@label.json"] = "Variable",
+	["@type.query"] = "Keyword",
 	["@none.bash"] = "String",
-
-	["@function.latex"] = "Variable",
-	["@error.latex"] = "String",
+	-- LaTeX
 	["@text.environment.latex"] = "Keyword",
 	["@text.environment.name.latex"] = "Constant",
 	["@text.reference.latex"] = "Title",
 	["@text.title"] = "Title",
-	["@text.emphasis.latex"] = {italic = true},
-	["@text.strong.latex"] = {bold = true},
-	["@text.math"] = "Number",
+	["@text.emphasis"] = {italic = true},
+	["@text.strong"] = {bold = true},
+	["@text.math"] = "Pink",
+	["@function.latex"] = "Variable",
+	["@error.latex"] = "String",
 	["@namespace.latex"] = "Command",
 	["@environment.latex"] = "Command",
+	-- Markdown
+	["@text.literal"] = "Cyan",
+	["@text.uri"] = "Link",
+	["@text.reference"] = "Url",
+
 	-- Vim syntax highlight changes
 	sqlType = "String",
 	sqlStatement = "Command",
 	sqlOperator = "Operator",
 
-	markdownUrl = "Url",
+	htmlLink = "Url",
+	markdownUrl = "Link",
 	markdownListMarker = "Delimiter",
 	markdownLinkTextDelimiter = "Delimiter",
 	markdownLinkDelimiter = "Delimiter",
@@ -163,6 +178,10 @@ local highlights = {
 	shExpr = "Operator",
 	shOption = "Parameter",
 	shStatement = "Fg",
+	luaTable = "Delimiter",
+	luaFunc = "Blue",
+	luaMetaMethod = "luaFunc",
+	luaFunction = "luaFunc",
 
 	xmlAttrib = "Parameter",
 	xmlEqual = "Operator",
@@ -178,6 +197,31 @@ local highlights = {
 	diffRemoved = "DiffRemove",
 	gitcommitSummary = "Title",
 	gitcommitHeader = "Title",
+
+	helpHeadline = "Title",
+	helpHeader = "LightHighlight",
+	helpHyperTextJump = "Command",
+	helpHyperTextEntry = "LightMagenta",
+	helpCommand = "String",
+	helpTag = "Parameter",
+	helpOption = "Variable",
+	helpSpecial = "Parameter",
+	helpExample = "Cyan",
+	helpType = "Keyword",
+	helpIdentifier = "helpType",
+	helpFunction = "LightCyan",
+	helpStructure = "@field",
+	helpSectionDelim = "Delimiter",
+	helpStorageClass = "Keyword",
+	helpURL = "Url",
+	helpLabel = "LightMagenta",
+	helpException = "Orange",
+	helpTypeDef = "Keyword",
+	helpBar = "Delimiter",
+	helpStar = "Delimiter",
+	helpBackTick = "Delimiter",
+
+	-- PLUGINS
 
 	-- Packer
 	packerSuccess = "Title",
@@ -204,13 +248,13 @@ local highlights = {
 	BufferInactiveSign = "Fg3",
 	BufferCurrentMod = {fg = "LightRed", bold = true},
 	BufferTabpages = "Cyan",
-	BufferTabpageFill = "None",
+	BufferTabpageFill = "Fg5",
 	-- NvimTree
 	NvimTreeExecFile = {fg = "LightGreen", bold = true},
-	Directory = "Fg4",
+	Directory = {fg = "Green", bold = true},
 	NvimTreeSymlink = {fg = "Cyan", bold = true},
 	NvimTreeSpecialFile = {fg = "Pink", bold = true},
-	NvimTreeOpenedFile = {fg = "Violet", bold = true},
+	NvimTreeOpenedFile = {fg = "Magenta", bold = true},
 	-- Lsp
 	DiagnosticVirtualTextError = {fg = "Red", italic = true, bold = true},
 	DiagnosticVirtualTextWarn = {fg = "Orange", italic = true},
@@ -232,8 +276,9 @@ local highlights = {
 	DapUIStepOut = "LightYellow",
 	DapUIStepBack = "LightMagenta",
 	DapUIPlayPause = "LightOrange",
-	DapUIThread = "Contrast",
-	DapUICurrentFrameName = {underline = true},
+	DapUIUnavailable = "Fg3",
+	DapUIThread = "Fg",
+	DapUICurrentFrameName = {fg = "Contrast", underline = true},
 	DapUIFrameName = "Fg3",
 	DapUIFloatBorder = "FloatBorder",
 	DapUILineNumber = "LineNr",
@@ -257,7 +302,7 @@ local highlights = {
 	TelescopeNormal = "Fg",
 	TelescopeMultiSelection = "Bg2",
 	TelescopeSelection = "Bg2",
-	TelescopePreviewMatch = "Bg",
+	TelescopePreviewMatch = "Bg4",
 	TelescopeMatching = {bold = true},
 	TelescopePromptPrefix = "LightHighlight",
 	-- Cmp
@@ -268,7 +313,7 @@ local highlights = {
 	CmpItemKindFunction = "Command",
 	CmpItemKindMethod = "Command",
 	CmpItemKindTable = "Parameter",
-	CmpItemKindField = "LightCyan",
+	CmpItemKindField = "@field",
 	CmpItemKindVariable = "Variable",
 	CmpItemKindEnum = "Constant",
 	CmpItemKindEnumMember = "Constant",
@@ -287,9 +332,9 @@ local highlights = {
 
 for i, v in pairs(colors) do vim.api.nvim_set_hl(0, i, {fg = v[1], ctermfg = v[2]}) end
 function M.hi(tbl)
-	for i, v in pairs(tbl) do
+	for k, v in pairs(tbl) do
 		if type(v) == "string" then
-			vim.api.nvim_set_hl(0, i, {link = v})
+			vim.api.nvim_set_hl(0, k, {link = v})
 		else
 			if v.fg then
 				v.ctermfg = colors[v.fg][2]
@@ -300,27 +345,26 @@ function M.hi(tbl)
 				v.bg = colors[v.bg][1]
 			end
 			if v.sp then v.sp = colors[v.sp][1] end
-			vim.api.nvim_set_hl(0, i, v)
+			vim.api.nvim_set_hl(0, k, v)
 		end
 	end
 end
-M.hi(highlights)
 
-vim.fn.matchadd("Todo", "TODO")
-vim.fn.matchadd("Todo", "Todo")
-vim.fn.matchadd("Todo", "NOTE")
-vim.fn.matchadd("Todo", "Note")
-vim.fn.matchadd("FIXME", "FIXME")
-vim.fn.matchadd("FIXME", "WARN")
-vim.fn.matchadd("DELETE", "DELETE")
-vim.fn.matchadd("DELETE", "ERROR")
-vim.fn.matchadd("IMPORTANT", "IMPORTANT")
-vim.fn.matchadd("OPTIONAL", "OPTIONAL")
-vim.fn.matchadd("OPTIONAL", "Optional")
+local function check()
+	local theme = {bg = colors.Bg[1], fg = colors.Fg[1]}
+	for k, v in pairs(colors) do theme[k] = v[1] end
+	local present, plugin = pcall(require, "feline")
+	if present then plugin.use_theme(theme) end
+end
+
+vim.api.nvim_create_autocmd("VimEnter", {once = true, callback = check})
 
 M.load = function()
-	vim.o.termguicolors = os.getenv("TERM") ~= "linux"
 	vim.g.colors_name = "nerdcontrast"
+	if highlights then
+		M.hi(highlights)
+		highlights = nil
+	end
 	if vim.fn.exists("syntax_on") then vim.cmd.syntax "reset" end
 	local link = function(links)
 		local idx
@@ -369,21 +413,6 @@ M.load = function()
 		if v[1].sp then v[2].sp = colors[v[1].sp][1] end
 		vim.api.nvim_set_hl(0, i, v[2])
 	end
-	local present, glc = pcall(require, "galaxyline.themes.colors")
-	if present then
-		glc.nerdcontrast = {
-			bg = colors.Bg[1],
-			fg = colors.Fg[1],
-			fg_alt = colors.Grey[1],
-			yellow = colors.Yellow[1],
-			cyan = colors.Cyan[1],
-			green = colors.Green[1],
-			orange = colors.Orange[1],
-			magenta = colors.Magenta[1],
-			blue = colors.Blue[1],
-			red = colors.Red[1],
-		}
-		vim.api.nvim_set_hl(0, "GalaxylineFillSection", {bg = colors.Bg[1]})
-	end
+	check()
 end
 return M

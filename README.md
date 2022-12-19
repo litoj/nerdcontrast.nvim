@@ -6,7 +6,7 @@ A colourscheme with optimal contrast based on default light theme of NetBeans ID
 
 ## Requirements
 
-- Neovim 0.7.0+
+- Neovim 0.8.0+
 
 ## Installing with [`packer`](https://github.com/wbthomason/packer.nvim)
 
@@ -59,10 +59,6 @@ An optional keybind toggle:
 nmap("n", "<Leader>c", function()
 	vim.o.background = vim.o.background == "light" and "dark" or "light"
 	vim.cmd.colorscheme "nerdcontrast" -- or `require'nerdcontrast'.load()`
-  --[[ if you use galaxyline you have to load it's config again
-	package.loaded["galaxyline-s"] = nil
-	require "galaxyline-s"
-  ]]
 end)
 ```
 
@@ -72,7 +68,7 @@ end)
 - [Cmp](https://github.com/hrsh7th/nvim-cmp)
 - [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 - [Barbar](https://github.com/romgrk/barbar.nvim)
-- [Galaxyline](https://github.com/NTBBloodbath/galaxyline.nvim)
+- [Feline](https://github.com/feline-nvim/feline.nvim)
 - [NvimTree](https://github.com/kyazdani42/nvim-tree.lua)
 - [RnivmR](https://github.com/kevinhwang91/rnvimr)
 
@@ -86,17 +82,16 @@ end)
 | DarkName | Code    | BrightName   | Code    |
 | -------- | ------- | ------------ | ------- |
 | Black    | #222222 | LightGrey    | #bdbcbb |
-| Violet   | #9040a8 | LightViolet  | #ad4dd0 |
-| Magenta  | #ad30a8 | LightMagenta | #bd40b7 |
+| Magenta  | #a030a8 | LightMagenta | #c850e0 |
 | Pink     | #c06680 | LightPink    | #e7909a |
 | Red      | #cc2815 | LightRed     | #f03522 |
 | Brown    | #885515 | None         | NONE    |
 | Orange   | #cc6415 | LightOrange  | #f09322 |
-| Yellow   | #cfa815 | LightYellow  | #e8d822 |
+| Yellow   | #cca815 | LightYellow  | #e8d822 |
 | Olive    | #99a015 | LightOlive   | #b0cd22 |
-| Green    | #54a015 | LightGreen   | #77dd22 |
+| Green    | #54a015 | LightGreen   | #66d022 |
 | Cyan     | #32a08d | LightCyan    | #66e0c0 |
-| Blue     | #3268ad | LightBlue    | #40a3e0 |
+| Blue     | #3870c0 | LightBlue    | #50a8f0 |
 | Grey     | #5a5856 | White        | #f0eeea |
 
 ## Get colour codes
