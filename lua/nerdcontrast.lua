@@ -66,6 +66,8 @@ local highlights = {
 	VertSplit = "Fg6",
 	StatusLine = "Bg",
 	StatusLineNC = "Bg2",
+	TabLineFill = {},
+	TabLineSel = "White",
 	Pmenu = "Bg",
 	PmenuSel = "Bg2",
 	PmenuSbar = "Bg2",
@@ -118,7 +120,7 @@ local highlights = {
 	["@attribute"] = "Parameter",
 	["@storageclass"] = "Keyword",
 	["@type.builtin"] = "Keyword",
-	["@variable.builtin"] = "Keyword",
+	["@variable.builtin.java"] = "Keyword",
 	["@constant.builtin"] = "Keyword",
 	["@function.builtin"] = "Keyword",
 	-- TreeSitter language highlight changes
@@ -158,31 +160,6 @@ local highlights = {
 	sqlStatement = "Command",
 	sqlOperator = "Operator",
 
-	htmlLink = "Url",
-	markdownUrl = "Link",
-	markdownListMarker = "Delimiter",
-	markdownLinkTextDelimiter = "Delimiter",
-	markdownLinkDelimiter = "Delimiter",
-	markdownEscape = "SpecialChar",
-	markdownCode = "Cyan",
-	markdownCodeBlock = "Fg2",
-	markdownItalicDelimiter = "Delimiter",
-	markdownBoldDelimiter = "Delimiter",
-	markdownBoldItalicDelimiter = "Delimiter",
-	shDeref = "Variable",
-	shShellVariables = "Variable",
-	shVariable = "Variable",
-	shQuote = "String",
-	shPosnParm = "Delimiter",
-	shArithmetic = "Operator",
-	shExpr = "Operator",
-	shOption = "Parameter",
-	shStatement = "Fg",
-	luaTable = "Delimiter",
-	luaFunc = "Blue",
-	luaMetaMethod = "luaFunc",
-	luaFunction = "luaFunc",
-
 	xmlAttrib = "Parameter",
 	xmlEqual = "Operator",
 	xmlTag = "Delimiter",
@@ -197,6 +174,10 @@ local highlights = {
 	diffRemoved = "DiffRemove",
 	gitcommitSummary = "Title",
 	gitcommitHeader = "Title",
+	gitcommitFile = "String",
+	gitcommitArrow = "Delimiter",
+	gitcommitBranch = "Green",
+	gitcommitType = "Keyword",
 
 	helpHeadline = "Title",
 	helpHeader = "LightHighlight",
@@ -255,6 +236,8 @@ local highlights = {
 	NvimTreeSymlink = {fg = "Cyan", bold = true},
 	NvimTreeSpecialFile = {fg = "Pink", bold = true},
 	NvimTreeOpenedFile = {fg = "Magenta", bold = true},
+	-- IndentBlankline
+	IndentBlanklineChar = "Fg7",
 	-- Lsp
 	DiagnosticVirtualTextError = {fg = "Red", italic = true, bold = true},
 	DiagnosticVirtualTextWarn = {fg = "Orange", italic = true},
@@ -268,7 +251,7 @@ local highlights = {
 	DiagnosticWarn = "Orange",
 	DiagnosticHint = "Fg3",
 	DiagnosticInfo = "LightOlive",
-	-- Dapui
+	-- DapUI
 	DapUIStop = "LightRed",
 	DapUIRestart = "LightRed",
 	DapUIStepOver = "Green",
@@ -297,37 +280,52 @@ local highlights = {
 	DapUIWatchesValue = "Fg",
 	DapUIValue = "Fg",
 	DapUIDecoration = "Fg",
-	-- Telescope
-	TelescopeBorder = "FloatBorder",
-	TelescopeNormal = "Fg",
-	TelescopeMultiSelection = "Bg2",
-	TelescopeSelection = "Bg2",
-	TelescopePreviewMatch = "Bg4",
-	TelescopeMatching = {bold = true},
-	TelescopePromptPrefix = "LightHighlight",
+	-- FzfLua
+	FzfLuaBorder = "FloatBorder",
+	FzfLuaTitle = "FloatTitle",
 	-- Cmp
 	CmpItemAbbrMatch = "LightBlue",
 	CmpItemKind = "Delimiter",
 	CmpItemKindText = "String",
 	CmpItemKindKeyword = "Keyword",
 	CmpItemKindFunction = "Command",
-	CmpItemKindMethod = "Command",
-	CmpItemKindTable = "Parameter",
+	CmpItemKindMethod = "CmpItemKindFunction",
 	CmpItemKindField = "@field",
 	CmpItemKindVariable = "Variable",
 	CmpItemKindEnum = "Constant",
 	CmpItemKindEnumMember = "Constant",
 	CmpItemKindConstant = "Constant",
-	CmpItemKindProperty = "String",
+	CmpItemKindProperty = "@field",
 	CmpItemKindUnit = "Number",
-	CmpItemKindValue = "Number",
+	CmpItemKindValue = "Normal",
 	CmpItemKindFile = "Brown",
 	CmpItemKindFolder = "Brown",
 	CmpItemKindOperator = "Operator",
 	CmpItemKindSnippet = "Macro",
+	CmpItemKindConstructor = "CmpItemKindMethod",
+	CmpItemKindClass = "Pink",
+	CmpItemKindTable = "LightCyan",
+	CmpItemKindStruct = "CmpItemKindTable",
+	CmpItemKindInterface = "CmpItemKindClass",
+	--[[ -- Navic
+	NavicSeparator = "Yellow",
+	NavicText = "Red",
+	NavicIconsFile = "Brown",
+	NavicIconsModule = "PreProc",
+	NavicIconsNamespace = "PreProc",
+	NavicIconsPackage = "PreProc",
+	NavicIconsProperty = "@field",
+	NavicIconsEnum = "Constant",
+	NavicIconsConstant = "Constant",
+	NavicIconsVariable = "Variable",
+	NavicIconsString = "String",
+	NavicIconsBoolean = "Boolean",
+	NavicIconsNumber = "Number", ]]
+
 	-- Extra
 	Neo = {fg = "Cyan", bold = true},
 	Vim = {fg = "Green", bold = true},
+	FloatTitle = {fg = "Olive", bold = true},
 }
 
 for i, v in pairs(colors) do vim.api.nvim_set_hl(0, i, {fg = v[1], ctermfg = v[2]}) end
@@ -351,13 +349,13 @@ function M.hi(tbl)
 end
 
 local function check()
-	local theme = {bg = colors.Bg[1], fg = colors.Fg[1]}
-	for k, v in pairs(colors) do theme[k] = v[1] end
-	local present, plugin = pcall(require, "feline")
-	if present then plugin.use_theme(theme) end
+	local ok, fl = pcall(require, "feline")
+	if ok then fl.use_theme({fg = colors.Fg[1], bg = colors.Bg[1]}) end
 end
 
-vim.api.nvim_create_autocmd("VimEnter", {once = true, callback = check})
+if vim.v.vim_did_enter ~= 1 then
+	vim.api.nvim_create_autocmd("VimEnter", {once = true, callback = check})
+end
 
 M.load = function()
 	vim.g.colors_name = "nerdcontrast"
@@ -391,13 +389,23 @@ M.load = function()
 		link({"Black", "Black2", "Grey", "Grey2", "LightGrey2", "LightGrey", "White2", "White"})
 		vim.g.terminal_color_15 = colors.Black[1]
 		vim.g.terminal_color_0 = colors.White[1]
-		vim.api.nvim_set_hl(0, "Normal", {ctermfg = 0, ctermbg = 15, fg = "#000000", bg = "#faf8ff"})
+		vim.api.nvim_set_hl(0, "Normal", {
+			ctermfg = 0,
+			ctermbg = 15,
+			fg = "#000000",
+			bg = vim.g.bg_none and "NONE" or "#faf8ff",
+		})
 		vim.api.nvim_set_hl(0, "Visual", {link = "Bg"})
 	else
 		link({"White", "White2", "LightGrey", "LightGrey2", "Grey2", "Grey", "Black2", "Black"})
 		vim.g.terminal_color_0 = colors.Black[1]
 		vim.g.terminal_color_15 = colors.White[1]
-		vim.api.nvim_set_hl(0, "Normal", {ctermbg = 0, ctermfg = 15, fg = "#f0eeea", bg = "NONE"})
+		vim.api.nvim_set_hl(0, "Normal", {
+			ctermbg = 0,
+			ctermfg = 15,
+			fg = "#f0eeea",
+			bg = vim.g.bg_none and "NONE" or "#101010",
+		})
 		vim.api.nvim_set_hl(0, "Visual", {link = "Bg2"})
 	end
 	for i, v in pairs(M.themeDep) do

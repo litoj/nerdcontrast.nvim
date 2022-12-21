@@ -11,7 +11,7 @@ setlocal commentstring=#%s
 
 " define the config syntax
 syn match   configdelimiter "[()\[\];,:{}]"
-syn match   configoperator  "[=|&\*\+\<\>]"
+syn match   configoperator  "[=|&\*\+\<\>.]"
 syn match   configcomment   "\(dnl.*\)\|\(#.*\)" contains=configDnl,@Spell
 syn match   configfunction  "\<[A-Z_][A-Z0-9_]*\>"
 syn match   confignumber    "[-+ ]*\d[.0-9]*" contained contains=configoperator
@@ -20,8 +20,8 @@ syn keyword configDnl   	dnl contained
 syn keyword configkeyword   if then else fi test for in do done true false
 syn keyword configspecial   cat rm eval
 syn match   configvalue    "[^=]*$" contained contains=confignumber,configoperator,configdelimiter,configkeyword,confighex
-syn match   configlabel    "[a-zA-Z0-9-_ \t]*=" contained contains=configoperator
-syn match   configline     "^[a-zA-Z0-9-_ \t]\+=.*$" contains=configlabel,configvalue,configdelimiter,confignumber
+syn match   configlabel    "[a-zA-Z0-9-_.]\+[ \t]*=" contained contains=configoperator
+syn match   configline     "^[a-zA-Z0-9-_. \t]\+=.*$" contains=configlabel,configvalue,configdelimiter,confignumber
 
 " This shortens the script, see syn-ext-match..
 syn region  configstring    start=+\z(["'`]\)+ skip=+\\\z1+ end=+\z1+ contains=@Spell

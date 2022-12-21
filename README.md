@@ -1,8 +1,8 @@
 # nerdcontrast
 
-A colourscheme with optimal contrast based on default light theme of NetBeans IDE
+A colorscheme with optimal contrast based on default light theme of NetBeans IDE
 
-**Light** and **Dark** variants
+choose between **Light** and **Dark** dynamically
 
 ## Requirements
 
@@ -12,19 +12,19 @@ A colourscheme with optimal contrast based on default light theme of NetBeans ID
 
 ```lua
 require'packer'.startup(function(use)
-	...
-	use "JosefLitos/nerdcontrast.nvim"
-	use {"JosefLitos/nerdcontrast.nvim", config = function()
-  -- with extra custom colors
+  ...
+  use "JosefLitos/nerdcontrast.nvim"
+  use {"JosefLitos/nerdcontrast.nvim", config = function()
+    -- with extra custom colors
     require'nerdcontrast'.hi({
-      -- set hex values of given colours
+      -- set hex values of given colors
       BoldGreen = {fg = "Green", bold = true},
       -- directly linked
       WhiteFg = "Fg", -- Fg hex = Bg8 hex, Fg2=Bg7...
       WhiteBg = "Bg8", -- Fg changes Text, Bg changes background
     })
-  -- for colours using unlinked `Fg` or `Bg` values
-  -- color in 1. table, effects in 2. table
+    -- for colors using unlinked `Fg` or `Bg` values
+    -- color in 1. table, effects in 2. table
     vim.tbl_extend("force", require'nerdcontrast'.themeDep, {
       Error = {{fg = "Fg8", bg = "Red"}},
       GraySpiked = {{sp = "Bg3"}, {undercurl = true}},
@@ -58,6 +58,8 @@ An optional keybind toggle:
 -- Dark/Light theme toggle
 nmap("n", "<Leader>c", function()
 	vim.o.background = vim.o.background == "light" and "dark" or "light"
+  -- Transparent bg
+  vim.g.bg_none = vim.o.background == "dark"
 	vim.cmd.colorscheme "nerdcontrast" -- or `require'nerdcontrast'.load()`
 end)
 ```
@@ -66,7 +68,6 @@ end)
 
 - [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - [Cmp](https://github.com/hrsh7th/nvim-cmp)
-- [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 - [Barbar](https://github.com/romgrk/barbar.nvim)
 - [Feline](https://github.com/feline-nvim/feline.nvim)
 - [NvimTree](https://github.com/kyazdani42/nvim-tree.lua)
@@ -74,10 +75,10 @@ end)
 
 ## Screenshots
 
-![Markdown](https://user-images.githubusercontent.com/54900518/150679390-89653466-d66a-4286-8288-29c58faa096a.png)
-![Lua](https://user-images.githubusercontent.com/54900518/150679516-f89dbcd1-f789-457c-a290-7934af949624.png)
+![Markdown](https://user-images.githubusercontent.com/54900518/208907793-5ddb1616-b96c-461f-8d89-73bc525ab885.png)
+![Lua](https://user-images.githubusercontent.com/54900518/208909818-5550485a-652f-43cd-9328-ca536dddb4d8.png)
 
-## Available colours
+## Available colors
 
 | DarkName | Code    | BrightName   | Code    |
 | -------- | ------- | ------------ | ------- |
@@ -94,19 +95,20 @@ end)
 | Blue     | #3870c0 | LightBlue    | #50a8f0 |
 | Grey     | #5a5856 | White        | #f0eeea |
 
-## Get colour codes
+## Get color codes
 
-Get colour hex with `require'nerdcontrast'.colors["Colour name"][1]`
+Get color hex with `require'nerdcontrast'.colors["Color name"][1]`
 
-For ease of use, the main used colours are linked as shortcuts to allow simple change:
+For ease of use, the main used colors are linked as shortcuts to allow simple change:
 
-| Link           | Colour       |
+| Link           | Color        |
 | -------------- | ------------ |
 | Highlight      | Green        |
 | LightHighlight | LightGreen   |
 | Contrast       | Magenta      |
 | LightContrast  | LightMagenta |
 
-For Dark/Light independency, `Bg,Bg2-Bg8` and `Fg,Fg2-Fg8` colour links are also available. If you wish to use them
-and are expecting to be using the toggle shortcut, please refer to them through Vim's `hi link`
-feature or set the value with `require'nerdcontrast'.themeDep["Colour name"]` and reload the theme
+For Dark/Light independency, `Bg,Bg2-Bg8` and `Fg,Fg2-Fg8` color links are also available. If you
+wish to use them and are expecting to be using the toggle shortcut, please refer to them through
+Vim's `hi link` feature or set the value with `require'nerdcontrast'.themeDep["Color name"]` and
+reload the theme
