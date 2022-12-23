@@ -42,10 +42,6 @@ M.themeDep = {
 	CursorLineNR = {{fg = "Fg3", bg = "Bg"}},
 	Todo = {{fg = "Bg", bg = "Contrast"}, {bold = true}},
 	OPTIONAL = {{fg = "Bg", bg = "Green"}, {bold = true}},
-	DiffAdd = {{fg = "Green", bg = "Bg"}},
-	DiffChange = {{fg = "Cyan", bg = "Bg"}},
-	DiffDelete = {{fg = "Red", bg = "Bg"}},
-	DiffText = {{fg = "Yellow", bg = "Bg"}},
 	LspReferenceRead = {{bg = "Bg"}, {bold = true}},
 	LspReferenceText = {{bg = "Bg"}, {bold = true}},
 	LspReferenceWrite = {{bg = "Bg"}, {bold = true}},
@@ -53,6 +49,7 @@ M.themeDep = {
 	Comment = {{fg = "Fg4"}, {italic = true}},
 	Underlined = {{fg = "Fg3"}, {underline = true}},
 	Link = {{fg = "Fg4"}, {italic = true}},
+	NvimTreeCursorLine = {{bg = "Bg"}, {bold = true}},
 }
 
 local highlights = {
@@ -167,6 +164,10 @@ local highlights = {
 
 	i3ConfigCommand = "Command",
 
+	DiffAdd = "Green",
+	DiffChange = "Cyan",
+	DiffDelete = "Red",
+	DiffText = "Yellow",
 	diffAdded = "DiffAdd",
 	diffChanged = "DiffChange",
 	diffDiffer = "DiffChange",
@@ -219,6 +220,11 @@ local highlights = {
 	NvimTreeGitNew = "DiffAdd",
 	NvimTreeRootFolder = "LightContrast",
 	NvimTreeFolderIcon = "Highlight",
+	NvimTreeExecFile = {fg = "LightGreen", bold = true},
+	Directory = {fg = "Green", bold = true},
+	NvimTreeSymlink = {fg = "Cyan", bold = true},
+	NvimTreeSpecialFile = "Fg",
+	NvimTreeOpenedFile = {fg = "Orange", bold = true},
 	-- Barbar
 	BufferVisible = "Fg",
 	BufferVisibleMod = "LightRed",
@@ -230,12 +236,6 @@ local highlights = {
 	BufferCurrentMod = {fg = "LightRed", bold = true},
 	BufferTabpages = "Cyan",
 	BufferTabpageFill = "Fg5",
-	-- NvimTree
-	NvimTreeExecFile = {fg = "LightGreen", bold = true},
-	Directory = {fg = "Green", bold = true},
-	NvimTreeSymlink = {fg = "Cyan", bold = true},
-	NvimTreeSpecialFile = {fg = "Pink", bold = true},
-	NvimTreeOpenedFile = {fg = "Magenta", bold = true},
 	-- IndentBlankline
 	IndentBlanklineChar = "Fg7",
 	-- Lsp
@@ -307,20 +307,6 @@ local highlights = {
 	CmpItemKindTable = "LightCyan",
 	CmpItemKindStruct = "CmpItemKindTable",
 	CmpItemKindInterface = "CmpItemKindClass",
-	--[[ -- Navic
-	NavicSeparator = "Yellow",
-	NavicText = "Red",
-	NavicIconsFile = "Brown",
-	NavicIconsModule = "PreProc",
-	NavicIconsNamespace = "PreProc",
-	NavicIconsPackage = "PreProc",
-	NavicIconsProperty = "@field",
-	NavicIconsEnum = "Constant",
-	NavicIconsConstant = "Constant",
-	NavicIconsVariable = "Variable",
-	NavicIconsString = "String",
-	NavicIconsBoolean = "Boolean",
-	NavicIconsNumber = "Number", ]]
 
 	-- Extra
 	Neo = {fg = "Cyan", bold = true},
