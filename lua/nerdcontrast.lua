@@ -2,8 +2,8 @@ vim.o.termguicolors = os.getenv("TERM") ~= "linux"
 local M = {}
 local colors = {
 	None = {"NONE", "NONE"},
-	Black = {"#222222", 0},
-	Black2 = {"#3a3a3a", 0},
+	Black = {"#2a2a2a", 0},
+	Black2 = {"#454545", 0},
 	Magenta = {"#a030a8", 5}, -- 9d2098
 	Pink = {"#c06680", 13},
 	Red = {"#cc2815", 1},
@@ -14,9 +14,9 @@ local colors = {
 	Green = {"#54a015", 2},
 	Cyan = {"#32a08d", 6},
 	Blue = {"#3870c0", 4},
-	Grey = {"#5a5856", 8},
+	Grey = {"#5c5a58", 8},
 	Grey2 = {"#7a7876", 8},
-	LightGrey2 = {"#969390", 7},
+	LightGrey2 = {"#959391", 7},
 	LightGrey = {"#bdbcbb", 7},
 	LightMagenta = {"#c850e0", 5},
 	LightPink = {"#e7909a", 13},
@@ -27,7 +27,7 @@ local colors = {
 	LightGreen = {"#66d022", 10},
 	LightCyan = {"#66e0c0", 14}, -- 50e8b0"
 	LightBlue = {"#50a8f0", 12},
-	White2 = {"#e0ddda", 15},
+	White2 = {"#dfddda", 15},
 	White = {"#f0eeea", 15},
 }
 M.colors = colors
@@ -38,13 +38,12 @@ colors.Contrast = colors.Magenta -- contrast
 colors.LightContrast = colors.LightMagenta -- contrast
 
 M.themeDep = {
-	Folded = {{fg = "Fg2"}, {italic = true}},
+	Folded = {{fg = "Fg2", bg = "Bg"}, {italic = true, bold = true}},
 	CursorLineNR = {{fg = "Fg3", bg = "Bg"}},
 	Todo = {{fg = "Bg", bg = "Contrast"}, {bold = true}},
-	OPTIONAL = {{fg = "Bg", bg = "Green"}, {bold = true}},
-	LspReferenceRead = {{bg = "Bg"}, {bold = true}},
-	LspReferenceText = {{bg = "Bg"}, {bold = true}},
-	LspReferenceWrite = {{bg = "Bg"}, {bold = true}},
+	LspReferenceRead = {{bg = "Bg", fg = "LightCyan"}, {bold = true}},
+	LspReferenceText = {{bg = "Bg2"}, {bold = true, underline = true}},
+	LspReferenceWrite = {{bg = "Bg", fg = "LightOrange"}, {bold = true}},
 	BufferCurrent = {{fg = "Fg"}, {bold = true}},
 	Comment = {{fg = "Fg4"}, {italic = true}},
 	Underlined = {{fg = "Fg3"}, {underline = true}},
@@ -122,7 +121,7 @@ local highlights = {
 	["@function.builtin"] = "Keyword",
 	-- TreeSitter language highlight changes
 	["@property"] = "@field", -- C/CPP
-	["@include.cpp"] = "PreProc",
+	["@include.c"] = "PreProc",
 	["@property.css"] = "Parameter",
 	["@type.qualifier"] = "Keyword", -- Java
 	["@attribute.java"] = "PreProc",
@@ -151,6 +150,7 @@ local highlights = {
 	["@text.literal"] = "Cyan",
 	["@text.uri"] = "Link",
 	["@text.reference"] = "Url",
+	["@none"] = "Fg",
 
 	-- Vim syntax highlight changes
 	sqlType = "String",
@@ -307,6 +307,9 @@ local highlights = {
 	CmpItemKindTable = "LightCyan",
 	CmpItemKindStruct = "CmpItemKindTable",
 	CmpItemKindInterface = "CmpItemKindClass",
+	-- Ufo
+	UfoFoldedBg = "Bg",
+	UfoFoldedFg = "Fg2",
 
 	-- Extra
 	Neo = {fg = "Cyan", bold = true},
@@ -343,7 +346,7 @@ if vim.v.vim_did_enter ~= 1 then
 	vim.api.nvim_create_autocmd("VimEnter", {once = true, callback = check})
 end
 
-M.load = function()
+M.setup = function()
 	vim.g.colors_name = "nerdcontrast"
 	if highlights then
 		M.hi(highlights)
