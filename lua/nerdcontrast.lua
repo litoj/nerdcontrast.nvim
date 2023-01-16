@@ -83,7 +83,7 @@ local highlights = {
 	CursorColumn = "Bg",
 	CursorLine = "Bg",
 	LineNr = "Fg5",
-	NonText = "Fg8",
+	NonText = "Fg7", -- used for listchars (indent)
 	SpecialKey = "Orange",
 	Keyword = "Blue",
 	Include = "Keyword",
@@ -236,8 +236,6 @@ local highlights = {
 	BufferCurrentMod = {fg = "LightRed", bold = true},
 	BufferTabpages = "Cyan",
 	BufferTabpageFill = "Fg5",
-	-- IndentBlankline
-	IndentBlanklineChar = "Fg7",
 	-- Lsp
 	DiagnosticVirtualTextError = {fg = "Red", italic = true, bold = true},
 	DiagnosticVirtualTextWarn = {fg = "Orange", italic = true},
