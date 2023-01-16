@@ -1,0 +1,17 @@
+return {
+	NvimTreeIndentMarker = "Contrast",
+	NvimTreeImageFile = "Yellow",
+	NvimTreeGitDirty = "LightOrange",
+	NvimTreeGitDeleted = "DiffDelete",
+	NvimTreeGitMerge = "DiffChange",
+	NvimTreeGitRenamed = "DiffChange",
+	NvimTreeGitStaged = "DiffAdd",
+	NvimTreeGitNew = "DiffAdd",
+	NvimTreeRootFolder = "LightContrast",
+	NvimTreeFolderIcon = "Highlight",
+	NvimTreeExecFile = {fg = "LightGreen", bold = true},
+	Directory = {fg = "Green", bold = true},
+	NvimTreeSymlink = {fg = "Cyan", bold = true},
+	NvimTreeSpecialFile = "Fg1",
+	NvimTreeOpenedFile = {fg = "Orange", bold = true},
+}

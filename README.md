@@ -8,7 +8,20 @@ choose between **Light** and **Dark**, but keep all colors the same
 
 - Neovim 0.8.0+
 
-## Installing with [`packer`](https://github.com/wbthomason/packer.nvim)
+## Installation
+
+### [`lazy.nvim`](https://github.com/folke/lazy.nvim)
+
+```lua
+return {
+  "JosefLitos/nerdcontrast.nvim",
+  lazy = false,
+  priority = 999,
+  config = true -- automatically sets colorscheme, or fun() like packer
+}
+```
+
+### [`packer.nvim`](https://github.com/wbthomason/packer.nvim)
 
 ```lua
 packer.use {
@@ -63,8 +76,8 @@ nc.hi({
   -- set hex values of given nerdcontrast custom colors
   BoldGreen = {fg = "Green", bold = true},
   -- directly linked
-  WhiteFg = "Fg", -- Fg hex = Bg8 hex, Fg2=Bg7...
-  WhiteBg = "Bg8", -- Fg changes Text, Bg changes background
+  WhiteFg = "Fg1", -- Fg1 hex = Bg8 hex, Fg2=Bg7...
+  WhiteBg = "Bg8", -- Fgx changes Text, Bgx changes background
 })
 ```
 
@@ -87,8 +100,8 @@ nc.hi({
 
 | DarkName | Code    | BrightName   | Code    |
 | -------- | ------- | ------------ | ------- |
-| Black    | #2a2a2a | LightGrey2   | #959391 |
-| Black2   | #454545 | LightGrey    | #bdbcbb |
+| Black    | #282828 | LightGrey2   | #959391 |
+| Black2   | #424242 | LightGrey    | #bdbcbb |
 | Magenta  | #a030a8 | LightMagenta | #c850e0 |
 | Pink     | #c06680 | LightPink    | #e7909a |
 | Red      | #cc2815 | LightRed     | #f03522 |
@@ -115,7 +128,7 @@ For ease of use, the main used colors are linked as shortcuts to allow simple ch
 | Contrast       | Magenta      |
 | LightContrast  | LightMagenta |
 
-For Dark/Light independency, `Bg,Bg2-Bg8` and `Fg,Fg2-Fg8` color links are also available. If you
+For Dark/Light independency, `Bg1-Bg8` and `Fg1-Fg8` color links are also available. If you
 wish to use them and are expecting to be using the toggle shortcut, please refer to them through
 Vim's `hi link` feature or set the value with `require'nerdcontrast'.themeDep["Color name"]` and
 reload the theme
