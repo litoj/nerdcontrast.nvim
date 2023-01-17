@@ -8,25 +8,19 @@ return {
 	["@attribute"] = "Parameter",
 	["@storageclass"] = "Keyword",
 	["@type.builtin"] = "Keyword",
-	["@variable.builtin.java"] = "Keyword",
 	["@constant.builtin"] = "Keyword",
 	["@function.builtin"] = "Keyword",
 	-- TreeSitter language highlight changes
-	["@property"] = "@field", -- C/CPP
+	["@text.reference.gitcommit"] = "Variable",
+	["@text.uri.gitcommit"] = "String",
+	-- C/CPP
+	["@property"] = "@field",
 	["@include.c"] = "PreProc",
 	["@include.cpp"] = "PreProc",
-	["@property.css"] = "Parameter",
-	["@type.qualifier"] = "Keyword", -- Java
+	-- Java
+	["@type.qualifier"] = "Keyword",
+	["@variable.builtin.java"] = "Keyword",
 	["@attribute.java"] = "PreProc",
-	["@tag"] = "Statement", -- HTML
-	["@tag.delimiter"] = "Delimiter", -- HTML
-	["@tag.attribute"] = "Parameter", -- XML
-	["@string.special"] = "LightOrange", -- Vim regex
-	["@constructor.lua"] = "Delimiter",
-	["@field.yaml"] = "Variable",
-	["@label.json"] = "Variable",
-	["@type.query"] = "Keyword",
-	["@none.bash"] = "String",
 	-- LaTeX
 	["@text.environment.latex"] = "Keyword",
 	["@text.environment.name.latex"] = "Constant",
@@ -44,4 +38,16 @@ return {
 	["@text.uri"] = "Link",
 	["@text.reference"] = "Url",
 	["@none"] = "Fg1",
+	-- HTML
+	["@tag"] = "Statement",
+	["@tag.delimiter"] = "Delimiter",
+	-- Singles
+	["@property.css"] = "Parameter",
+	["@tag.attribute"] = "Parameter", -- XML
+	["@string.special"] = "LightOrange", -- Vim regex
+	["@constructor.lua"] = "Delimiter",
+	["@field.yaml"] = "Variable",
+	["@label.json"] = "Variable",
+	["@type.query"] = "Keyword",
+	["@none.bash"] = "String",
 }
