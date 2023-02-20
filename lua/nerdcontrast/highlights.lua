@@ -64,13 +64,14 @@ return {
 	xmlTag = "Delimiter",
 	xmlTagName = "Label",
 
-	i3ConfigCommand = "Command",
-
 	DiffAdd = "Green",
 	DiffChange = "Cyan",
 	DiffDelete = "Red",
 	DiffText = "Yellow",
 	-- PLUGINS
+
+	i3ConfigCommand = "Command",
+	DevIconMd = "Fg1",
 
 	-- FzfLua
 	FzfLuaBorder = "FloatBorder",

@@ -124,7 +124,7 @@ M.setup = function()
 	if package.loaded.feline then require'feline'.use_theme({fg = colors.Fg1[1], bg = colors.Bg1[1]}) end
 	if not M.loaded then
 		M.hi(require "nerdcontrast.highlights")
-		vim.defer_fn(function() require "nerdcontrast.lazy_load"(M) end, 30)
+		vim.schedule(function() require "nerdcontrast.lazy_load"(M) end)
 		M.loaded = true
 	end
 end

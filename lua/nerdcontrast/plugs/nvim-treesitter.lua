@@ -1,5 +1,6 @@
 return {
 	["@field"] = "LightGreen",
+	["@namespace"] = "LightGreen",
 	["@variable"] = "Variable",
 	["@parameter"] = "Parameter",
 	["@constructor"] = "Type",
@@ -10,13 +11,11 @@ return {
 	["@type.builtin"] = "Keyword",
 	["@constant.builtin"] = "Keyword",
 	["@function.builtin"] = "Keyword",
+	["@property"] = "@field",
+	["@string.special"] = "Orange",
 	-- TreeSitter language highlight changes
 	["@text.reference.gitcommit"] = "Variable",
 	["@text.uri.gitcommit"] = "String",
-	-- C/CPP
-	["@property"] = "@field",
-	["@include.c"] = "PreProc",
-	["@include.cpp"] = "PreProc",
 	-- Java
 	["@type.qualifier"] = "Keyword",
 	["@variable.builtin.java"] = "Keyword",
@@ -41,13 +40,15 @@ return {
 	-- HTML
 	["@tag"] = "Statement",
 	["@tag.delimiter"] = "Delimiter",
-	-- Singles
+	-- Other
+	["@include.c"] = "PreProc",
+	["@include.cpp"] = "PreProc",
 	["@property.css"] = "Parameter",
-	["@tag.attribute"] = "Parameter", -- XML
-	["@string.special"] = "LightOrange", -- Vim regex
+	["@tag.attribute.xml"] = "Parameter",
 	["@constructor.lua"] = "Delimiter",
 	["@field.yaml"] = "Variable",
 	["@label.json"] = "Variable",
 	["@type.query"] = "Keyword",
 	["@none.bash"] = "String",
+	["@label.help"] = "LightMagenta",
 }

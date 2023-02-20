@@ -1,6 +1,5 @@
 " Vim syntax file
-" Language:		configure.in script: M4 with sh
-" Former Maintainer:	Christian Hammesr <ch@lathspell.westend.com>
+" Language: toml with edits for common config styles support
 
 " quit when a syntax file was already loaded
 if exists("b:current_syntax")
@@ -10,42 +9,33 @@ endif
 setlocal commentstring=#%s
 
 " define the config syntax
-syn match   configdelimiter "[()\[\];,:{}]"
-syn match   configoperator  "[=|&\*\+\<\>.]"
-syn match   configcomment   "\(dnl.*\)\|\(#.*\)" contains=configDnl,@Spell
-syn match   configfunction  "\<[A-Z_][A-Z0-9_]*\>"
-syn match   confignumber    "[-+ ]*\d[.0-9]*" contained contains=configoperator
-syn match   confighex       "[a-f0-9]\{6\}" contained
-syn keyword configDnl   	dnl contained
-syn keyword configkeyword   if then else fi test for in do done true false
-syn keyword configspecial   cat rm eval
-syn match   configvalue    "[^=]*$" contained contains=confignumber,configoperator,configdelimiter,configkeyword,confighex
-syn match   configlabel    "[a-zA-Z0-9-_.]\+[ \t]*=" contained contains=configoperator
-syn match   configline     "^[a-zA-Z0-9-_. \t]\+=.*$" contains=configlabel,configvalue,configdelimiter,confignumber
+syn match   configDelimiter "[()\[\];,:{}]"
+syn match   configOperator  "[=|&\*\+\<\>.]"
+syn match   configComment   "\(dnl.*\)\|\(\(#\|//\).*\)" contains=@Spell
+syn region  configComment   start="/\*" end="\*/" contains=@Spell
+syn match   configNumber    "[-+ ]*\d[.0-9]*" contained contains=configOperator
+syn match   configHex       "[a-f0-9]\{6\}" contained
+syn match   configValue    "[^=]*$" contained contains=configNumber,configOperator,configDelimiter,configKeyword,configHex
+syn match   configVariable "\w\+\s*=" contained contains=configOperator
+syn match   configLine     "^\s*\w\+\s*=.*$" contains=configVariable,configValue,configNumber
+syn match   configLabel    "\w\+\s*{" contained contains=configDelimiter
+syn region  configBlock    start=".*{$" end="}$" contains=configLabel,configDelimiter,configComment,configLine,configString,configOperator transparent
 
 " This shortens the script, see syn-ext-match..
-syn region  configstring    start=+\z(["'`]\)+ skip=+\\\z1+ end=+\z1+ contains=@Spell
-
-" Anything inside AC_MSG_TYPE([...])  and AC_MSG_TYPE(...) is a string.
-syn region  configmsg matchgroup=configfunction start="AC_MSG_[A-Z]*\ze(\[" matchgroup=configdelimiter end="\])" contains=configdelimiter,@Spell
-syn region  configmsg matchgroup=configfunction start="AC_MSG_[A-Z]*\ze([^[]" matchgroup=configdelimiter end=")" contains=configdelimiter,@Spell
+syn region  configString    start=+\z(["'`]\)+ skip=+\\\z1+ end=+\z1+ contains=@Spell
 
 " Define the default highlighting.
 " Only when an item doesn't have highlighting yet
 
-hi def link configdelimiter Delimiter
-hi def link configoperator  Operator
-hi def link configcomment   Comment
-hi def link configDnl       Comment
-hi def link configfunction  Function
-hi def link confignumber    Number
-hi def link configkeyword   Keyword
-hi def link configlabel     Variable
-hi def link configspecial   Special
-hi def link configstring    String
-hi def link confighex       Constant
-hi def link configvalue     String
-hi def link configmsg       String
+hi def link configDelimiter Delimiter
+hi def link configOperator  Operator
+hi def link configComment   Comment
+hi def link configNumber    Number
+hi def link configVariable  Variable
+hi def link configLabel     @field
+hi def link configString    String
+hi def link configHex       Constant
+hi def link configValue     String
 
 
 let b:current_syntax = "config"

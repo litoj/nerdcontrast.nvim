@@ -1,5 +1,5 @@
 return function(M)
-	for _, ft in ipairs({"help", "gitcommit"}) do
+	for _, ft in ipairs({"gitcommit", "help", "mcfunction"}) do
 		local function load_hi() M.hi(require("nerdcontrast.ft." .. ft)) end
 		if vim.bo.filetype == ft then
 			load_hi()
@@ -8,13 +8,13 @@ return function(M)
 		end
 	end
 	for _, mod in ipairs({
-		"lspconfig",
-		"nvim-treesitter",
-		"dapui",
-		"cmp",
-		"nvim-tree",
 		"bufferline",
+		"cmp",
+		"dapui",
 		"lazy",
+		"lspconfig",
+		"nvim-tree",
+		"nvim-treesitter",
 		"packer",
 	}) do
 		local function load_hi() M.hi(require("nerdcontrast.plugs." .. mod)) end
