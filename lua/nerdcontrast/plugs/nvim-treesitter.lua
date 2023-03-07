@@ -41,6 +41,7 @@ return {
 	["@tag"] = "Statement",
 	["@tag.delimiter"] = "Delimiter",
 	-- Other
+	["@type.builtin.kotlin"] = "Type",
 	["@include.c"] = "PreProc",
 	["@include.cpp"] = "PreProc",
 	["@property.css"] = "Parameter",

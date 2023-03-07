@@ -13,4 +13,6 @@ return {
 	LazyReasonStart = "LightHighlight",
 	LazyReasonKeys = "Character",
 	LazySpecial = "Delimiter",
+	LazyDimmed = "Fg4",
+	LazyProp = "Orange"
 }
