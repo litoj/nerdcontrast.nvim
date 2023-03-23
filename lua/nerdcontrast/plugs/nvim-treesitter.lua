@@ -37,6 +37,7 @@ return {
 	["@text.uri"] = "Link",
 	["@text.reference"] = "Url",
 	["@none"] = "Fg1",
+	["@text.todo.checked.markdown"] = "Done",
 	-- HTML
 	["@tag"] = "Statement",
 	["@tag.delimiter"] = "Delimiter",
@@ -52,4 +53,7 @@ return {
 	["@type.query"] = "Keyword",
 	["@none.bash"] = "String",
 	["@label.help"] = "LightMagenta",
+	-- SQL
+	["@type.qualifier.sql"] = "Conditional",
+	["@keyword.operator.sql"] = "Conditional",
 }

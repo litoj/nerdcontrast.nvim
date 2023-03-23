@@ -43,6 +43,7 @@ M.themeDep = {
 	Folded = {{fg = "Fg2", bg = "Bg1"}, {italic = true, bold = true}},
 	CursorLineNR = {{fg = "Fg3", bg = "Bg1"}},
 	Todo = {{fg = "Bg1", bg = "Contrast"}, {bold = true}},
+	Done = {{fg = "Bg1", bg = "Green"}, {bold = true}},
 	LspReferenceRead = {{bg = "Bg1", fg = "LightCyan"}, {bold = true}},
 	LspReferenceText = {{bg = "Bg2"}, {bold = true, underline = true}},
 	LspReferenceWrite = {{bg = "Bg1", fg = "LightOrange"}, {bold = true}},

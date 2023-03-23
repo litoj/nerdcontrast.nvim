@@ -53,9 +53,8 @@ end)
 ```lua
 local time = tonumber(os.date("%H"))
 local month = tonumber(os.date("%m"))
-if month > 6 then month = 12 - month end
-month = math.floor(month / 2)
-vim.o.background = (time > 8 - month and time < 17 + month) and "light" or "dark"
+if month > 6 then month = 13 - month end
+vim.o.background = (time > 9 - month and time < 15 + month) and "light" or "dark"
 ```
 
 ### Highlight group customization
