@@ -34,10 +34,10 @@ return {
 	["@environment.latex"] = "Command",
 	-- Markdown
 	["@text.literal"] = "Cyan",
-	["@text.uri"] = "Link",
+	["@text.uri"] = {{fg = "Fg4"}, {italic = true}},
 	["@text.reference"] = "Url",
 	["@none"] = "Fg1",
-	["@text.todo.checked.markdown"] = "Done",
+	["@text.todo.checked.markdown"] = {{fg = "Bg1", bg = "Green"}, {bold = true}},
 	-- HTML
 	["@tag"] = "Statement",
 	["@tag.delimiter"] = "Delimiter",

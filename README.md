@@ -44,7 +44,7 @@ nmap("n", "<Leader>c", function()
 	vim.o.background = vim.o.background == "light" and "dark" or "light"
   -- Transparent bg for dark theme
   vim.g.bg_none = vim.o.background == "dark"
-	vim.cmd.colorscheme "nerdcontrast" -- or `require'nerdcontrast'.load()`
+	vim.cmd.colorscheme "nerdcontrast" -- or `require'nerdcontrast'.setup()`
 end)
 ```
 
@@ -62,21 +62,16 @@ vim.o.background = (time > 9 - month and time < 15 + month) and "light" or "dark
 ```lua
 local nc = require "nerdcontrast"
 
--- for `Fg`/`Bg` values to get updated on theme change
--- colors in 1. table, effects in 2. table
-vim.tbl_extend("force", nc.themeDep, {
-  Error = {{fg = "Fg8", bg = "Red"}},
-  GraySpiked = {{sp = "Bg3"}, {undercurl = true}},
-})
--- the following call will now use the updated table
-nc.setup() -- equal to `vim.cmd.colorscheme "nerdcontrast"`
-
 nc.hi({
   -- set hex values of given nerdcontrast custom colors
   BoldGreen = {fg = "Green", bold = true},
   -- directly linked
   WhiteFg = "Fg1", -- Fg1 hex = Bg8 hex, Fg2=Bg7...
   WhiteBg = "Bg8", -- Fgx changes Text, Bgx changes background
+	-- put colors in a separate table for using `Fgx`/`Bgx` by value
+	-- colors in 1. table, effects in 2. table
+  Error = {{fg = "Fg8", bg = "Red"}},
+  GraySpiked = {{sp = "Bg3"}, {undercurl = true}},
 })
 ```
 
@@ -129,5 +124,5 @@ For ease of use, the main used colors are linked as shortcuts to allow simple ch
 
 For Dark/Light independency, `Bg1-Bg8` and `Fg1-Fg8` color links are also available. If you
 wish to use them and are expecting to be using the toggle shortcut, please refer to them through
-Vim's `hi link` feature or set the value with `require'nerdcontrast'.themeDep["Color name"]` and
-reload the theme
+Vim's `hi link` feature or set the value with `require'nerdcontrast'.hi({})` in the forementioned
+format.
