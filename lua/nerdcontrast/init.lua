@@ -14,10 +14,10 @@ local colors = {
 	Green = {"#54a015", 2},
 	Cyan = {"#32a08d", 6},
 	Blue = {"#3870c0", 4},
-	Grey = {"#5c5a58", 8},
+	Grey = {"#555453", 8},
 	Grey2 = {"#7a7876", 8},
 	LightGrey2 = {"#959391", 7},
-	LightGrey = {"#bdbcbb", 7},
+	LightGrey = {"#bbbbbb", 7},
 	LightMagenta = {"#c850e0", 5},
 	LightPink = {"#e7909a", 13},
 	LightRed = {"#f03522", 9},
@@ -27,7 +27,7 @@ local colors = {
 	LightGreen = {"#66d022", 10},
 	LightCyan = {"#66e0c0", 14}, -- 50e8b0"
 	LightBlue = {"#50a8f0", 12},
-	White2 = {"#dfddda", 15},
+	White2 = {"#dedddb", 15},
 	White = {"#f0eeea", 15},
 }
 M.colors = colors
@@ -120,7 +120,7 @@ M.setup = function()
 
 	if package.loaded.feline then require'feline'.use_theme({fg = colors.Fg1[1], bg = colors.Bg1[1]}) end
 	if not M.loaded then
-		M.hi(require "nerdcontrast.highlights")
+		M.hi(require "nerdcontrast.groups")
 		vim.schedule(function() require "nerdcontrast.lazy_load"(M) end)
 		M.loaded = true
 	end

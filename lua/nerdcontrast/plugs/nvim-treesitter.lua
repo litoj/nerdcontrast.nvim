@@ -1,6 +1,6 @@
 return {
-	["@field"] = "LightGreen",
-	["@namespace"] = "LightGreen",
+	["@field"] = "Field",
+	["@namespace"] = "Namespace",
 	["@variable"] = "Variable",
 	["@parameter"] = "Parameter",
 	["@constructor"] = "Type",
@@ -11,6 +11,7 @@ return {
 	["@type.builtin"] = "Keyword",
 	["@constant.builtin"] = "Keyword",
 	["@function.builtin"] = "Keyword",
+	["@variable.builtin"] = "Keyword",
 	["@property"] = "@field",
 	["@string.special"] = "Orange",
 	-- TreeSitter language highlight changes
@@ -18,7 +19,6 @@ return {
 	["@text.uri.gitcommit"] = "String",
 	-- Java
 	["@type.qualifier"] = "Keyword",
-	["@variable.builtin.java"] = "Keyword",
 	["@attribute.java"] = "PreProc",
 	-- LaTeX
 	["@text.environment.latex"] = "Keyword",

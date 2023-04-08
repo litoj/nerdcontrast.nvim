@@ -1,4 +1,5 @@
 return function(M)
+	M.hi(require "nerdcontrast.groups_lazy")
 	for _, ft in ipairs({"gitcommit", "help", "mcfunction"}) do
 		local function load_hi() M.hi(require("nerdcontrast.ft." .. ft)) end
 		if vim.bo.filetype == ft then
@@ -15,7 +16,6 @@ return function(M)
 		"lspconfig",
 		"nvim-tree",
 		"nvim-treesitter",
-		"packer",
 	}) do
 		local function load_hi() M.hi(require("nerdcontrast.plugs." .. mod)) end
 		if package.loaded[mod] then
