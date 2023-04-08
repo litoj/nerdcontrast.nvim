@@ -24,6 +24,10 @@ return {
 	NonText = "Fg7", -- used for listchars (indent)
 	SpecialKey = "Orange",
 	-- Code
+	Title = {fg = "LightHighlight", bold = true},
+	Todo = {{fg = "Bg1", bg = "Contrast"}, {bold = true}},
+	Underlined = {{fg = "Fg3"}, {underline = true}},
+	Url = {fg = "LightBlue", sp = "LightBlue", underline = true},
 	Comment = {{fg = "Fg4"}, {italic = true}},
 	Keyword = "Blue",
 	Include = "Keyword",

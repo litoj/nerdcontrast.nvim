@@ -95,7 +95,7 @@ nc.hi({
 | DarkName | Code    | BrightName   | Code    |
 | -------- | ------- | ------------ | ------- |
 | Black    | #282828 | LightGrey2   | #959391 |
-| Black2   | #424242 | LightGrey    | #bdbcbb |
+| Black2   | #424242 | LightGrey    | #b5b5b5 |
 | Magenta  | #a030a8 | LightMagenta | #c850e0 |
 | Pink     | #c06680 | LightPink    | #e7909a |
 | Red      | #cc2815 | LightRed     | #f03522 |
@@ -106,7 +106,7 @@ nc.hi({
 | Green    | #54a015 | LightGreen   | #66d022 |
 | Cyan     | #32a08d | LightCyan    | #66e0c0 |
 | Blue     | #3870c0 | LightBlue    | #50a8f0 |
-| Grey     | #5c5a58 | White2       | #dfddda |
+| Grey     | #5c5a58 | White2       | #dad8d5 |
 | Grey2    | #7a7876 | White        | #f0eeea |
 
 ## Get color codes

@@ -14,10 +14,10 @@ local colors = {
 	Green = {"#54a015", 2},
 	Cyan = {"#32a08d", 6},
 	Blue = {"#3870c0", 4},
-	Grey = {"#555453", 8},
+	Grey = {"#5c5a58", 8},
 	Grey2 = {"#7a7876", 8},
 	LightGrey2 = {"#959391", 7},
-	LightGrey = {"#bbbbbb", 7},
+	LightGrey = {"#b5b5b5", 7},
 	LightMagenta = {"#c850e0", 5},
 	LightPink = {"#e7909a", 13},
 	LightRed = {"#f03522", 9},
@@ -27,7 +27,7 @@ local colors = {
 	LightGreen = {"#66d022", 10},
 	LightCyan = {"#66e0c0", 14}, -- 50e8b0"
 	LightBlue = {"#50a8f0", 12},
-	White2 = {"#dedddb", 15},
+	White2 = {"#dad8d5", 15},
 	White = {"#f0eeea", 15},
 }
 M.colors = colors
@@ -85,8 +85,14 @@ M.setup = function()
 	if vim.fn.exists("syntax_on") then vim.cmd.syntax "reset" end
 	local function link(links)
 		vim.g.terminal_color_0 = colors[links[8]][1]
-		for i = 8, 1, -1 do
-			local color = colors[links[i]]
+		vim.g.terminal_color_15 = colors[links[1]][1]
+		colors.Fg1 = links[1] == "Black" and {"#000000", 0} or {"#ffffff", 15}
+		vim.api.nvim_set_hl(0, "Fg1", {fg = colors.Fg1[1]})
+		local color = colors[links[1]]
+		colors.Bg8 = color
+		vim.api.nvim_set_hl(0, "Bg8", {bg = color[1], ctermbg = color[2]})
+		for i = 8, 2, -1 do
+			color = colors[links[i]]
 			local idx = "Fg" .. i
 			colors[idx] = color
 			vim.api.nvim_set_hl(0, idx, {link = links[i]})
@@ -94,7 +100,6 @@ M.setup = function()
 			colors[idx] = color
 			vim.api.nvim_set_hl(0, idx, {bg = color[1], ctermbg = color[2]})
 		end
-		vim.g.terminal_color_15 = colors[links[1]][1]
 	end
 	if vim.o.background == "light" then
 		link({"Black", "Black2", "Grey", "Grey2", "LightGrey2", "LightGrey", "White2", "White"})
@@ -104,16 +109,14 @@ M.setup = function()
 			fg = "#000000",
 			bg = vim.g.bg_none and "NONE" or "#faf8ff",
 		})
-		vim.api.nvim_set_hl(0, "Visual", {link = "Bg1"})
 	else
 		link({"White", "White2", "LightGrey", "LightGrey2", "Grey2", "Grey", "Black2", "Black"})
 		vim.api.nvim_set_hl(0, "Normal", {
 			ctermbg = 0,
 			ctermfg = 15,
-			fg = "#f0f0f0",
+			fg = "#ffffff",
 			bg = vim.g.bg_none and "NONE" or "#101010",
 		})
-		vim.api.nvim_set_hl(0, "Visual", {link = "Bg2"})
 	end
 	hiTheme(M.themeDep)
 	vim.g.colors_name = "nerdcontrast"

@@ -18,10 +18,7 @@ return {
 	Search = {fg = "LightContrast", bold = true},
 	IncSearch = {fg = "LightBlue", bold = true},
 	Folded = {{fg = "Fg2", bg = "Bg1"}, {italic = true, bold = true}},
-	Title = {fg = "LightHighlight", bold = true},
-	Todo = {{fg = "Bg1", bg = "Contrast"}, {bold = true}},
-	Underlined = {{fg = "Fg3"}, {underline = true}},
-	Url = {fg = "LightBlue", sp = "LightBlue", underline = true},
+	Visual = "Bg1",
 	-- Lsp
 	LspReferenceRead = {{bg = "Bg1", fg = "LightCyan"}, {bold = true}},
 	LspReferenceText = {{bg = "Bg2"}, {bold = true, underline = true}},

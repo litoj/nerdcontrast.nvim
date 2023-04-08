@@ -16,9 +16,9 @@ syn region  configComment   start="/\*" end="\*/" contains=@Spell
 syn match   configNumber    "[-+ ]*\d[.0-9]*" contained contains=configOperator
 syn match   configHex       "[a-f0-9]\{6\}" contained
 syn match   configValue    "[^=]*$" contained contains=configNumber,configOperator,configDelimiter,configKeyword,configHex
-syn match   configVariable "\w\+\s*=" contained contains=configOperator
-syn match   configLine     "^\s*\w\+\s*=.*$" contains=configVariable,configValue,configNumber
-syn match   configLabel    "\w\+\s*{" contained contains=configDelimiter
+syn match   configVariable "[a-z0-9A-Z_-]\+\s*=" contained contains=configOperator
+syn match   configLine     "^\s*[a-z0-9A-Z_-]\+\s*=.*$" contains=configVariable,configValue,configNumber
+syn match   configLabel    "[a-z0-9A-Z_-]\+\s*{" contained contains=configDelimiter
 syn region  configBlock    start=".*{$" end="}$" contains=configLabel,configDelimiter,configComment,configLine,configString,configOperator transparent
 
 " This shortens the script, see syn-ext-match..
