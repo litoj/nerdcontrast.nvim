@@ -28,8 +28,12 @@ packer.use {
   "JosefLitos/nerdcontrast.nvim",
   config = function()
     vim.o.background = "dark" -- default, "light" for light theme
-    vim.g.bg_none = false     -- default, `true` for transparent background
     vim.cmd.colorscheme "nerdcontrast"
+    -- or manual for setting other options, default settings
+    require'nerdcontrast'.setup {
+      bg = true, -- set default bg, otherwise transparent
+      export = 0, -- set source terminal theme 1=bg+fg, 2=all
+    }
   end,
 }
 ```
@@ -42,19 +46,8 @@ packer.use {
 -- Dark/Light theme toggle
 nmap("n", "<Leader>c", function()
 	vim.o.background = vim.o.background == "light" and "dark" or "light"
-  -- Transparent bg for dark theme
-  vim.g.bg_none = vim.o.background == "dark"
 	vim.cmd.colorscheme "nerdcontrast" -- or `require'nerdcontrast'.setup()`
 end)
-```
-
-### Daylight dependant theme
-
-```lua
-local time = tonumber(os.date("%H"))
-local month = tonumber(os.date("%m"))
-if month > 6 then month = 13 - month end
-vim.o.background = (time > 9 - month and time < 15 + month) and "light" or "dark"
 ```
 
 ### Highlight group customization
@@ -66,11 +59,11 @@ nc.hi({
   -- set hex values of given nerdcontrast custom colors
   BoldGreen = {fg = "Green", bold = true},
   -- directly linked
-  WhiteFg = "Fg1", -- Fg1 hex = Bg8 hex, Fg2=Bg7...
-  WhiteBg = "Bg8", -- Fgx changes Text, Bgx changes background
+  DefaultFg = "Fg1", -- fg part of `Normal`, Fg2=Bg7..Fg7=Bg2
+  WhiteBg = "Bg7", -- Fgx changes Text, Bgx changes background
 	-- put colors in a separate table for using `Fgx`/`Bgx` by value
 	-- colors in 1. table, effects in 2. table
-  Error = {{fg = "Fg8", bg = "Red"}},
+  Error = {{fg = "Fg4", bg = "Red"}},
   GraySpiked = {{sp = "Bg3"}, {undercurl = true}},
 })
 ```
@@ -112,17 +105,9 @@ nc.hi({
 ## Get color codes
 
 Get color hex with `require'nerdcontrast'.colors["Color name"][1]`
+or link to them directly by name
 
-For ease of use, the main used colors are linked as shortcuts to allow simple change:
-
-| Link           | Color        |
-| -------------- | ------------ |
-| Highlight      | Green        |
-| LightHighlight | LightGreen   |
-| Contrast       | Magenta      |
-| LightContrast  | LightMagenta |
-
-For Dark/Light independency, `Bg1-Bg8` and `Fg1-Fg8` color links are also available. If you
+For Dark/Light independency, `Bg1-Bg7` and `Fg1-Fg8` color links are also available. If you
 wish to use them and are expecting to be using the toggle shortcut, please refer to them through
 Vim's `hi link` feature or set the value with `require'nerdcontrast'.hi({})` in the forementioned
 format.

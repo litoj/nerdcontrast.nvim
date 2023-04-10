@@ -1,5 +1,5 @@
 return {
-	NvimTreeIndentMarker = "Contrast",
+	NvimTreeIndentMarker = "Magenta",
 	NvimTreeImageFile = "Yellow",
 	NvimTreeGitDirty = "LightOrange",
 	NvimTreeGitDeleted = "DiffDelete",
@@ -7,8 +7,8 @@ return {
 	NvimTreeGitRenamed = "DiffChange",
 	NvimTreeGitStaged = "DiffAdd",
 	NvimTreeGitNew = "DiffAdd",
-	NvimTreeRootFolder = "LightContrast",
-	NvimTreeFolderIcon = "Highlight",
+	NvimTreeRootFolder = "LightMagenta",
+	NvimTreeFolderIcon = "Green",
 	NvimTreeExecFile = {fg = "LightGreen", bold = true},
 	Directory = {fg = "Green", bold = true},
 	NvimTreeSymlink = {fg = "Cyan", bold = true},

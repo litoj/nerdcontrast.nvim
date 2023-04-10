@@ -1,6 +1,6 @@
 return {
 	helpHeadline = "Title",
-	helpHeader = "LightHighlight",
+	helpHeader = "LightGreen",
 	helpHyperTextJump = "Command",
 	helpHyperTextEntry = "LightMagenta",
 	helpCommand = "String",

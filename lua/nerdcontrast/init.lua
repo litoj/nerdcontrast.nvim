@@ -1,6 +1,16 @@
 vim.o.termguicolors = os.getenv("TERM") ~= "linux"
 local M = {}
+
+--- Configuration options
+---@class nerdcontrast.config
+---@field bg boolean fill background or leave it transparent
+---@field export (0|1|2) set source terminal colors to the theme, 1=bg+fg, 2=all
+M.config = {bg = true, export = 0}
+
+---@type table<string,table<string,integer>>
 local colors = {
+	Dark = {"#000000", 0},
+	Light = {"#ffffff", 15},
 	None = {"NONE", "NONE"},
 	Black = {"#282828", 0},
 	Black2 = {"#424242", 0},
@@ -32,12 +42,7 @@ local colors = {
 }
 M.colors = colors
 
-for i, v in pairs(colors) do vim.api.nvim_set_hl(0, i, {fg = v[1], ctermfg = v[2]}) end
-
-colors.Highlight = colors.Green -- highlight
-colors.LightHighlight = colors.LightGreen -- highlight
-colors.Contrast = colors.Magenta -- contrast
-colors.LightContrast = colors.LightMagenta -- contrast
+for k, v in pairs(colors) do vim.api.nvim_set_hl(0, k, {fg = v[1], ctermfg = v[2]}) end
 
 M.themeDep = {}
 
@@ -81,50 +86,107 @@ function M.hi(tbl)
 	end
 end
 
-M.setup = function()
-	if vim.fn.exists("syntax_on") then vim.cmd.syntax "reset" end
-	local function link(links)
-		vim.g.terminal_color_0 = colors[links[8]][1]
-		vim.g.terminal_color_15 = colors[links[1]][1]
-		colors.Fg1 = links[1] == "Black" and {"#000000", 0} or {"#ffffff", 15}
-		vim.api.nvim_set_hl(0, "Fg1", {fg = colors.Fg1[1]})
-		local color = colors[links[1]]
-		colors.Bg8 = color
-		vim.api.nvim_set_hl(0, "Bg8", {bg = color[1], ctermbg = color[2]})
-		for i = 8, 2, -1 do
-			color = colors[links[i]]
-			local idx = "Fg" .. i
-			colors[idx] = color
-			vim.api.nvim_set_hl(0, idx, {link = links[i]})
-			idx = "Bg" .. (9 - i)
-			colors[idx] = color
-			vim.api.nvim_set_hl(0, idx, {bg = color[1], ctermbg = color[2]})
-		end
+--- Plugin setup with optional configuration
+---@param opts (nerdcontrast.config|nil)
+function M.setup(opts)
+	if opts then
+		if opts.bg ~= nil then M.config.bg = opts.bg end
+		if opts.export ~= nil then M.config.export = opts.export end
 	end
+	local bg, fg, links
 	if vim.o.background == "light" then
-		link({"Black", "Black2", "Grey", "Grey2", "LightGrey2", "LightGrey", "White2", "White"})
-		vim.api.nvim_set_hl(0, "Normal", {
-			ctermfg = 0,
-			ctermbg = 15,
-			fg = "#000000",
-			bg = vim.g.bg_none and "NONE" or "#faf8ff",
-		})
+		bg, fg = colors.Light, colors.Dark
+		links = {"Black2", "Grey", "Grey2", "LightGrey2", "LightGrey", "White2", "White"}
+		vim.g.terminal_color_15 = M.colors.Black[1]
 	else
-		link({"White", "White2", "LightGrey", "LightGrey2", "Grey2", "Grey", "Black2", "Black"})
-		vim.api.nvim_set_hl(0, "Normal", {
-			ctermbg = 0,
-			ctermfg = 15,
-			fg = "#ffffff",
-			bg = vim.g.bg_none and "NONE" or "#101010",
-		})
+		fg, bg = colors.Light, colors.Dark
+		links = {"White2", "LightGrey", "LightGrey2", "Grey2", "Grey", "Black2", "Black"}
+		vim.g.terminal_color_15 = M.colors.White[1]
+	end
+	if vim.fn.exists("syntax_on") then vim.cmd.syntax "reset" end
+	vim.api.nvim_set_hl(0, "Normal", {
+		ctermbg = bg[2],
+		ctermfg = fg[2],
+		fg = fg[1],
+		bg = M.config.bg and bg[1] or "NONE",
+	})
+	colors.Fg1 = fg
+	vim.api.nvim_set_hl(0, "Fg1", {fg = fg[1], ctermbg = fg[2]})
+	local color = colors[links[1]]
+	for i = 7, 1, -1 do
+		color = colors[links[i]]
+		local idx = "Fg" .. (i+1)
+		colors[idx] = color
+		vim.api.nvim_set_hl(0, idx, {link = links[i]})
+		idx = "Bg" .. (8 - i)
+		colors[idx] = color
+		vim.api.nvim_set_hl(0, idx, {bg = color[1], ctermbg = color[2]})
 	end
 	hiTheme(M.themeDep)
+	if vim.o.termguicolors then
+		vim.g.terminal_color_0 = M.colors.Bg1[1]
+		vim.g.terminal_color_1 = M.colors.Red[1]
+		vim.g.terminal_color_2 = M.colors.Green[1]
+		vim.g.terminal_color_3 = M.colors.Yellow[1]
+		vim.g.terminal_color_4 = M.colors.Blue[1]
+		vim.g.terminal_color_5 = M.colors.Magenta[1]
+		vim.g.terminal_color_6 = M.colors.Cyan[1]
+		vim.g.terminal_color_7 = M.colors.LightGrey[1]
+		vim.g.terminal_color_8 = M.colors.Grey[1]
+		vim.g.terminal_color_9 = M.colors.LightRed[1]
+		vim.g.terminal_color_10 = M.colors.LightGreen[1]
+		vim.g.terminal_color_11 = M.colors.LightYellow[1]
+		vim.g.terminal_color_12 = M.colors.LightBlue[1]
+		vim.g.terminal_color_13 = M.colors.LightPink[1]
+		vim.g.terminal_color_14 = M.colors.Olive[1]
+	end
+	if M.config.export > 0 then
+		local c = bg[1]
+		io.write(("printf '\x1b]11;rgb:%s/%s/%s\a"):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
+		c = fg[1]
+		io.write(("\x1b]10;rgb:%s/%s/%s\a\x1b]4"):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
+		for i = 0, 15, M.config.export == 1 and 15 or 1 do
+			c = vim.g["terminal_color_" .. i]
+			io.write((";rgb:%s/%s/%s"):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
+		end
+		io.write "\a'"
+	end
 	vim.g.colors_name = "nerdcontrast"
 
 	if package.loaded.feline then require'feline'.use_theme({fg = colors.Fg1[1], bg = colors.Bg1[1]}) end
 	if not M.loaded then
 		M.hi(require "nerdcontrast.groups")
-		vim.schedule(function() require "nerdcontrast.lazy_load"(M) end)
+		for _, ft in ipairs({"gitcommit", "help", "mcfunction"}) do
+			local function load_hi() M.hi(require("nerdcontrast.ft." .. ft)) end
+			if vim.bo.filetype == ft then
+				load_hi()
+			else
+				vim.api.nvim_create_autocmd("FileType", {once = true, pattern = ft, callback = load_hi})
+			end
+		end
+		for _, mod in ipairs({
+			"bufferline",
+			"cmp",
+			"dapui",
+			"lazy",
+			"lspconfig",
+			"nvim-tree",
+			"nvim-treesitter",
+		}) do
+			local function load_hi() M.hi(require("nerdcontrast.plugs." .. mod)) end
+			if package.loaded[mod] then
+				load_hi()
+			else
+				package.preload[mod] = function()
+					package.preload[mod] = nil
+					load_hi()
+					for _, loader in pairs(package.loaders) do
+						local ret = loader(mod)
+						if type(ret) == "function" then return ret() end
+					end
+				end
+			end
+		end
 		M.loaded = true
 	end
 end
