@@ -3,8 +3,11 @@ vim.api.nvim_create_autocmd('LspTokenUpdate', {
 	group = gid,
 	callback = function(args)
 		local token = args.data.token
-		if token.modifiers.readonly and token.modifiers.static and token.type == 'variable' then
+		if token.modifiers.readonly and token.type == 'variable' and
+				(token.modifiers.static or token.modifiers.fileScope) then
 			vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, 'Constant')
+		elseif token.modifiers.globalScope and token.modifiers.defaultLibrary and token.type == 'variable' then
+			vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, 'Namespace')
 		end
 	end,
 })
@@ -46,11 +49,12 @@ return {
 	Title = {fg = "LightGreen", bold = true},
 	Todo = {{fg = "Bg1", bg = "Magenta"}, {bold = true}},
 	Underlined = {{fg = "Fg3"}, {underline = true}},
+	Bold = {bold = true},
 	Url = {fg = "LightBlue", sp = "LightBlue", underline = true},
 	Comment = {{fg = "Fg4"}, {italic = true}},
 	Keyword = "Blue",
 	Include = "Keyword",
-	Boolean = "Keyword",
+	Boolean = {fg = "Blue", italic = true},
 	PreProc = "Cyan",
 	Define = "PreProc",
 	Statement = "Keyword",
@@ -59,17 +63,18 @@ return {
 	Delimiter = "LightRed",
 	Operator = "Red",
 	Conditional = "LightBlue",
-	Repeat = "Command",
+	Repeat = "Conditional",
 	String = "Yellow",
 	Character = "LightYellow",
 	Number = "LightPink",
 	Identifier = "Fg1",
+	-- Type = "SlateGray",
 	Type = "Fg2",
 	Function = "Fg1",
 	Constant = {fg = "Magenta", italic = true},
 	Variable = "Green",
 	Tag = "Parameter",
-	Parameter = "Olive",
+	Parameter = "LightOlive",
 	-- Lsp
 	LspReferenceRead = {{bg = "Bg1", fg = "LightCyan"}, {bold = true}},
 	LspReferenceText = {{bg = "Bg2"}, {bold = true, underline = true}},
@@ -80,13 +85,15 @@ return {
 	["@lsp.type.variable"] = "Variable",
 	["@lsp.type.parameter"] = "Parameter",
 	["@lsp.type.namespace"] = "Namespace",
-	["@lsp.type.macro"] = "",
+	["@lsp.type.macro"] = "Macro",
 	["@lsp.mod.readonly"] = "Bg1",
 	["@lsp.mod.static"] = {italic = true},
-	["@lsp.typemod.function.defaultLibrary"] = "Namespace",
+	["@lsp.typemod.function.defaultLibrary"] = "@function.builtin",
 	["@lsp.typemod.variable.defaultLibrary"] = "Namespace",
 	["@lsp.typemod.variable.classScope"] = "Field",
 	["@lsp.typemod.variable.globalScope"] = {fg = "LightGreen", italic = true},
+	["@lsp.typemod.variable.fileScope"] = {fg = "LightGreen", italic = true},
+	["@lsp.typemod.class.declaration"] = {{fg = "Fg2"}, {bold = true}},
 
 	-- Vim regex syntax
 	sqlType = "String",
@@ -109,6 +116,9 @@ return {
 	-- FzfLua
 	FzfLuaBorder = "FloatBorder",
 	FzfLuaTitle = "FloatTitle",
+	FzfLuaSearch = "Search",
+	FzfLuaCursor = {fg = "LightMagenta", bold = true, underline = true},
+	FzfLuaCursorLine = {{bg = "Bg1"}, {underline = true}},
 	-- Ufo
 	UfoFoldedBg = "Bg1",
 	UfoFoldedFg = "Fg2",
@@ -119,5 +129,5 @@ return {
 	Vim = {fg = "Green", bold = true},
 	Command = "LightBlue",
 	Field = "LightGreen",
-	Namespace = {fg = "Blue", italic = true},
+	Namespace = {fg = "Cyan", italic = true},
 }

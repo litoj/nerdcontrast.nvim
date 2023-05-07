@@ -19,7 +19,7 @@ local colors = {
 	Red = {"#cc2815", 1},
 	Brown = {"#885515", 3},
 	Orange = {"#cc6415", 3},
-	Yellow = {"#cca815", 3},
+	Yellow = {"#cca815", 11},
 	Olive = {"#99a015", 2},
 	Green = {"#54a015", 2},
 	Cyan = {"#32a08d", 6},
@@ -31,14 +31,15 @@ local colors = {
 	LightMagenta = {"#c850e0", 5},
 	LightPink = {"#e7909a", 13},
 	LightRed = {"#f03522", 9},
-	LightOrange = {"#f09322", 11},
+	LightOrange = {"#f09322", 3},
 	LightYellow = {"#e8d822", 11},
 	LightOlive = {"#b0cd22", 10},
 	LightGreen = {"#66d022", 10},
 	LightCyan = {"#66e0c0", 14}, -- 50e8b0"
 	LightBlue = {"#50a8f0", 12},
 	White2 = {"#dad8d5", 15},
-	White = {"#f0eeea", 15},
+	White = {"#f6f5f4", 15},
+	-- SlateGray = {"#8088ae", 8},
 }
 M.colors = colors
 
@@ -111,11 +112,11 @@ function M.setup(opts)
 		bg = M.config.bg and bg[1] or "NONE",
 	})
 	colors.Fg1 = fg
-	vim.api.nvim_set_hl(0, "Fg1", {fg = fg[1], ctermbg = fg[2]})
+	vim.api.nvim_set_hl(0, "Fg1", {fg = fg[1], ctermfg = fg[2]})
 	local color = colors[links[1]]
 	for i = 7, 1, -1 do
 		color = colors[links[i]]
-		local idx = "Fg" .. (i+1)
+		local idx = "Fg" .. (i + 1)
 		colors[idx] = color
 		vim.api.nvim_set_hl(0, idx, {link = links[i]})
 		idx = "Bg" .. (8 - i)
@@ -123,8 +124,23 @@ function M.setup(opts)
 		vim.api.nvim_set_hl(0, idx, {bg = color[1], ctermbg = color[2]})
 	end
 	hiTheme(M.themeDep)
-	if vim.o.termguicolors then
-		vim.g.terminal_color_0 = M.colors.Bg1[1]
+	vim.g.terminal_color_0 = M.colors.Bg1[1]
+	if M.config.export > 0 then
+		local c = bg[1]
+		io.write(("printf '\x1b]11;rgb:%s/%s/%s\a"):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
+		c = fg[1]
+		io.write(("\x1b]10;rgb:%s/%s/%s\a\x1b]4"):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
+		for i = 0, 15, M.config.export == 1 and 15 or 1 do
+			c = vim.g["terminal_color_" .. i]
+			io.write((";%s;rgb:%s/%s/%s"):format(i, c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
+		end
+		io.write "\a'"
+	end
+	vim.g.colors_name = "nerdcontrast"
+
+	if package.loaded.feline then require'feline'.use_theme({fg = colors.Fg1[1], bg = colors.Bg1[1]}) end
+	if not M.loaded then
+		M.hi(require "nerdcontrast.groups")
 		vim.g.terminal_color_1 = M.colors.Red[1]
 		vim.g.terminal_color_2 = M.colors.Green[1]
 		vim.g.terminal_color_3 = M.colors.Yellow[1]
@@ -139,23 +155,6 @@ function M.setup(opts)
 		vim.g.terminal_color_12 = M.colors.LightBlue[1]
 		vim.g.terminal_color_13 = M.colors.LightPink[1]
 		vim.g.terminal_color_14 = M.colors.Olive[1]
-	end
-	if M.config.export > 0 then
-		local c = bg[1]
-		io.write(("printf '\x1b]11;rgb:%s/%s/%s\a"):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
-		c = fg[1]
-		io.write(("\x1b]10;rgb:%s/%s/%s\a\x1b]4"):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
-		for i = 0, 15, M.config.export == 1 and 15 or 1 do
-			c = vim.g["terminal_color_" .. i]
-			io.write((";rgb:%s/%s/%s"):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
-		end
-		io.write "\a'"
-	end
-	vim.g.colors_name = "nerdcontrast"
-
-	if package.loaded.feline then require'feline'.use_theme({fg = colors.Fg1[1], bg = colors.Bg1[1]}) end
-	if not M.loaded then
-		M.hi(require "nerdcontrast.groups")
 		for _, ft in ipairs({"gitcommit", "help", "mcfunction"}) do
 			local function load_hi() M.hi(require("nerdcontrast.ft." .. ft)) end
 			if vim.bo.filetype == ft then

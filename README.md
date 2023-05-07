@@ -100,7 +100,7 @@ nc.hi({
 | Cyan     | #32a08d | LightCyan    | #66e0c0 |
 | Blue     | #3870c0 | LightBlue    | #50a8f0 |
 | Grey     | #5c5a58 | White2       | #dad8d5 |
-| Grey2    | #7a7876 | White        | #f0eeea |
+| Grey2    | #7a7876 | White        | #f6f5f4 |
 
 ## Get color codes
 

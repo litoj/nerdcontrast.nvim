@@ -12,24 +12,24 @@ syn match makeComment /^\s*#.*$/ contains=makeTodo
 syn match makeNumber /[= (-][0-9.]\+\([ )]\|$\)/ contained contains=makeSep
 syn match makeOperator /[\\*><|]/ contained
 
-syn match makeSep /[=:]/ contained
-syn match makeValue /[=:].*[^\\]$/ contains=makeVarCall,makeEscapedChar,makeNumber,makeSep contained
-syn region makeValue start=/[=:].*\\$/ end=/[^\\]$/ contains=makeVarCall,makeNumber,makeOperator,makeSep,makeEscapedChar contained
+syn match makeSep /[+:=]/ contained
+syn match makeValue /[+:]\?=.*[^\\]$/ contains=makeVarCall,makeEscapedChar,makeNumber,makeSep contained
+syn region makeValue start=/[+:]\?=.*\\$/ end=/[^\\]$/ contains=makeVarCall,makeNumber,makeOperator,makeSep,makeEscapedChar contained
 
 " Variable
 syn match makeVarRepl /:.*=[^)]*/ contains=makeSep contained
-syn match makeVariable /[A-Z0-9_]\+/ contained
-syn match makeVarCall /\$([a-zA-Z0-9_.:=]\+)/ contains=makeVariable,makeVarRepl contained
-syn match makeVarline /^[A-Z0-9_]\+\s*=\s*.*/ contains=makeVariable,makeValue
+syn match makeVariable /[0-9A-Za-z_]\+/ contained
+syn match makeVarCall /\$([0-9A-Za-z_.:=]\+)/ contains=makeVariable,makeVarRepl contained
+syn match makeVarLine /[0-9A-Za-z_]\+\s*[+:]\?=\s*.*/ contains=makeVariable,makeValue
 
-syn match makeEscapedChar	"\\[^$]"
-syn match makeSpecial /\.[A-Z_]\+:.*/ contains=makeSep,makeValue
+syn match makeEscapedChar "\\[^$]"
+syn match makeSpecial /^\.[A-Z_]\+ \?:\(\s*[0-9a-zA-Z_]\)*/ contains=makeSep,makeValue
 
 syn match makeInclKeyword /^include/ contained
 syn match makeInclude /^include [^ ]\+$/ contains=makeInclKeyword
 
-syn match makeDeps /:.*$/ contains=makeSep,makeVarCall contained
-syn match makeTarget /^\([a-z_.-]\+\|\$([A-Z_]\+)\):.*/ contains=makeDeps,makeVarCall
+syn match makeDeps /:.*$/ contains=makeSep,makeVarCall,makeVarLine contained
+syn match makeTarget /^\([^.][^ :=]*\|\$([^ =]*)\): [^=]*/ contains=makeDeps,makeVarCall
 
 " Command
 syn match makeSilent "^\t@" contained
