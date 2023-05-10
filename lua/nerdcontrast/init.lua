@@ -43,8 +43,6 @@ local colors = {
 }
 M.colors = colors
 
-for k, v in pairs(colors) do vim.api.nvim_set_hl(0, k, {fg = v[1], ctermfg = v[2]}) end
-
 M.themeDep = {}
 
 local function hiTheme(tbl)
@@ -72,6 +70,7 @@ function M.hi(tbl)
 				M.themeDep[k] = v
 				hiTheme({[k] = v})
 			else
+				-- and v.xx:sub(1,1)~='#'
 				if v.fg then
 					v.ctermfg = colors[v.fg][2]
 					v.fg = colors[v.fg][1]
@@ -90,6 +89,9 @@ end
 --- Plugin setup with optional configuration
 ---@param opts (nerdcontrast.config|nil)
 function M.setup(opts)
+	if not M.loaded then
+		for k, v in pairs(colors) do vim.api.nvim_set_hl(0, k, {fg = v[1], ctermfg = v[2]}) end
+	end
 	if opts then
 		if opts.bg ~= nil then M.config.bg = opts.bg end
 		if opts.export ~= nil then M.config.export = opts.export end
@@ -140,7 +142,6 @@ function M.setup(opts)
 
 	if package.loaded.feline then require'feline'.use_theme({fg = colors.Fg1[1], bg = colors.Bg1[1]}) end
 	if not M.loaded then
-		M.hi(require "nerdcontrast.groups")
 		vim.g.terminal_color_1 = M.colors.Red[1]
 		vim.g.terminal_color_2 = M.colors.Green[1]
 		vim.g.terminal_color_3 = M.colors.Yellow[1]
@@ -155,6 +156,7 @@ function M.setup(opts)
 		vim.g.terminal_color_12 = M.colors.LightBlue[1]
 		vim.g.terminal_color_13 = M.colors.LightPink[1]
 		vim.g.terminal_color_14 = M.colors.Olive[1]
+		M.hi(require "nerdcontrast.groups")
 		for _, ft in ipairs({"gitcommit", "help", "mcfunction"}) do
 			local function load_hi() M.hi(require("nerdcontrast.ft." .. ft)) end
 			if vim.bo.filetype == ft then

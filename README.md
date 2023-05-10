@@ -66,6 +66,9 @@ nc.hi({
   Error = {{fg = "Fg4", bg = "Red"}},
   GraySpiked = {{sp = "Bg3"}, {undercurl = true}},
 })
+-- using custom rgb, could be simplified, but at performance cost
+nc.colors.MyLovelyColor = {"#dd3388", 9}
+nc.hi({ UsingCustomColor = {sp = "MyLovelyColor", underwave = true} })
 ```
 
 ## Support
