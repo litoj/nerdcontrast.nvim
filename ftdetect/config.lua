@@ -1,5 +1,8 @@
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-	pattern = {"*config", "*.conf"},
-	command = "setlocal ft=config",
 	group = "filetypedetect",
+	pattern = {"*config", "*.conf"},
+	callback = function(state)
+		local ft = vim.api.nvim_buf_get_option(state.buf, "filetype")
+		if ft == "" or ft == "conf" then vim.api.nvim_buf_set_option(state.buf, "filetype", "config") end
+	end,
 })
