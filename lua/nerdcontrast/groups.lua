@@ -1,16 +1,3 @@
-local gid = vim.api.nvim_create_augroup("LspTokenHighlight", {clear = true})
-vim.api.nvim_create_autocmd('LspTokenUpdate', {
-	group = gid,
-	callback = function(args)
-		local token = args.data.token
-		if token.modifiers.readonly and token.type == 'variable' and
-				(token.modifiers.static or token.modifiers.fileScope) then
-			vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, 'Constant')
-		elseif token.modifiers.globalScope and token.modifiers.defaultLibrary and token.type == 'variable' then
-			vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, 'Namespace')
-		end
-	end,
-})
 return {
 	-- InfoColumn/Cursor
 	FoldColumn = "Fg1",
@@ -20,7 +7,7 @@ return {
 	LineNr = "Fg5",
 	CursorLineNr = {{fg = "Fg3", bg = "Bg1"}},
 	-- Menu elements
-	FloatTitle = {fg = "Olive", bold = true}, -- Custom group
+	FloatTitle = {fg = "Olive", bold = true},
 	FloatBorder = "Magenta",
 	NormalFloat = "Fg1",
 	Pmenu = "Bg1",
@@ -50,57 +37,36 @@ return {
 	Todo = {{fg = "Bg1", bg = "Magenta"}, {bold = true}},
 	Underlined = {{fg = "Fg3"}, {underline = true}},
 	Bold = {bold = true},
-	Url = {fg = "LightBlue", sp = "LightBlue", underline = true},
 	Comment = {{fg = "Fg4"}, {italic = true}},
 	Keyword = "Blue",
+	Tag = "Keyword",
 	Include = "Keyword",
 	Boolean = {fg = "Blue", italic = true},
 	PreProc = "Cyan",
 	Define = "PreProc",
-	Statement = "Keyword",
+	Statement = "LightBlue",
+	Label = "Keyword",
+	Exception = "Keyword",
 	Special = "Magenta",
 	SpecialChar = "Orange",
 	Delimiter = "LightRed",
 	Operator = "Red",
-	Conditional = "LightBlue",
-	Repeat = "Conditional",
 	String = "Yellow",
 	Character = "LightYellow",
 	Number = "LightPink",
 	Identifier = "Fg1",
 	-- Type = "SlateGray",
 	Type = "Fg2",
+	TypeDef = {bold = true},
 	Function = "Fg1",
 	Constant = {fg = "Magenta", italic = true},
 	Variable = "Green",
-	Tag = "Parameter",
-	Parameter = "LightOlive",
-	-- Lsp
-	LspReferenceRead = {{bg = "Bg1", fg = "LightCyan"}, {bold = true}},
-	LspReferenceText = {{bg = "Bg2"}, {bold = true, underline = true}},
-	LspReferenceWrite = {{bg = "Bg1", fg = "LightOrange"}, {bold = true}},
-	DiagnosticUnnecessary = {{sp = "Fg4"}, {underdotted = true}},
-	["@lsp"] = "",
-	["@lsp.type.property"] = "Field",
-	["@lsp.type.variable"] = "Variable",
-	["@lsp.type.parameter"] = "Parameter",
-	["@lsp.type.namespace"] = "Namespace",
-	["@lsp.type.macro"] = "Macro",
-	["@lsp.mod.readonly"] = "Bg1",
-	["@lsp.mod.static"] = {italic = true},
-	["@lsp.typemod.function.defaultLibrary"] = "@function.builtin",
-	["@lsp.typemod.variable.defaultLibrary"] = "Namespace",
-	["@lsp.typemod.variable.classScope"] = "Field",
-	["@lsp.typemod.variable.globalScope"] = {fg = "LightGreen", italic = true},
-	["@lsp.typemod.variable.fileScope"] = {fg = "LightGreen", italic = true},
-	["@lsp.typemod.class.declaration"] = {{fg = "Fg2"}, {bold = true}},
 
 	-- Vim regex syntax
 	sqlType = "String",
-	sqlStatement = "Command",
 	sqlOperator = "Operator",
 
-	xmlAttrib = "Parameter",
+	xmlAttrib = "@attribute",
 	xmlEqual = "Operator",
 	xmlTag = "Delimiter",
 	xmlTagName = "Label",
@@ -111,7 +77,6 @@ return {
 	DiffText = "Yellow",
 
 	-- PLUGINS
-	i3ConfigCommand = "Command",
 	DevIconMd = "Fg1",
 	-- FzfLua
 	FzfLuaBorder = "FloatBorder",
@@ -127,7 +92,5 @@ return {
 	-- Custom
 	Neo = {fg = "Cyan", bold = true},
 	Vim = {fg = "Green", bold = true},
-	Command = "LightBlue",
-	Field = "LightGreen",
-	Namespace = {fg = "Cyan", italic = true},
+	Url = {fg = "LightBlue", sp = "LightBlue", underline = true},
 }

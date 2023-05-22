@@ -1,5 +1,5 @@
 return {
-	mcCommand = "Command",
+	mcCommand = "Statement",
 	mcXRotation = "Number",
 	mcCoordinate = "Number",
 	mcCoordinate2 = "Number",

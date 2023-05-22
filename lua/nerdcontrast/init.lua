@@ -4,10 +4,10 @@ local M = {}
 --- Configuration options
 ---@class nerdcontrast.config
 ---@field bg boolean fill background or leave it transparent
----@field export (0|1|2) set source terminal colors to the theme, 1=bg+fg, 2=all
+---@field export 0|1|2 set source terminal colors to the theme, 1=bg+fg, 2=all
 M.config = {bg = true, export = 0}
 
----@type table<string,table<string,integer>>
+---@type table<string,table<1|2, string|integer>>
 local colors = {
 	Dark = {"#000000", 0},
 	Light = {"#ffffff", 15},
@@ -91,10 +91,25 @@ end
 function M.setup(opts)
 	if not M.loaded then
 		for k, v in pairs(colors) do vim.api.nvim_set_hl(0, k, {fg = v[1], ctermfg = v[2]}) end
+		vim.g.terminal_color_1 = M.colors.Red[1]
+		vim.g.terminal_color_2 = M.colors.Green[1]
+		vim.g.terminal_color_3 = M.colors.Yellow[1]
+		vim.g.terminal_color_4 = M.colors.Blue[1]
+		vim.g.terminal_color_5 = M.colors.Magenta[1]
+		vim.g.terminal_color_6 = M.colors.Cyan[1]
+		vim.g.terminal_color_7 = M.colors.LightGrey[1]
+		vim.g.terminal_color_8 = M.colors.Grey[1]
+		vim.g.terminal_color_9 = M.colors.LightRed[1]
+		vim.g.terminal_color_10 = M.colors.LightGreen[1]
+		vim.g.terminal_color_11 = M.colors.LightYellow[1]
+		vim.g.terminal_color_12 = M.colors.LightBlue[1]
+		vim.g.terminal_color_13 = M.colors.LightPink[1]
+		vim.g.terminal_color_14 = M.colors.Olive[1]
 	end
 	if opts then
 		if opts.bg ~= nil then M.config.bg = opts.bg end
 		if opts.export ~= nil then M.config.export = opts.export end
+		if opts.reload ~= nil then M.config.reload = opts.reload end
 	end
 	local bg, fg, links
 	if vim.o.background == "light" then
@@ -126,6 +141,7 @@ function M.setup(opts)
 		vim.api.nvim_set_hl(0, idx, {bg = color[1], ctermbg = color[2]})
 	end
 	hiTheme(M.themeDep)
+	if package.loaded.feline then require'feline'.use_theme({fg = colors.Fg1[1], bg = colors.Bg1[1]}) end
 	vim.g.terminal_color_0 = M.colors.Bg1[1]
 	if M.config.export > 0 then
 		local c = bg[1]
@@ -138,57 +154,47 @@ function M.setup(opts)
 		end
 		io.write "\a'"
 	end
-	vim.g.colors_name = "nerdcontrast"
 
-	if package.loaded.feline then require'feline'.use_theme({fg = colors.Fg1[1], bg = colors.Bg1[1]}) end
-	if not M.loaded then
-		vim.g.terminal_color_1 = M.colors.Red[1]
-		vim.g.terminal_color_2 = M.colors.Green[1]
-		vim.g.terminal_color_3 = M.colors.Yellow[1]
-		vim.g.terminal_color_4 = M.colors.Blue[1]
-		vim.g.terminal_color_5 = M.colors.Magenta[1]
-		vim.g.terminal_color_6 = M.colors.Cyan[1]
-		vim.g.terminal_color_7 = M.colors.LightGrey[1]
-		vim.g.terminal_color_8 = M.colors.Grey[1]
-		vim.g.terminal_color_9 = M.colors.LightRed[1]
-		vim.g.terminal_color_10 = M.colors.LightGreen[1]
-		vim.g.terminal_color_11 = M.colors.LightYellow[1]
-		vim.g.terminal_color_12 = M.colors.LightBlue[1]
-		vim.g.terminal_color_13 = M.colors.LightPink[1]
-		vim.g.terminal_color_14 = M.colors.Olive[1]
-		M.hi(require "nerdcontrast.groups")
-		for _, ft in ipairs({"gitcommit", "help", "mcfunction"}) do
-			local function load_hi() M.hi(require("nerdcontrast.ft." .. ft)) end
-			if vim.bo.filetype == ft then
-				load_hi()
-			else
-				vim.api.nvim_create_autocmd("FileType", {once = true, pattern = ft, callback = load_hi})
-			end
-		end
-		for _, mod in ipairs({
-			"bufferline",
-			"cmp",
-			"dapui",
-			"lazy",
-			"lspconfig",
-			"nvim-tree",
-			"nvim-treesitter",
-		}) do
-			local function load_hi() M.hi(require("nerdcontrast.plugs." .. mod)) end
-			if package.loaded[mod] then
-				load_hi()
-			else
-				package.preload[mod] = function()
-					package.preload[mod] = nil
-					load_hi()
-					for _, loader in pairs(package.loaders) do
-						local ret = loader(mod)
-						if type(ret) == "function" then return ret() end
-					end
-				end
-			end
-		end
-		M.loaded = true
+	if M.loaded then
+		vim.g.colors_name = "nerdcontrast"
+		return
 	end
+	M.hi(require "nerdcontrast.groups")
+	for _, ft in ipairs({"gitcommit", "help", "mcfunction"}) do
+		if vim.bo.filetype == ft then
+			M.hi(require("nerdcontrast.ft." .. ft))
+		else
+			vim.api.nvim_create_autocmd("FileType", {
+				once = true,
+				pattern = ft,
+				callback = function() M.hi(require("nerdcontrast.ft." .. ft)) end,
+			})
+		end
+	end
+	local function preload(mod)
+		package.preload[mod] = nil
+		M.hi(require("nerdcontrast.plugs." .. mod))
+		for _, loader in pairs(package.loaders) do
+			local ret = loader(mod)
+			if type(ret) == "function" then return ret() end
+		end
+	end
+	for _, mod in ipairs({
+		"bufferline",
+		"cmp",
+		"dapui",
+		"lazy",
+		"lspconfig",
+		"nvim-tree",
+		"nvim-treesitter",
+	}) do
+		if package.loaded[mod] then
+			M.hi(require("nerdcontrast.plugs." .. mod))
+		else
+			package.preload[mod] = function() return preload(mod) end
+		end
+	end
+	M.loaded = true
+	vim.g.colors_name = "nerdcontrast"
 end
 return M

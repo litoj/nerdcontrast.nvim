@@ -9,7 +9,7 @@ return {
 	LazyReasonPlugin = "LightMagenta",
 	LazyReasonEvent = "PreProc",
 	LazyReasonFt = "String",
-	LazyReasonCmd = "Command",
+	LazyReasonCmd = "Statement",
 	LazyReasonSource = "Brown",
 	LazyReasonImport = "Parameter",
 	LazyReasonKeys = "SpecialKey",

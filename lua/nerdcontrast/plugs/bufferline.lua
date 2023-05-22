@@ -10,4 +10,6 @@ return {
 	BufferInactiveSign = "Fg3",
 	BufferTabpages = "Cyan",
 	BufferTabpageFill = "Fg5",
+	BufferScrollArrow = "Bg1",
+	BufferTabpagesSep = "",
 }

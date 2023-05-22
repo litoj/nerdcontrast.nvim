@@ -20,7 +20,7 @@ return {
 
 	CmpItemKindKeyword = {bg = "Blue"},
 	CmpItemKindOperator = {bg = "Red"},
-	CmpItemKindEvent = {bg = "LightYellow"},
+	CmpItemKindEvent = {bg = "Orange"},
 	CmpItemKindSnippet = "Bg2",
 
 	CmpItemKindText = {bg = "Yellow"},
