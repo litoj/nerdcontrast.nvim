@@ -12,6 +12,6 @@ return {
 	NvimTreeExecFile = {fg = "LightGreen", bold = true},
 	Directory = {fg = "Green", bold = true},
 	NvimTreeSymlink = {fg = "Cyan", bold = true},
-	NvimTreeSpecialFile = "Fg1",
+	NvimTreeSpecialFile = "Fg0",
 	NvimTreeOpenedFile = {fg = "Orange", bold = true},
 }

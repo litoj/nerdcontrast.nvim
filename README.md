@@ -1,8 +1,8 @@
 # nerdcontrast.nvim
 
-A colorscheme with optimal contrast based on default light theme of NetBeans IDE
+A colourscheme with optimal contrast based on default light theme of NetBeans IDE
 
-choose between **Light** and **Dark**, but keep all colors the same
+choose between **Light** and **Dark**, but keep all colours the same
 
 ## Requirements
 
@@ -17,7 +17,7 @@ return {
   "JosefLitos/nerdcontrast.nvim",
   lazy = false,
   priority = 999,
-  config = true -- automatically sets colorscheme, or fun() like packer
+  config = true -- automatically sets colourscheme, or fun() like packer
 }
 ```
 
@@ -33,6 +33,7 @@ packer.use {
     require'nerdcontrast'.setup {
       bg = true, -- set default bg, otherwise transparent
       export = 0, -- set source terminal theme 1=bg+fg, 2=all
+      palette = {}, -- custom colour palette, see lua/palette/
     }
   end,
 }
@@ -56,18 +57,18 @@ end)
 local nc = require "nerdcontrast"
 
 nc.hi({
-  -- set hex values of given nerdcontrast custom colors
+  -- set hex values of given nerdcontrast custom colours
   BoldGreen = {fg = "Green", bold = true},
   -- directly linked
-  DefaultFg = "Fg1", -- fg part of `Normal`, Fg2=Bg7..Fg7=Bg2
-  WhiteBg = "Bg7", -- Fgx changes Text, Bgx changes background
-	-- put colors in a separate table for using `Fgx`/`Bgx` by value
-	-- colors in 1. table, effects in 2. table
+  DefaultFg = "Fg0", -- fg part of `Normal`... - Fg0=Bg8..Fg8=Bg0
+  WhiteBg = "Bg8", -- Fgx changes Text, Bgx changes background
+	-- put colours in a separate table for using `Fgx`/`Bgx` by value
+	-- colours in 1. table, effects in 2. table
   Error = {{fg = "Fg4", bg = "Red"}},
   GraySpiked = {{sp = "Bg3"}, {undercurl = true}},
 })
 -- using custom rgb, could be simplified, but at performance cost
-nc.colors.MyLovelyColor = {"#dd3388", 9}
+nc.setPalette({MyLovelyColor = {"#dd3388", 9}})
 nc.hi({ UsingCustomColor = {sp = "MyLovelyColor", underwave = true} })
 ```
 
@@ -86,12 +87,10 @@ nc.hi({ UsingCustomColor = {sp = "MyLovelyColor", underwave = true} })
 ![Markdown](https://user-images.githubusercontent.com/54900518/208907793-5ddb1616-b96c-461f-8d89-73bc525ab885.png)
 ![Lua](https://user-images.githubusercontent.com/54900518/208909818-5550485a-652f-43cd-9328-ca536dddb4d8.png)
 
-## Available colors
+## Available colours
 
 | DarkName | Code    | BrightName   | Code    |
 | -------- | ------- | ------------ | ------- |
-| Black    | #282828 | LightGrey2   | #959391 |
-| Black2   | #424242 | LightGrey    | #b5b5b5 |
 | Magenta  | #a030a8 | LightMagenta | #c850e0 |
 | Pink     | #c06680 | LightPink    | #e7909a |
 | Red      | #cc2815 | LightRed     | #f03522 |
@@ -102,15 +101,13 @@ nc.hi({ UsingCustomColor = {sp = "MyLovelyColor", underwave = true} })
 | Green    | #54a015 | LightGreen   | #66d022 |
 | Cyan     | #32a08d | LightCyan    | #66e0c0 |
 | Blue     | #3870c0 | LightBlue    | #50a8f0 |
-| Grey     | #5c5a58 | White2       | #dad8d5 |
-| Grey2    | #7a7876 | White        | #f6f5f4 |
 
-## Get color codes
+## Get colour codes
 
-Get color hex with `require'nerdcontrast'.colors["Color name"][1]`
+Get colour hex with `require'nerdcontrast'.palette["Colour name"][1]`
 or link to them directly by name
 
-For Dark/Light independency, `Bg1-Bg7` and `Fg1-Fg8` color links are also available. If you
+For Dark/Light independency, `Bg0-Bg8`, `Fg0-Fg8` and other colour links under `nerdcontrast.palette.` are also available. If you
 wish to use them and are expecting to be using the toggle shortcut, please refer to them through
 Vim's `hi link` feature or set the value with `require'nerdcontrast'.hi({})` in the forementioned
 format.

@@ -34,9 +34,9 @@ return {
 	["@environment.latex"] = "Statement",
 	-- Markdown
 	["@text.literal"] = "Cyan",
-	["@text.uri"] = {{fg = "Fg4"}, {italic = true}},
+	["@text.uri"] = {{fg = "Fg3"}, {italic = true}},
 	["@text.reference"] = "Url",
-	["@none"] = "Fg1",
+	["@none"] = "Fg0",
 	["@text.todo.checked.markdown"] = {fg = "Green", bold = true},
 	["@text.title.1.marker"] = {fg = "LightRed", bold = true},
 	["@text.title.2.marker"] = "@text.title.1.marker",
@@ -67,4 +67,6 @@ return {
 	["@constructor.lua"] = "Delimiter",
 	["@keyword.luadoc"] = "PreProc",
 	["@function.macro.luadoc"] = "Constant",
+	["@string.documentation"] = "Comment",
+	["@keyword.jsdoc"] = "@attribute.java",
 }

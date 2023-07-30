@@ -12,14 +12,16 @@ setlocal commentstring=#%s
 syn match   configDelimiter "[()\[\];,:{}]"
 syn match   configOperator  "[=|&\*\+\<\>.]"
 syn match   configComment   "\(dnl.*\)\|\(\(#\|//\).*\)" contains=@Spell
+syn match   configComment   "^\s*;.*"
 syn region  configComment   start="/\*" end="\*/" contains=@Spell
 syn match   configNumber    "[-+ ]*\d[.0-9]*" contained contains=configOperator
-syn match   configHex       "[a-f0-9]\{6\}" contained
-syn match   configValue    "[^=]*$" contained contains=configNumber,configOperator,configDelimiter,configKeyword,configHex
-syn match   configVariable "[a-z0-9A-Z_-]\+\s*=" contained contains=configOperator
-syn match   configLine     "^\s*[a-z0-9A-Z_-]\+\s*=.*$" contains=configVariable,configValue,configNumber
-syn match   configLabel    "[a-z0-9A-Z_-]\+\s*{" contained contains=configDelimiter
-syn region  configBlock    start=".*{$" end="}$" contains=configLabel,configDelimiter,configComment,configLine,configString,configOperator transparent
+syn match   configHex       "[0-9A-Za-f]\{6\}" contained
+syn match   configValue    "[^=]*$" contained contains=configNumber,configOperator,configDelimiter,configHex,configString
+syn match   configVariable "[^ =]\+\s*=" contained contains=configOperator
+syn match   configLine     "^\s*[^ =]\+\s*=.*$" contains=configVariable,configValue,configNumber
+syn match   configField    "[0-9A-Za-z_:=-]\+\s*{" contained contains=configDelimiter
+syn match   configLabel    "^\[[0-9A-Za-z_ -]\+\]$" contains=configDelimiter
+syn region  configBlock    start=".*{$" end="}$" contains=configField,configDelimiter,configComment,configLine,configString,configOperator transparent
 
 " This shortens the script, see syn-ext-match..
 syn region  configString    start=+\z(["'`]\)+ skip=+\\\z1+ end=+\z1+ contains=@Spell
@@ -32,10 +34,9 @@ hi def link configOperator  Operator
 hi def link configComment   Comment
 hi def link configNumber    Number
 hi def link configVariable  Variable
-hi def link configLabel     @field
+hi def link configField     @field
 hi def link configString    String
 hi def link configHex       Constant
-hi def link configValue     String
 
 
 let b:current_syntax = "config"

@@ -1,31 +1,31 @@
 return {
 	-- InfoColumn/Cursor
-	FoldColumn = "Fg1",
-	SignColumn = "Fg1",
+	FoldColumn = "Fg0",
+	SignColumn = "Fg0",
 	CursorColumn = "Bg1",
 	CursorLine = "Bg1",
-	LineNr = "Fg5",
-	CursorLineNr = {{fg = "Fg3", bg = "Bg1"}},
+	LineNr = "Fg4",
+	CursorLineNr = {{fg = "Fg2", bg = "Bg1"}},
 	-- Menu elements
 	FloatTitle = {fg = "Olive", bold = true},
 	FloatBorder = "Magenta",
-	NormalFloat = "Fg1",
+	NormalFloat = "Fg0",
 	Pmenu = "Bg1",
 	PmenuSel = "Bg2",
 	PmenuSbar = "Bg2",
 	PmenuThumb = "Bg3",
-	VertSplit = "Fg6",
+	VertSplit = "Fg5",
 	TabLineFill = "",
-	TabLineSel = "White",
+	TabLineSel = "Fg0",
 	StatusLine = "Bg1",
 	StatusLineNC = "Bg2",
 	Visual = "Bg1",
 	Search = {fg = "LightMagenta", bold = true},
 	IncSearch = {fg = "LightBlue", bold = true},
-	Folded = {{fg = "Fg2", bg = "Bg1"}, {italic = true, bold = true}},
+	Folded = {{bg = "Bg1"}, {italic = true}},
 	MatchParen = {fg = "LightYellow", italic = true, bold = true},
 	Conceal = {{fg = "Orange", bg = "Bg3"}},
-	NonText = "Fg7", -- used for listchars (indent)
+	NonText = "Fg6", -- used for listchars (indent)
 	SpecialKey = "Orange",
 	-- Messages
 	ErrorMsg = {fg = "LightRed", bold = true},
@@ -35,9 +35,9 @@ return {
 	-- Code
 	Title = {fg = "LightGreen", bold = true},
 	Todo = {{fg = "Bg1", bg = "Magenta"}, {bold = true}},
-	Underlined = {{fg = "Fg3"}, {underline = true}},
+	Underlined = {{fg = "Fg2"}, {underline = true}},
 	Bold = {bold = true},
-	Comment = {{fg = "Fg4"}, {italic = true}},
+	Comment = {{fg = "Fg3"}, {italic = true}},
 	Keyword = "Blue",
 	Tag = "Keyword",
 	Include = "Keyword",
@@ -54,11 +54,11 @@ return {
 	String = "Yellow",
 	Character = "LightYellow",
 	Number = "LightPink",
-	Identifier = "Fg1",
-	-- Type = "SlateGray",
-	Type = "Fg2",
+	Identifier = "Fg0",
+	Type = "SlateGrey",
+	-- Type = "Fg1",
 	TypeDef = {bold = true},
-	Function = "Fg1",
+	Function = "Fg0",
 	Constant = {fg = "Magenta", italic = true},
 	Variable = "Green",
 
@@ -77,7 +77,7 @@ return {
 	DiffText = "Yellow",
 
 	-- PLUGINS
-	DevIconMd = "Fg1",
+	DevIconMd = "Fg0",
 	-- FzfLua
 	FzfLuaBorder = "FloatBorder",
 	FzfLuaTitle = "FloatTitle",
@@ -86,7 +86,8 @@ return {
 	FzfLuaCursorLine = {{bg = "Bg1"}, {underline = true}},
 	-- Ufo
 	UfoFoldedBg = "Bg1",
-	UfoFoldedFg = "Fg2",
+	UfoFoldedFg = "Fg1",
+	UfoFoldedEllipsis = {fg = "LightOrange", bold = true},
 	-- LspSignature
 	LspSignatureActiveParameter = {bold = true},
 	-- Custom

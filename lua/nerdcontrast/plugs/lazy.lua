@@ -14,6 +14,6 @@ return {
 	LazyReasonImport = "Parameter",
 	LazyReasonKeys = "SpecialKey",
 	LazySpecial = "Delimiter",
-	LazyDimmed = "Fg4",
+	LazyDimmed = "Fg3",
 	LazyProp = "Orange",
 }

@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd('LspTokenUpdate', {
 	callback = function(args)
 		local token = args.data.token
 		if token.modifiers.readonly and token.type == 'variable' and
-				(token.modifiers.static or token.modifiers.fileScope) then
+				(token.modifiers.static or token.modifiers.fileScope or token.modifiers.globalScope) then
 			vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, 'Constant')
 		elseif token.modifiers.globalScope and token.modifiers.defaultLibrary and token.type == 'variable' then
 			vim.lsp.semantic_tokens.highlight_token(token, args.buf, args.data.client_id, '@namespace')
@@ -14,21 +14,21 @@ vim.api.nvim_create_autocmd('LspTokenUpdate', {
 return {
 	DiagnosticVirtualTextError = {fg = "Red", italic = true, bold = true},
 	DiagnosticVirtualTextWarn = {fg = "Orange", italic = true},
-	DiagnosticVirtualTextHint = {fg = "LightGrey", italic = true},
-	DiagnosticVirtualTextInfo = {fg = "LightGrey", italic = true},
-	DiagnosticVirtualTextOk = {fg = "LightGrey", italic = true},
+	DiagnosticVirtualTextHint = {fg = "Fg3", italic = true},
+	DiagnosticVirtualTextInfo = {fg = "Fg3", italic = true},
+	DiagnosticVirtualTextOk = {fg = "Fg3", italic = true},
 	DiagnosticUnderlineError = {sp = "Red", undercurl = true},
 	DiagnosticUnderlineWarn = {sp = "Orange", undercurl = true},
-	DiagnosticUnderlineHint = {sp = "LightGrey", underline = true},
-	DiagnosticUnderlineInfo = {sp = "LightGrey", undercurl = true},
+	DiagnosticUnderlineHint = {sp = "Fg3", underline = true},
+	DiagnosticUnderlineInfo = {sp = "Fg3", undercurl = true},
 	DiagnosticError = "Red",
 	DiagnosticWarn = "Orange",
-	DiagnosticHint = "Fg3",
+	DiagnosticHint = "Fg2",
 	DiagnosticInfo = "LightOlive",
 	LspReferenceRead = {{bg = "Bg2", fg = "LightCyan"}, {bold = true}},
 	LspReferenceText = {{bg = "Bg2", fg = "Yellow"}, {bold = true}},
 	LspReferenceWrite = {{bg = "Bg2", fg = "LightOrange"}, {bold = true}},
-	DiagnosticUnnecessary = {{sp = "Fg4"}, {underdotted = true}},
+	DiagnosticUnnecessary = {sp = "Fg3", underdotted = true},
 	["@lsp"] = "",
 	["@lsp.type.property"] = "@property",
 	["@lsp.type.variable"] = "Variable",
