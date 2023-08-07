@@ -144,7 +144,7 @@ function M.setup(opts)
 
 	if not M.loaded then
 		M.hi(require "nerdcontrast.groups")
-		for _, ft in ipairs({"gitcommit", "markdown", "latex", "help", "mcfunction"}) do
+		for _, ft in ipairs({"gitcommit", "latex", "help", "mcfunction", "asciidoctor"}) do
 			if vim.bo.filetype == ft then
 				M.hi(require("nerdcontrast.ft." .. ft))
 			else

@@ -14,7 +14,27 @@ return {
 	["@variable.builtin"] = "@namespace",
 	["@property"] = "@field",
 	["@string.special"] = "Orange",
-	-- TreeSitter
+	-- Markdown
+	["@none"] = "Fg1",
+	["@text.literal"] = "Cyan",
+	["@text.literal.block"] = "Fg2",
+	["@text.reference"] = "String",
+	["@text.uri"] = "Url",
+	["@text.title"] = "Title",
+	["@text.emphasis"] = {italic = true},
+	["@text.strong"] = {bold = true},
+	["@text.math"] = "Pink",
+	["@text.todo.checked.markdown"] = {fg = "Green", bold = true},
+	["@text.title.1.marker"] = {fg = "LightRed", bold = true},
+	["@text.title.2.marker"] = "@text.title.1.marker",
+	["@text.title.3.marker"] = "Delimiter",
+	["@text.title.4.marker"] = "Delimiter",
+	["@text.title.5.marker"] = "Delimiter",
+	["@text.title.1"] = {fg = "LightGreen", underline = true, bold = true},
+	["@text.title.3"] = {fg = "LightGreen", bold = true, italic = true},
+	["@text.title.4"] = "LightGreen",
+	["@text.title.5"] = {fg = "LightGreen", italic = true},
+	-- GitCommit
 	["@text.reference.gitcommit"] = "Variable",
 	["@text.uri.gitcommit"] = "String",
 	-- Java

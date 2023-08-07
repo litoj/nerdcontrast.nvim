@@ -43,7 +43,7 @@ packer.use {
 
 ### Theme toggle
 
-```lua
+```
 -- Dark/Light theme toggle
 nmap("n", "<Leader>c", function()
 	vim.o.background = vim.o.background == "light" and "dark" or "light"
