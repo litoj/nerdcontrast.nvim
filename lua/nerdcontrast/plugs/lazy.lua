@@ -1,10 +1,10 @@
 return {
-	LazyNormal = "Bg1",
-	LazyButton = "Bg2",
-	LazyH1 = {bg = "Bg3", bold = true},
-	LazyButtonActive = "LazyH1",
+	LazyNormal = "Bg2",
+	LazyButton = "Bg3",
+	LazyH2 = {{bg = "Bg3"}, {bold = true}},
+	LazyButtonActive = "LazyH2",
 	LazyCommit = "String",
-	LazyH2 = "Title",
+	LazyH3 = "Title",
 	LazyReasonStart = "Title",
 	LazyReasonPlugin = "LightMagenta",
 	LazyReasonEvent = "PreProc",
@@ -14,6 +14,6 @@ return {
 	LazyReasonImport = "Parameter",
 	LazyReasonKeys = "SpecialKey",
 	LazySpecial = "Delimiter",
-	LazyDimmed = "Fg3",
+	LazyDimmed = "Fg4",
 	LazyProp = "Orange",
 }

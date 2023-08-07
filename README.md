@@ -60,14 +60,14 @@ nc.hi({
   -- set hex values of given nerdcontrast custom colours
   BoldGreen = {fg = "Green", bold = true},
   -- directly linked
-  DefaultFg = "Fg0", -- fg part of `Normal`... - Fg0=Bg8..Fg8=Bg0
-  WhiteBg = "Bg8", -- Fgx changes Text, Bgx changes background
+  DefaultFg = "Fg1", -- fg part of `Normal`... - Fg5=Bg5
+  GreyBg = "Bg4", -- Fgx changes Text, Bgx changes background
 	-- put colours in a separate table for using `Fgx`/`Bgx` by value
 	-- colours in 1. table, effects in 2. table
   Error = {{fg = "Fg4", bg = "Red"}},
   GraySpiked = {{sp = "Bg3"}, {undercurl = true}},
 })
--- using custom rgb, could be simplified, but at performance cost
+-- using custom rgb, could be simplified, but this is faster
 nc.setPalette({MyLovelyColor = {"#dd3388", 9}})
 nc.hi({ UsingCustomColor = {sp = "MyLovelyColor", underwave = true} })
 ```
@@ -107,7 +107,7 @@ nc.hi({ UsingCustomColor = {sp = "MyLovelyColor", underwave = true} })
 Get colour hex with `require'nerdcontrast'.palette["Colour name"][1]`
 or link to them directly by name
 
-For Dark/Light independency, `Bg0-Bg8`, `Fg0-Fg8` and other colour links under `nerdcontrast.palette.` are also available. If you
+For Dark/Light independency, `Bg1-Bg5`, `Fg1-Fg5` and other colour links under `nerdcontrast.palette.` are also available. If you
 wish to use them and are expecting to be using the toggle shortcut, please refer to them through
 Vim's `hi link` feature or set the value with `require'nerdcontrast'.hi({})` in the forementioned
 format.

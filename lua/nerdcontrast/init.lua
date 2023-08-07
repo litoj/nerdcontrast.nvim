@@ -73,23 +73,28 @@ end
 
 for k, v in pairs(M.palette) do vim.api.nvim_set_hl(0, k, {fg = v[1], ctermfg = v[2]}) end
 
+---@param tbl nerdcontrast.initPalette
 function M.setPalette(tbl)
-	for k, v in pairs(tbl) do
+	for i, v in ipairs(tbl.fg) do
+		local k = "Fg" .. i
+		M.palette[k] = v
+		vim.api.nvim_set_hl(0, k, {fg = v[1], ctermfg = v[2]})
+	end
+	for i, v in ipairs(tbl.bg) do
+		local k = "Bg" .. i
+		M.palette[k] = v
+		vim.api.nvim_set_hl(0, k, {bg = v[1], ctermbg = v[2]})
+	end
+	for k, v in pairs(tbl.colors) do
 		M.palette[k] = v
 		vim.api.nvim_set_hl(0, k, {fg = v[1], ctermfg = v[2]})
 	end
 	vim.api.nvim_set_hl(0, "Normal", {
-		ctermbg = M.palette.Fg8[2],
-		ctermfg = M.palette.Fg0[2],
-		fg = M.palette.Fg0[1],
-		bg = M.config.bg and M.palette.Fg8[1] or "NONE",
+		ctermfg = M.palette.Fg1[2],
+		ctermbg = M.palette.Bg1[2],
+		fg = M.palette.Fg1[1],
+		bg = M.config.bg and M.palette.Bg1[1] or "NONE",
 	})
-	for i = 0, 8 do
-		local c = M.palette["Fg" .. i]
-		local idx = "Bg" .. (8 - i)
-		M.palette[idx] = c
-		vim.api.nvim_set_hl(0, idx, {bg = c[1], ctermbg = c[2]})
-	end
 	M:hiThemeDep()
 end
 
@@ -105,33 +110,30 @@ function M.setup(opts)
 	end
 	M.setPalette(opts.palette)
 
-	vim.g.terminal_color_0 = M.palette.Fg7[1]
-	vim.g.terminal_color_7 = M.palette.Fg5[1]
-	if not M.loaded then
-		vim.g.terminal_color_1 = M.palette.Red[1]
-		vim.g.terminal_color_2 = M.palette.Green[1]
-		vim.g.terminal_color_3 = M.palette.Yellow[1]
-		vim.g.terminal_color_4 = M.palette.Blue[1]
-		vim.g.terminal_color_5 = M.palette.Magenta[1]
-		vim.g.terminal_color_6 = M.palette.Cyan[1]
-		vim.g.terminal_color_9 = M.palette.LightRed[1]
-		vim.g.terminal_color_10 = M.palette.LightGreen[1]
-		vim.g.terminal_color_11 = M.palette.LightYellow[1]
-		vim.g.terminal_color_12 = M.palette.LightBlue[1]
-		vim.g.terminal_color_13 = M.palette.LightPink[1]
-		vim.g.terminal_color_14 = M.palette.Olive[1]
-	end
-	vim.g.terminal_color_8 = M.palette.Fg2[1]
-	vim.g.terminal_color_15 = M.palette.Fg0[1]
+	vim.g.terminal_color_0 = M.palette.Bg2[1]
+	vim.g.terminal_color_8 = M.palette.Bg4[1]
+	vim.g.terminal_color_1 = M.palette.Red[1]
+	vim.g.terminal_color_2 = M.palette.Green[1]
+	vim.g.terminal_color_3 = M.palette.Yellow[1]
+	vim.g.terminal_color_4 = M.palette.Blue[1]
+	vim.g.terminal_color_5 = M.palette.Magenta[1]
+	vim.g.terminal_color_6 = M.palette.Cyan[1]
+	vim.g.terminal_color_9 = M.palette.LightRed[1]
+	vim.g.terminal_color_10 = M.palette.LightGreen[1]
+	vim.g.terminal_color_11 = M.palette.LightYellow[1]
+	vim.g.terminal_color_12 = M.palette.LightBlue[1]
+	vim.g.terminal_color_13 = M.palette.LightPink[1]
+	vim.g.terminal_color_14 = M.palette.Olive[1]
+	vim.g.terminal_color_7 = M.palette.Fg3[1]
+	vim.g.terminal_color_15 = M.palette.Fg1[1]
 	if vim.fn.exists("syntax_on") then vim.cmd.syntax "reset" end
 	if package.loaded.feline then
-		require'feline'.use_theme({fg = M.palette.Fg0[1], bg = M.palette.Bg1[1]})
+		require'feline'.use_theme({fg = M.palette.Fg1[1], bg = M.palette.Bg2[1]})
 	end
-	vim.g.terminal_color_0 = M.palette.Fg7[1]
 	if M.config.export > 0 then
-		local c = M.palette.Bg0[1]
+		local c = M.palette.Bg1[1]
 		io.write(("\x1b]11;rgb:%s/%s/%s\a"):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
-		c = M.palette.Fg0[1]
+		c = M.palette.Fg1[1]
 		io.write(("\x1b]10;rgb:%s/%s/%s\a\x1b]4"):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
 		for i = 0, 15, M.config.export == 1 and 15 or 1 do
 			c = vim.g["terminal_color_" .. i]
@@ -142,7 +144,7 @@ function M.setup(opts)
 
 	if not M.loaded then
 		M.hi(require "nerdcontrast.groups")
-		for _, ft in ipairs({"gitcommit", "help", "mcfunction"}) do
+		for _, ft in ipairs({"gitcommit", "markdown", "latex", "help", "mcfunction"}) do
 			if vim.bo.filetype == ft then
 				M.hi(require("nerdcontrast.ft." .. ft))
 			else

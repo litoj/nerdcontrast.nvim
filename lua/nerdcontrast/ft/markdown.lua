@@ -1,0 +1,16 @@
+return {
+	["@text.literal"] = "Cyan",
+	["@text.uri"] = {{fg = "Fg4"}, {italic = true}},
+	["@text.reference"] = "Url",
+	["@none"] = "Fg1",
+	["@text.todo.checked.markdown"] = {fg = "Green", bold = true},
+	["@text.title.1.marker"] = {fg = "LightRed", bold = true},
+	["@text.title.2.marker"] = "@text.title.1.marker",
+	["@text.title.3.marker"] = "Delimiter",
+	["@text.title.4.marker"] = "Delimiter",
+	["@text.title.5.marker"] = "Delimiter",
+	["@text.title.1"] = {fg = "LightGreen", underline = true, bold = true},
+	["@text.title.3"] = {fg = "LightGreen", bold = true, italic = true},
+	["@text.title.4"] = "LightGreen",
+	["@text.title.5"] = {fg = "LightGreen", italic = true},
+}

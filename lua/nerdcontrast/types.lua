@@ -1,8 +1,13 @@
+---@alias nerdcontrast.colorDef table<1|2, string|integer>
 ---@alias nerdcontrast.palette table<string,table<1|2, string|integer>>
+---@class nerdcontrast.initPalette
+---@field fg table<nerdcontrast.colorDef>
+---@field bg table<nerdcontrast.colorDef>
+---@field colors nerdcontrast.palette|nil
 ---@class nerdcontrast.config
 ---@field bg boolean|nil fill background or leave it transparent
 ---@field export 0|1|2|nil set source terminal colors to the theme, 1=bg+fg, 2=all
----@field palette nerdcontrast.palette|nil
+---@field palette nerdcontrast.initPalette|nil
 ---@field reload boolean|nil reload on each theme change
 ---@class nerdcontrast
 ---@field config nerdcontrast.config
