@@ -43,11 +43,11 @@ packer.use {
 
 ### Theme toggle
 
-```
+```lua
 -- Dark/Light theme toggle
 nmap("n", "<Leader>c", function()
 	vim.o.background = vim.o.background == "light" and "dark" or "light"
-	vim.cmd.colorscheme "nerdcontrast" -- or `require'nerdcontrast'.setup()`
+	vim.cmd.colorscheme "nerdcontrast" -- or `require'nerdcontrast'.setup{}`
 end)
 ```
 
@@ -61,13 +61,13 @@ nc.hi({
   BoldGreen = {fg = "Green", bold = true},
   -- directly linked
   DefaultFg = "Fg1", -- fg part of `Normal`... - Fg5=Bg5
-  GreyBg = "Bg4", -- Fgx changes Text, Bgx changes background
+  CursorBg = "BgHi", -- BgX changes background
 	-- put colours in a separate table for using `Fgx`/`Bgx` by value
-	-- colours in 1. table, effects in 2. table
+	-- colours in 1st table, effects in 2nd table
   Error = {{fg = "Fg4", bg = "Red"}},
   GraySpiked = {{sp = "Bg3"}, {undercurl = true}},
 })
--- using custom rgb, could be simplified, but this is faster
+-- using custom rgb; could be simplified, but this is faster
 nc.setPalette({MyLovelyColor = {"#dd3388", 9}})
 nc.hi({ UsingCustomColor = {sp = "MyLovelyColor", underwave = true} })
 ```
@@ -94,7 +94,7 @@ nc.hi({ UsingCustomColor = {sp = "MyLovelyColor", underwave = true} })
 | Magenta  | #a030a8 | LightMagenta | #c850e0 |
 | Pink     | #c06680 | LightPink    | #e7909a |
 | Red      | #cc2815 | LightRed     | #f03522 |
-| Brown    | #885515 | None         | NONE    |
+| Brown    | #885515 | SlateGrey    | #7880ae |
 | Orange   | #cc6415 | LightOrange  | #f09322 |
 | Yellow   | #cca815 | LightYellow  | #e8d822 |
 | Olive    | #99a015 | LightOlive   | #b0cd22 |

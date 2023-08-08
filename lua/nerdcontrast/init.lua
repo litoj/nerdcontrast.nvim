@@ -9,7 +9,6 @@ M.palette = {
 	Magenta = {"#a030a8", 5}, -- #9d2098
 	Pink = {"#c06680", 13},
 	Red = {"#cc2815", 1},
-	Brown = {"#885515", 3},
 	Orange = {"#cc6415", 3},
 	Yellow = {"#cca815", 11},
 	Olive = {"#99a015", 2},
@@ -56,7 +55,6 @@ function M.hi(tbl)
 			else
 				c = v
 			end
-			-- and v.xx:sub(1,1)~='#'
 			if v.fg then
 				c.ctermfg = M.palette[v.fg][2]
 				c.fg = M.palette[v.fg][1]
@@ -75,19 +73,15 @@ for k, v in pairs(M.palette) do vim.api.nvim_set_hl(0, k, {fg = v[1], ctermfg = 
 
 ---@param tbl nerdcontrast.initPalette
 function M.setPalette(tbl)
-	for i, v in ipairs(tbl.fg) do
-		local k = "Fg" .. i
+	for k, v in pairs(tbl.fg) do
+		if type(k) == "number" then k = "Fg" .. k end
 		M.palette[k] = v
 		vim.api.nvim_set_hl(0, k, {fg = v[1], ctermfg = v[2]})
 	end
-	for i, v in ipairs(tbl.bg) do
-		local k = "Bg" .. i
+	for k, v in pairs(tbl.bg) do
+		k = "Bg" .. k
 		M.palette[k] = v
 		vim.api.nvim_set_hl(0, k, {bg = v[1], ctermbg = v[2]})
-	end
-	for k, v in pairs(tbl.colors) do
-		M.palette[k] = v
-		vim.api.nvim_set_hl(0, k, {fg = v[1], ctermfg = v[2]})
 	end
 	vim.api.nvim_set_hl(0, "Normal", {
 		ctermfg = M.palette.Fg1[2],

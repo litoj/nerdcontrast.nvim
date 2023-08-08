@@ -2,10 +2,10 @@ return {
 	-- InfoColumn/Cursor
 	FoldColumn = "Fg1",
 	SignColumn = "Fg1",
-	CursorColumn = "Bg2",
-	CursorLine = "Bg2",
+	CursorLine = "BgHi",
+	CursorColumn = "BgHi",
 	LineNr = "Fg4",
-	CursorLineNr = {{fg = "Fg3", bg = "Bg2"}},
+	CursorLineNr = {{fg = "Fg3", bg = "BgHi"}},
 	-- Menu elements
 	FloatTitle = {fg = "Olive", bold = true},
 	FloatBorder = "Magenta",
@@ -83,7 +83,7 @@ return {
 	FzfLuaTitle = "FloatTitle",
 	FzfLuaSearch = "Search",
 	FzfLuaCursor = {fg = "LightMagenta", bold = true, underline = true},
-	FzfLuaCursorLine = {{bg = "Bg2"}, {underline = true}},
+	FzfLuaCursorLine = {{bg = "BgHi"}, {underline = true}},
 	-- Ufo
 	UfoFoldedBg = "Bg2",
 	UfoFoldedFg = "Fg2",

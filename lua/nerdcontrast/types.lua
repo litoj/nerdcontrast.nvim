@@ -1,8 +1,8 @@
 ---@alias nerdcontrast.colorDef table<1|2, string|integer>
 ---@alias nerdcontrast.palette table<string,table<1|2, string|integer>>
 ---@class nerdcontrast.initPalette
----@field fg table<nerdcontrast.colorDef>
----@field bg table<nerdcontrast.colorDef>
+---@field fg table<string|integer,nerdcontrast.colorDef>
+---@field bg table<string|integer,nerdcontrast.colorDef>
 ---@field colors nerdcontrast.palette|nil
 ---@class nerdcontrast.config
 ---@field bg boolean|nil fill background or leave it transparent
