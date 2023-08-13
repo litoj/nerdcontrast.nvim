@@ -1,4 +1,6 @@
 return {
+	NvimTreeNormal = "Overlay",
+	NvimTreeCursorLine = "OverlaySel",
 	NvimTreeIndentMarker = "Magenta",
 	NvimTreeImageFile = "Yellow",
 	NvimTreeGitDirty = "LightOrange",
@@ -14,4 +16,5 @@ return {
 	NvimTreeSymlink = {fg = "Cyan", bold = true},
 	NvimTreeSpecialFile = "Fg1",
 	NvimTreeOpenedFile = {fg = "Orange", bold = true},
+	NvimTreeWindowPicker = {bg = "Bg2b", {bold = true}},
 }

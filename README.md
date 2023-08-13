@@ -16,7 +16,7 @@ choose between **Light** and **Dark**, but keep all colours the same
 return {
   "JosefLitos/nerdcontrast.nvim",
   lazy = false,
-  priority = 999,
+  priority = 1000,
   config = true -- automatically sets colourscheme, or fun() like packer
 }
 ```
@@ -33,7 +33,8 @@ packer.use {
     require'nerdcontrast'.setup {
       bg = true, -- set default bg, otherwise transparent
       export = 0, -- set source terminal theme 1=bg+fg, 2=all
-      palette = {}, -- custom colour palette, see lua/palette/
+      overlay = false, -- set nvimtree and bufferline bg to statusline bg
+      palette = {}, -- custom colour palette, see `nerdcontrast.initPalette`
     }
   end,
 }
@@ -68,7 +69,7 @@ nc.hi({
   GraySpiked = {{sp = "Bg3"}, {undercurl = true}},
 })
 -- using custom rgb; could be simplified, but this is faster
-nc.setPalette({MyLovelyColor = {"#dd3388", 9}})
+nc.setPalette({fg = {MyLovelyColor = {"#dd3388", 9}}})
 nc.hi({ UsingCustomColor = {sp = "MyLovelyColor", underwave = true} })
 ```
 
@@ -104,10 +105,10 @@ nc.hi({ UsingCustomColor = {sp = "MyLovelyColor", underwave = true} })
 
 ## Get colour codes
 
-Get colour hex with `require'nerdcontrast'.palette["Colour name"][1]`
-or link to them directly by name
+Get colour hex with `require'nerdcontrast'.palette["Colour name"][1]` or link to them directly by
+name
 
-For Dark/Light independency, `Bg1-Bg5`, `Fg1-Fg5` and other colour links under `nerdcontrast.palette.` are also available. If you
-wish to use them and are expecting to be using the toggle shortcut, please refer to them through
-Vim's `hi link` feature or set the value with `require'nerdcontrast'.hi({})` in the forementioned
-format.
+For Dark/Light independency, `Bg<x>`, `Fg1-Fg5` and other colour links under
+`nerdcontrast.palette.` are also available. If you wish to use them and are expecting to be using
+the toggle shortcut, please refer to them through Vim's `hi link` feature or set the value with
+`require'nerdcontrast'.hi({})` in the forementioned format.

@@ -25,6 +25,6 @@ return {
 
 	CmpItemKindText = {bg = "Yellow"},
 	CmpItemKindUnit = {bg = "LightPink"},
-	CmpItemKindFile = {fg = "Brown", reverse = true},
+	CmpItemKindFile = {fg = "Brown", {reverse = true}},
 	CmpItemKindFolder = "CmpItemKindFile",
 }
