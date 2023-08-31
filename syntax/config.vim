@@ -9,6 +9,7 @@ endif
 setlocal commentstring=#%s
 
 " define the config syntax
+syn keyword configBool true false yes no auto contained
 syn match   configDelimiter "[()\[\];,:{}]"
 syn match   configOperator  "[=|&\*\+\<\>.]"
 syn match   configComment   "\(dnl.*\)\|\(\(#\|//\).*\)" contains=@Spell
@@ -16,7 +17,7 @@ syn match   configComment   "^\s*;.*"
 syn region  configComment   start="/\*" end="\*/" contains=@Spell
 syn match   configNumber    "[-+ ]*\d[.0-9]*" contained contains=configOperator
 syn match   configHex       "[0-9A-Za-f]\{6\}" contained
-syn match   configValue    "[^=]*$" contained contains=configNumber,configOperator,configDelimiter,configHex,configString
+syn match   configValue    "[^=]*$" contained contains=configBool,configNumber,configOperator,configDelimiter,configHex,configString
 syn match   configVariable "[^ =]\+\s*=" contained contains=configOperator
 syn match   configLine     "^\s*[^ =]\+\s*=.*$" contains=configVariable,configValue,configNumber
 syn match   configField    "[0-9A-Za-z_:=-]\+\s*{" contained contains=configDelimiter
@@ -29,6 +30,7 @@ syn region  configString    start=+\z(["'`]\)+ skip=+\\\z1+ end=+\z1+ contains=@
 " Define the default highlighting.
 " Only when an item doesn't have highlighting yet
 
+hi def link configBool      Boolean
 hi def link configDelimiter Delimiter
 hi def link configOperator  Operator
 hi def link configComment   Comment

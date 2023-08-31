@@ -1,22 +1,27 @@
----@alias nerdcontrast.Color {[1]: string, [2]: integer|"NONE"}
----@alias nerdcontrast.Highlight {[string]: string|boolean, [1]: table<string,boolean>}
+---@alias nerdcontrast.ColorDef {[1]: string, [2]: integer|"NONE", bg?: boolean }
+---@class nerdcontrast.ThemeDepHl
+---@field sp? string
+---@field fg? string
+---@field bg? string
+---@field [1] vim.api.keyset.highlight
+---@alias nerdcontrast.Highlight vim.api.keyset.highlight|nerdcontrast.ThemeDepHl
 ---@alias nerdcontrast.HiTbl table<string,nerdcontrast.Highlight>
----@alias nerdcontrast.Palette table<string,nerdcontrast.Color>
----@alias nerdcontrast.InitPalette table<"fg"|"bg",table<string,nerdcontrast.Color>|nil>
+---@alias nerdcontrast.Palette table<string,nerdcontrast.ColorDef>
 ---@class nerdcontrast.Config
----@field bg boolean|nil fill background or leave it transparent
----@field export 0|1|2|nil set source terminal colors to the theme, 1=bg+fg, 2=all
----@field palette nerdcontrast.InitPalette|nil
----@field overlay boolean|nil set nvimtree+bufferline to distinct Bg
----@field reload boolean|nil reload on each theme change
----@field opacity string|nil set terminal background opacity (hex string)
+---@field bg? boolean fill background or leave it transparent
+---@field defer? false|integer defer ft+plugs highlights by given time
+---@field export? 0|1|2 set source terminal colours to the theme, 1=bg+fg, 2=all
+---@field palette? nerdcontrast.Palette
+---@field opacity? string set terminal background opacity (hex string)
+---@field overlay? boolean set nvimtree+bufferline to distinct Bg
+---@field reload? boolean reload on each theme change
 ---@class nerdcontrast
 ---@field config nerdcontrast.Config
 ---@field palette nerdcontrast.Palette
 ---@field setPalette function
 ---@field setTerm function
----@field themeDep nerdcontrast.HiTbl
+---@field themeDep table<string,nerdcontrast.ThemeDepHl>
 ---@field hiThemeDep function
----@field hi function
----@field setup function
+---@field hi fun(tbl: nerdcontrast.HiTbl)
+---@field setup fun(opts?: nerdcontrast.Config)
 ---@field loaded boolean

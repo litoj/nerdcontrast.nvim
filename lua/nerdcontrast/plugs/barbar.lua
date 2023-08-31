@@ -1,0 +1,15 @@
+return {
+	BufferVisible = 'Overlay',
+	BufferVisibleMod = { fg = 'Red', bg = 'Overlay', { italic = true } },
+	BufferVisibleSign = { fg = 'LightMagenta', bg = 'Overlay', {} },
+	BufferCurrent = { bold = true },
+	BufferCurrentMod = { fg = 'LightRed', bold = true, italic = true },
+	BufferCurrentSign = 'LightGreen',
+	BufferInactive = { fg = 'Fg3', bg = 'Overlay', {} },
+	BufferInactiveMod = { fg = 'Orange', bg = 'Overlay', { italic = true } },
+	BufferInactiveSign = { fg = 'Fg3', bg = 'Overlay', {} },
+	BufferTabpages = { fg = 'Cyan', bg = 'Overlay', {} },
+	BufferTabpageFill = { fg = 'Fg4', bg = 'Overlay', {} },
+	BufferTabpagesSep = 'Overlay',
+	BufferScrollArrow = 'Overlay',
+}

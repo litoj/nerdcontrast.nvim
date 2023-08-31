@@ -1,1 +1,1 @@
-require'nerdcontrast'.setup()
+require('nerdcontrast').setup()
