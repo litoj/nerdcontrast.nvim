@@ -1,13 +1,13 @@
 vim.o.termguicolors = os.getenv 'TERM' ~= 'linux'
 ---@type nerdcontrast
 ---@diagnostic disable-next-line: missing-fields
-local M = { config = { bg = true, defer = 0, export = 0, overlay = false } }
+local M = { config = { bg = true, defer = 0, export = 0, overlay = false, opacity = 'ff' } }
 
-M.themeDep = { Normal = { fg = 'Fg1', bg = 'Bg0', {} } }
+M.themeDep = {}
 
 M.palette = {
 	None = { 'NONE', 'NONE' },
-	Magenta = { '#a030a8', 5 }, -- #9d2098
+	Magenta = { '#a830a8', 5 },
 	Pink = { '#c06680', 13 },
 	Red = { '#cc1515', 1 },
 	Orange = { '#cc7015', 3 },
@@ -23,14 +23,14 @@ M.palette = {
 	LightYellow = { '#f0d822', 11 },
 	LightOlive = { '#c0d022', 10 },
 	LightGreen = { '#66d022', 10 },
-	LightCyan = { '#50d0b8', 14 },
+	LightCyan = { '#22d0d0', 14 },
 	LightBlue = { '#50a8f0', 12 },
 }
 
 local hl = vim.api.nvim_set_hl
 
 ---@param tbl nerdcontrast.Palette
-function M.setPalette(tbl)
+function M.addPalette(tbl)
 	for k, v in pairs(tbl) do
 		M.palette[k] = v
 	end
@@ -56,9 +56,6 @@ function M.setPalette(tbl)
 	vim.g.terminal_color_14 = M.palette.Olive[1]
 	vim.g.terminal_color_8 = M.palette.Fg3[1]
 	vim.g.terminal_color_15 = M.palette.Fg1[1]
-	if package.loaded.feline then
-		require('feline').use_theme { fg = M.palette.Fg1[1], bg = M.palette.Bg2[1] }
-	end
 	M:hiThemeDep()
 	if vim.g.colors_name == 'nerdcontrast' then vim.cmd.redraw() end
 	M.setTerm(M.config)
@@ -73,7 +70,7 @@ function M.setTerm(cfg)
 				c:sub(2, 3),
 				c:sub(4, 5),
 				c:sub(6, 7),
-				cfg.opacity or 'ff'
+				cfg.opacity
 			)
 		)
 		c = M.palette.Fg1[1]
@@ -137,7 +134,7 @@ function M.setup(opts)
 			M.config[k] = v
 		end
 	end
-	M.setPalette(M.config.palette or require('nerdcontrast.palette.' .. vim.o.background))
+	M.addPalette(M.config.palette or require('nerdcontrast.palette.' .. vim.o.background))
 	M.config.palette = nil
 
 	if vim.g.colors_name ~= 'nerdcontrast' then
@@ -158,11 +155,12 @@ function M.setup(opts)
 			end
 			local function preload(mod)
 				package.preload[mod] = nil
-				M.hi(require('nerdcontrast.plugs.' .. mod))
 				for _, loader in pairs(package.loaders) do
 					local ret = loader(mod)
-					if type(ret) == 'function' then return ret() end
+					if type(ret) == 'function' then package.loaded[mod] = ret() end
 				end
+				M.hi(require('nerdcontrast.plugs.' .. mod))
+				return package.loaded[mod]
 			end
 			for mod, _ in vim.fs.dir(path .. 'plugs') do
 				mod = mod:sub(1, -5)

@@ -1,5 +1,6 @@
 return {
 	-- InfoColumn/Cursor
+	Normal = { fg = 'Fg1', bg = 'Bg0', {} },
 	Visual = 'Bg2b',
 	CursorLine = 'Bg2',
 	CursorColumn = 'Bg2',

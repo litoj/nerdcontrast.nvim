@@ -26,6 +26,7 @@ return {
 	UfoFoldedEllipsis = { fg = 'LightOrange', bold = true },
 	LspSignatureActiveParameter = { bold = true },
 	MarkSignHl = { fg = 'LightCyan', italic = true },
+	i3ConfigShParam = "@parameter",
 
 	-- Nerdcontrast
 	Neo = { fg = 'Cyan', bold = true },

@@ -12,13 +12,13 @@
 ---@field defer? false|integer defer ft+plugs highlights by given time
 ---@field export? 0|1|2 set source terminal colours to the theme, 1=bg+fg, 2=all
 ---@field palette? nerdcontrast.Palette
----@field opacity? string set terminal background opacity (hex string)
+---@field opacity? string set terminal background opacity ('00' - 'ff')
 ---@field overlay? boolean set nvimtree+bufferline to distinct Bg
 ---@field reload? boolean reload on each theme change
 ---@class nerdcontrast
 ---@field config nerdcontrast.Config
 ---@field palette nerdcontrast.Palette
----@field setPalette function
+---@field addPalette function
 ---@field setTerm function
 ---@field themeDep table<string,nerdcontrast.ThemeDepHl>
 ---@field hiThemeDep function

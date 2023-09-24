@@ -86,10 +86,22 @@ nc.hi({
 	-- for using changing colours, put effects in an extra table
   Error = {fg = 'Fg4', bg = 'Red', {}},
   GraySpiked = {sp = 'Bg3', {undercurl = true}},
+  -- custom rgb for onetime use
+  CustomColour = {{bg = '#dd3388', ctermbg = 9}}
 })
--- using custom rgb; could be simplified, but this is faster
-nc.setPalette({fg = {MyLovelyColor = {'#dd3388', 9}}})
-nc.hi({ UsingCustomColor = {sp = 'MyLovelyColor', underwave = true} })
+-- dynamic colour registration - for multiple usages
+nc.addPalette {
+	Overlay = setmetatable({}, {
+		__index = function(self, i)
+			if i == 'bg' then
+				local c = nc.palette[nc.config.overlay and 'Bg2' or 'Bg0']
+				self[1] = c[1]
+				self[2] = c[2]
+        return true -- default as background highlight
+			end
+		end,
+	})
+}
 ```
 
 ## Plugin support
