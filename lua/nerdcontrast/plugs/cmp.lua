@@ -8,7 +8,7 @@ return {
 
 	CmpItemKindModule = { fg = 'Red', reverse = true },
 	CmpItemKindInterface = 'CmpItemKindClass',
-	CmpItemKindClass = { fg = 'Slate', { reverse = true } },
+	CmpItemKindClass = { fg = 'FgBlue', reverse = true },
 	CmpItemKindStruct = 'CmpItemKindClass',
 	CmpItemKindEnum = { bg = 'Magenta' },
 	CmpItemKindTypeParameter = 'CmpItemKindClass',
@@ -21,11 +21,11 @@ return {
 
 	CmpItemKindKeyword = { bg = 'Blue' },
 	CmpItemKindOperator = { bg = 'Red' },
-	CmpItemKindEvent = { bg = 'LightOrange' },
+	CmpItemKindEvent = { bg = 'Orange' },
 	CmpItemKindSnippet = 'Bg3',
 
 	CmpItemKindText = { bg = 'Yellow' },
-	CmpItemKindUnit = { bg = 'LightPink' },
-	CmpItemKindFile = { bg = 'Brown', {} },
-	CmpItemKindFolder = { fg = 'Brown', { reverse = true } },
+	CmpItemKindUnit = { bg = 'FgRed' },
+	CmpItemKindFile = { bg = 'Orange' },
+	CmpItemKindFolder = { fg = 'Orange', reverse = true },
 }

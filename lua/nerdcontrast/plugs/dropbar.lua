@@ -30,7 +30,7 @@ return {
 	DropBarIconKindMarkdownH4 = 'Title',
 	DropBarIconKindMarkdownH5 = 'Title',
 	DropBarIconKindMarkdownH6 = 'Title',
-	DropBarIconKindFile = 'Brown',
+	DropBarIconKindFile = 'Orange',
 	DropBarIconKindFolder = 'Green',
 
 	DropBarIconKindNull = 'Boolean',

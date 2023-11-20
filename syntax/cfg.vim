@@ -1,0 +1,1 @@
+/home/kepis/Documents/personal/nvim/nerdcontrast.nvim/syntax/config.vim

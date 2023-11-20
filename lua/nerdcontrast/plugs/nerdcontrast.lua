@@ -14,22 +14,27 @@ return {
 	DiffDelete = 'Red',
 	DiffText = 'Yellow',
 
+	diffAdded = 'Green',
+	diffRemoved = 'Red',
+
 	-- PLUGINS
 	DevIconMd = 'Fg1',
 	FzfLuaBorder = 'FloatBorder',
 	FzfLuaTitle = 'FloatTitle',
 	FzfLuaSearch = 'Search',
-	FzfLuaCursor = { fg = 'LightMagenta', bold = true, underline = true },
-	FzfLuaCursorLine = { bg = 'Bg2', { underline = true } },
+	FzfLuaCursor = { fg = 'Magenta', bold = true, underline = true },
+	FzfLuaCursorLine = { bg = 'Bg2', underline = true },
 	UfoFoldedBg = 'Bg2',
 	UfoFoldedFg = 'Fg2',
-	UfoFoldedEllipsis = { fg = 'LightOrange', bold = true },
-	LspSignatureActiveParameter = { bold = true },
+	UfoFoldedEllipsis = { fg = 'Orange', bold = true },
+	LspSignatureActiveParameter = 'Bold',
 	MarkSignHl = { fg = 'LightCyan', italic = true },
-	i3ConfigShParam = "@parameter",
+	i3ConfigShParam = '@parameter',
 
 	-- Nerdcontrast
 	Neo = { fg = 'Cyan', bold = true },
 	Vim = { fg = 'Green', bold = true },
 	Url = { fg = 'LightBlue', sp = 'LightBlue', underline = true },
+	Bold = { bold = true },
+	Italic = { italic = true },
 }

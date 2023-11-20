@@ -24,8 +24,8 @@ return {
 	NavbuddyFunction = 'Function',
 	NavbuddyConstructor = 'Function',
 
-	NavbuddyFile = 'Brown',
-	NavbuddyEvent = 'LightOrange',
+	NavbuddyFile = 'Orange',
+	NavbuddyEvent = 'Orange',
 	NavbuddyKey = 'Keyword',
 	NavbuddyOperator = 'Red',
 	NavbuddyEnumMember = 'Constant',

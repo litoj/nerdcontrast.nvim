@@ -2,7 +2,7 @@
 
 A colourscheme with optimal contrast based on default light theme of NetBeans IDE
 
-choose between **Light** and **Dark**, but keep all colours the same
+choose between **Soft** and **Dark**, but keep all colours the same
 
 ## Requirements
 
@@ -45,7 +45,7 @@ packer.use {
 ### Theme toggle
 
 ```lua
--- Dark/Light theme toggle
+-- Dark/Soft theme toggle
 nmap('n', '<Leader>c', function()
 	vim.o.background = vim.o.background == 'light' and 'dark' or 'light'
 	vim.cmd.colorscheme 'nerdcontrast' -- or `require'nerdcontrast'.setup{}`
@@ -122,7 +122,7 @@ see [palettes](./lua/nerdcontrast/palette/) and [defaults](./lua/nerdcontrast/in
 Get colour hex with `require'nerdcontrast'.palette['Colour name'][1]` or link to them directly by
 name
 
-For Dark/Light independency, `Bg<x>`, `Fg1-Fg5` and other colour links under
+For Dark/Soft independency, `Bg<x>`, `Fg1-Fg5` and other colour links under
 `nerdcontrast.palette.` are also available. If you wish to use them and are expecting to be using
 the toggle shortcut, please refer to them through Vim's `hi link` feature or set the value with
 `require'nerdcontrast'.hi({})` in the forementioned format.
