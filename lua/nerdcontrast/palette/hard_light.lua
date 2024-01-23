@@ -6,15 +6,16 @@ return {
 	Green = { fg = '#007700' },
 	Cyan = { fg = '#009977' },
 	Blue = { fg = '#0033dd' },
-	Violet = { fg = '#7700cc' },
+	Violet = { fg = '#6600cc' },
 	Magenta = { fg = '#aa3399' },
 	LightRed = { fg = '#ff3333' },
-	LightOrange = { fg = '#dd6600' },
+	LightOrange = { fg = '#dd7700' },
 	LightYellow = { fg = '#ccbb00' },
 	LightGreen = { fg = '#11aa00' },
 	LightCyan = { fg = '#00bb99' },
 	LightBlue = { fg = '#0088ff' },
-	LightViolet = { fg = '#8833ff' },
+	LightViolet = { fg = '#8822ff' },
+	LightMagenta = { fg = '#cc22ff' },
 
 	FgRed = { fg = '#661100' },
 	FgYellow = { fg = '#664400' },
@@ -38,15 +39,15 @@ return {
 
 --[[
 	#610 #640 #040 #207 #207 #83f #306
-	#d60 #c90 #070 #08f #02d #70c #610
+	#d70 #c90 #070 #08f #02d #70c #610
 	#a50 #cb0 #1a0 #097 #08f #a39 #b00
-	#c90 #790 #790 #0b9 #0b9 #b00 #f33
+	#c90 #790 #790 #0b9 #0b9 #c2f #f33
 
-	#610 #a50 #d60 #c90
+	#610 #a50 #d70 #c90
 	#640 #cb0 #790 #cb0
 	#040 #070 #070 #1a0
 	#207 #097 #0b9 #0b9
 	#207 #02d #02d #08f
-	#605 #70b #a39 #a39
+	#605 #70b #a39 #c2f
 	#610 #b00 #b00 #f33
 ]]

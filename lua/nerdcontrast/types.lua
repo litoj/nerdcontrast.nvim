@@ -3,21 +3,25 @@
 ---@field fg? string
 ---@field bg? string
 ---@field [1] vim.api.keyset.highlight
----@alias nerdcontrast.Palette table<string,string> map of color hexcodes
+---@alias nerdcontrast.Palette table<string,string> map of color hexcodes / color name links
 ---@alias nerdcontrast.InitPalette table<string,vim.api.keyset.highlight> map of color definitions
----@class nerdcontrast.Config
----@field bg? boolean fill background or leave it transparent
+---@class nerdcontrast.ThemeConfig
+---@field palette? {base?:nerdcontrast.InitPalette|string, custom?:nerdcontrast.InitPalette} color definitions or name/path of color palette
+---@field theme? {base?:nerdcontrast.Palette|string, override?:nerdcontrast.Palette} base group → color name map or name/path of theme
+---@field opacity? boolean|string false for terminal bg, true for nvim bg, '00'-'ff' for terminal opacity
+---@class nerdcontrast.Config: nerdcontrast.ThemeConfig
 ---@field defer? false|integer defer ft+plugs highlights by given time
----@field export? 0|1|2 set source terminal colours to the theme, 1=bg+fg, 2=all
----@field palette? nerdcontrast.InitPalette
----@field opacity? string set terminal background opacity ('00' - 'ff')
----@field overlay? boolean set nvimtree+bufferline to distinct Bg
+---@field export? boolean set underlying terminal's colors to the theme
+---@field light? nerdcontrast.ThemeConfig defaults override for light theme
+---@field dark? nerdcontrast.ThemeConfig defaults override for dark theme
 ---@field reload? boolean reload on each theme change
 ---@class nerdcontrast
+---@field lualine? table lualine theme override - specified parts will override nc defaults
 ---@field config nerdcontrast.Config
----@field palette nerdcontrast.Palette
----@field addPalette fun(tbl: nerdcontrast.InitPalette)
----@field groups table<string,nerdcontrast.Highlight>
+---@field palette nerdcontrast.Palette color palette + theme group/color definitions
+---@field setConfig fun(cfg: nerdcontrast.Config) copy defaults to unspecified light/dark theme configs
+---@field update fun(cfg: nerdcontrast.ThemeConfig) update colors to set theme
+---@field deps table<string,nerdcontrast.Highlight>
 ---@field hi fun(tbl: table<string,nerdcontrast.Highlight|string>) highlight or link a color
 ---@field setup fun(opts?: nerdcontrast.Config) Plugin setup with optional configuration
 ---@field loaded boolean

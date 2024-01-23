@@ -14,10 +14,10 @@ return {
 	NavbuddyStruct = 'Structure',
 	NavbuddyEnum = 'Magenta',
 	NavbuddyConstant = 'Constant',
-	NavbuddyTypeParameter = '@parameter',
+	NavbuddyTypeParameter = 'Parameter',
 
-	NavbuddyField = '@field',
-	NavbuddyProperty = '@property',
+	NavbuddyField = 'Field',
+	NavbuddyProperty = 'Field',
 	NavbuddyVariable = 'Variable',
 
 	NavbuddyMethod = 'Function',

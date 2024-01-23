@@ -1,6 +1,6 @@
 return {
-	NvimTreeNormal = 'Overlay',
-	NvimTreeCursorLine = 'OverlaySel',
+	NvimTreeNormal = 'WinBar',
+	NvimTreeCursorLine = 'WinBarNC',
 	NvimTreeIndentMarker = 'Magenta',
 	NvimTreeImageFile = 'Yellow',
 	NvimTreeGitDirty = 'Orange',

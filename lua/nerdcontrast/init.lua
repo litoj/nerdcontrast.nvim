@@ -2,92 +2,103 @@ vim.o.termguicolors = true
 ---@type nerdcontrast
 ---@diagnostic disable-next-line: missing-fields
 local M = {
-	config = { bg = true, defer = 0, export = 0, overlay = false, opacity = 'ff' },
-	groups = {},
-	palette = {},
+	config = {
+		defer = 0,
+		export = false,
+		light = { palette = { base = 'nerdcontrast.palette.hard_light' } },
+		dark = { palette = { base = 'nerdcontrast.palette.hard_dark' } },
+	},
+	deps = {},
 }
+function M.setConfig(cfg)
+	local default = { palette = cfg.palette, theme = cfg.theme, opacity = cfg.opacity }
+	cfg.palette = nil
+	cfg.theme = nil
+	cfg.opacity = nil
+	M.config = vim.tbl_deep_extend('force', M.config, { light = default, dark = default }, cfg)
+end
+M.setConfig { theme = { base = 'nc' }, opacity = true }
 
 local hl = vim.api.nvim_set_hl
 
-function M.addPalette(tbl)
-	tbl.Bg0 = M.config.bg and tbl['Bg1'] or {}
-	tbl.Overlay = tbl[M.config.overlay and 'Bg2' or 'Bg0']
-	tbl.OverlaySel = tbl[M.config.overlay and 'Bg3' or 'Bg2']
-	for k, v in pairs(tbl) do
-		M.palette[k] = v.fg or v.bg
-		hl(0, k, v)
+function M.update(cfg)
+	local function getTbl(val, prefix)
+		return type(val) == 'string' and require(val:match '%.' and val or prefix .. val) or val
 	end
-
-	vim.g.terminal_color_0 = M.palette.Bg2
-	vim.g.terminal_color_7 = M.palette.Fg5
-	vim.g.terminal_color_1 = M.palette.Red
-	vim.g.terminal_color_2 = M.palette.Green
-	vim.g.terminal_color_3 = M.palette.Yellow
-	vim.g.terminal_color_4 = M.palette.Blue
-	vim.g.terminal_color_5 = M.palette.Magenta
-	vim.g.terminal_color_6 = M.palette.Cyan
-	vim.g.terminal_color_9 = M.palette.LightRed
-	vim.g.terminal_color_10 = M.palette.LightGreen
-	vim.g.terminal_color_11 = M.palette.LightYellow
-	vim.g.terminal_color_12 = M.palette.LightBlue
-	vim.g.terminal_color_13 = M.palette.FgRed
-	vim.g.terminal_color_14 = M.palette.Olive
-	vim.g.terminal_color_8 = M.palette.Fg3
-	vim.g.terminal_color_15 = M.palette.Fg1
-
-	for n, t in pairs(M.groups) do -- rehighlight dependant groups
-		local c = t[1]
-		if t.fg then c.fg = M.palette[t.fg] end
-		if t.bg then c.bg = M.palette[t.bg] end
-		if t.sp then c.sp = M.palette[t.sp] end
-		hl(0, n, c)
-	end
-
-	if vim.g.colors_name == 'nerdcontrast' then vim.cmd.redraw() end
-	if M.config.export > 0 then
-		local c = M.palette.Bg1
-		io.stderr:write(
-			('\x1b]11;rgba:%s/%s/%s/%s\a'):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7), M.config.opacity)
-		)
-		c = M.palette.Fg1
-		io.stderr:write(('\x1b]10;rgb:%s/%s/%s\a\x1b]4'):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
-		for i = 0, 15, M.config.export == 1 and 15 or 1 do
-			c = vim.g['terminal_color_' .. i]
-			io.stderr:write((';%s;rgb:%s/%s/%s'):format(i, c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
+	-- TODO: make monochrome pre-theme → just give an array of consecutive color definition tables
+	M.palette = {} -- set base color hex
+	local p = M.palette
+	for _, tbl in ipairs { getTbl(cfg.palette.base, 'nerdcontrast.palette.'), cfg.palette.custom } do
+		for k, v in pairs(type(tbl) == 'string' and require(tbl) or tbl) do
+			p[k] = v.fg or v.bg
+			hl(0, k, v)
 		end
-		io.stderr:write '\a'
+	end
+	p.Bg0 = cfg.opacity and p.Bg1 or 'NONE'
+
+	for _, tbl in ipairs { getTbl(cfg.theme.base, 'nerdcontrast.theme.'), cfg.theme.override } do
+		for k, v in pairs(type(tbl) == 'string' and require(tbl) or tbl) do
+			p[k] = p[v]
+			hl(0, k, { link = v })
+		end
+	end
+
+	vim.g.terminal_color_0 = p.Bg1
+	vim.g.terminal_color_1 = p.Red
+	vim.g.terminal_color_2 = p.Green
+	vim.g.terminal_color_3 = p.Yellow
+	vim.g.terminal_color_4 = p.Blue
+	vim.g.terminal_color_5 = p.Magenta
+	vim.g.terminal_color_6 = p.Cyan
+	vim.g.terminal_color_7 = p.Fg4
+	vim.g.terminal_color_8 = p.Bg4
+	vim.g.terminal_color_9 = p.LightRed
+	vim.g.terminal_color_10 = p.LightGreen
+	vim.g.terminal_color_11 = p.LightYellow
+	vim.g.terminal_color_12 = p.LightBlue
+	vim.g.terminal_color_13 = p.Number
+	vim.g.terminal_color_14 = p.Parameter
+	vim.g.terminal_color_15 = p.Fg1
+
+	for n, t in pairs(M.deps) do -- rehighlight dependant groups
+		local c = t[1]
+		if t.fg then c.fg = p[t.fg] end
+		if t.bg then c.bg = p[t.bg] end
+		if t.sp then c.sp = p[t.sp] end
+		hl(0, n, c)
 	end
 end
 
 function M.hi(tbl)
+	local p = M.palette
 	for k, v in pairs(tbl) do
-		if type(v) ~= 'table' then
+		if type(v) == 'string' then
 			hl(0, k, { link = v })
 		else
 			local c
 			if not v[1] then
 				c = { v }
-				M.groups[k] = c
+				M.deps[k] = c
 				if v.fg then
 					c.fg = v.fg
-					v.fg = M.palette[v.fg]
+					v.fg = p[v.fg]
 				end
 				if v.bg then
 					c.bg = v.bg
-					v.bg = M.palette[v.bg]
+					v.bg = p[v.bg]
 				end
 				if v.sp then
 					c.sp = v.sp
-					v.sp = M.palette[v.sp]
+					v.sp = p[v.sp]
 				end
 				tbl[k] = c
 				c = v
 			else
-				M.groups[k] = v
+				M.deps[k] = v
 				c = v[1]
-				if v.fg then c.fg = M.palette[v.fg] end
-				if v.bg then c.bg = M.palette[v.bg] end
-				if v.sp then c.sp = M.palette[v.sp] end
+				if v.fg then c.fg = p[v.fg] end
+				if v.bg then c.bg = p[v.bg] end
+				if v.sp then c.sp = p[v.sp] end
 			end
 			hl(0, k, c)
 		end
@@ -95,13 +106,31 @@ function M.hi(tbl)
 end
 
 function M.setup(opts)
-	if opts then
-		for k, v in pairs(opts) do
-			M.config[k] = v
+	if opts then M.setConfig(opts) end
+
+	M.update(M.config[vim.o.background])
+
+	if vim.g.colors_name == 'nerdcontrast' then vim.cmd.redraw() end -- sync with term color update
+	if M.config.export then
+		local c = M.palette.Bg1
+		if type(M.config[vim.o.background].opacity) == 'string' then
+			io.stderr:write(
+				('\x1b]11;rgba:%s/%s/%s/%s\a'):format(
+					c:sub(2, 3),
+					c:sub(4, 5),
+					c:sub(6, 7),
+					M.config[vim.o.background].opacity
+				)
+			)
 		end
+		c = M.palette.Fg1
+		io.stderr:write(('\x1b]10;rgb:%s/%s/%s\a\x1b]4'):format(c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
+		for i = 0, 15 do
+			c = vim.g['terminal_color_' .. i]
+			io.stderr:write((';%s;rgb:%s/%s/%s'):format(i, c:sub(2, 3), c:sub(4, 5), c:sub(6, 7)))
+		end
+		io.stderr:write '\a'
 	end
-	M.addPalette(M.config.palette or require('nerdcontrast.palette.' .. vim.o.background))
-	M.config.palette = nil
 
 	if vim.g.colors_name ~= 'nerdcontrast' then
 		M.hi(require 'nerdcontrast.groups')
@@ -119,21 +148,21 @@ function M.setup(opts)
 					})
 				end
 			end
-			local function preload(mod)
-				package.preload[mod] = nil
-				for _, loader in pairs(package.loaders) do
-					local ret = loader(mod)
-					if type(ret) == 'function' then package.loaded[mod] = ret() end
-				end
-				M.hi(require('nerdcontrast.plugs.' .. mod))
-				return package.loaded[mod]
-			end
 			for mod, _ in vim.fs.dir(path .. 'plugs') do
 				mod = mod:sub(1, -5)
 				if package.loaded[mod] then
 					M.hi(require('nerdcontrast.plugs.' .. mod))
 				else
-					package.preload[mod] = function() return preload(mod) end
+					package.preload[mod] = function()
+						package.preload[mod] = nil
+						for _, loader in pairs(package.loaders) do
+							local ret = loader(mod)
+							if type(ret) == 'function' then
+								package.loaded[mod] = ret()
+								return M.hi(require('nerdcontrast.plugs.' .. mod))
+							end
+						end
+					end
 				end
 			end
 		end

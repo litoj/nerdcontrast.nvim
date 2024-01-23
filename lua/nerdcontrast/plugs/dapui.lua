@@ -20,7 +20,7 @@ return {
 	DapUIWatchesEmpty = 'Red',
 	DapUIWatchesError = 'Red',
 	DapUIModifiedValue = 'Cyan',
-	DapUIType = 'Keyword',
+	DapUIType = 'Type',
 	DapUIVariable = 'Variable',
 	DapUISource = 'Orange',
 	DapUIScope = 'Magenta',

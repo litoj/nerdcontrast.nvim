@@ -36,7 +36,7 @@ hi def link configOperator  Operator
 hi def link configComment   Comment
 hi def link configNumber    Number
 hi def link configVariable  Variable
-hi def link configField     @field
+hi def link configField     Field
 hi def link configString    String
 hi def link configHex       Constant
 
