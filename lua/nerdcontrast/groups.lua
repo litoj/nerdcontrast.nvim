@@ -7,7 +7,7 @@ return {
 	ColorColumn = 'LineNr',
 	FoldColumn = 'LineNr',
 	StatusLineNC = 'WinBarNC',
-	WinSeparator = 'Fg4',
+	WinSeparator = 'NonText',
 	VertSplit = 'Fg4',
 	TabLineFill = '',
 	TabLineSel = 'Fg1',
@@ -24,7 +24,7 @@ return {
 	IncSearch = { fg = 'Ac1b', bold = true, reverse = true },
 	MatchParen = { fg = 'Ac1b', italic = true, bold = true },
 	Folded = { bg = 'Pmenu', italic = true },
-	Title = { fg = 'Title', bold = true },
+	Title = { fg = 'Ac2b', bold = true },
 	Todo = { fg = 'Bg2', bg = 'Ac1', bold = true },
 	Conceal = { fg = 'SpecialKey', bg = 'Bg4' },
 	NonText = { fg = 'Bg4' }, -- used for listchars (indent)

@@ -3,6 +3,7 @@ return {
 	LazyButton = 'PmenuSel',
 	LazyH2 = 'Title',
 	LazyButtonActive = { bg = 'Bg3', bold = true },
+	LazyH1 = 'LazyButtonActive',
 	LazyCommit = 'String',
 	LazyH3 = 'LightGreen',
 	LazyReasonStart = 'Title',

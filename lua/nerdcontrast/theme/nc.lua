@@ -35,7 +35,6 @@ return {
 	Define = 'Cyan',
 	Type = 'FgBlue',
 	Label = 'Cyan',
-	Title = 'LightGreen',
 	Tag = 'Blue',
 
 	Operator = 'Red',
@@ -52,6 +51,6 @@ return {
 	SpecialChar = 'LightOrange',
 
 	Exception = 'FgViolet',
-	Directory = 'LightGreen',
+	Directory = 'Green',
 	File = 'Yellow',
 }

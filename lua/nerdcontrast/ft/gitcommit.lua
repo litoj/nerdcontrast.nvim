@@ -10,4 +10,6 @@ return {
 	gitcommitArrow = 'Delimiter',
 	gitcommitBranch = 'Green',
 	gitcommitType = 'Keyword',
+	['@markup.link.gitcommit'] = 'Variable',
+	['@string.special.url'] = 'File',
 }

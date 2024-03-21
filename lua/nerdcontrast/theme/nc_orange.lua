@@ -13,7 +13,6 @@ return {
 	Define = 'LightRed',
 	Type = 'LightRed',
 	Label = 'Olive',
-	Title = 'Olive',
 
 	Operator = 'FgYellow',
 	Delimiter = 'FgYellow',

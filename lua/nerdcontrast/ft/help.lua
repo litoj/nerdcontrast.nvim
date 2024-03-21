@@ -21,4 +21,8 @@ return {
 	helpBar = 'Delimiter',
 	helpStar = 'Delimiter',
 	helpBackTick = 'Delimiter',
+	['@label.vimdoc'] = { fg = 'Ac1', underline = true },
+	['@markup.link.vimdoc'] = 'Url',
+	['@markup.heading.1.vimdoc'] = 'Title',
+	['@markup.heading.4.vimdoc'] = 'Bold',
 }

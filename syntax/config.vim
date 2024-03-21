@@ -18,8 +18,8 @@ syn region  configComment   start="/\*" end="\*/" contains=@Spell
 syn match   configNumber    "[-+ ]*\d[.0-9]*" contained contains=configOperator
 syn match   configHex       "[0-9A-Za-f]\{6\}" contained
 syn match   configValue    "[^=]*$" contained contains=configBool,configNumber,configOperator,configDelimiter,configHex,configString
-syn match   configVariable "[^ =]\+\s*=" contained contains=configOperator
-syn match   configLine     "^\s*[^ =]\+\s*=.*$" contains=configVariable,configValue,configNumber
+syn match   configVariable "[^ =#./;][^ =#]\+\s*=" contained contains=configOperator
+syn match   configLine     "^\s*[^ =#./;][^ =#]\+\s*=.*$" contains=configVariable,configValue,configNumber
 syn match   configField    "[0-9A-Za-z_:=-]\+\s*{" contained contains=configDelimiter
 syn match   configLabel    "^\[[0-9A-Za-z_ -]\+\]$" contains=configDelimiter
 syn region  configBlock    start=".*{$" end="}$" contains=configField,configDelimiter,configComment,configLine,configString,configOperator transparent

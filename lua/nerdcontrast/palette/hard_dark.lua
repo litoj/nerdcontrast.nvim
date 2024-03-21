@@ -28,7 +28,7 @@ return {
 	Fg2 = { fg = '#dddddd' },
 	Fg3 = { fg = '#c0c0c0' },
 	Fg4 = { fg = '#a0a0a0' },
-	Fg5 = { fg = '#808080' },
+	Fg5 = { fg = '#797979' },
 
 	Bg4 = { bg = '#606060' },
 	Bg3 = { bg = '#404040' },
@@ -49,6 +49,6 @@ return {
 	#cfc #0f0 #0f0 #4b0
 	#bdf #0fc #0d9 #0d9
 	#bdf #0cf #0cf #47f
-	#dbf #b3a #b8f #93f
+	#dbf #b8f #b3a #93f
 	#fcc #f55 #f00 #b3a
 ]]

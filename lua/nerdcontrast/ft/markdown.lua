@@ -1,0 +1,22 @@
+return {
+	['@markup.raw'] = 'PreProc',
+	['@markup.raw.block'] = 'Fg1',
+	['@markup.list.checked'] = { fg = 'Green', bold = true },
+	['@markup.list.unchecked'] = 'Todo',
+	['@markup.link.label'] = 'Url',
+	['@markup.link.url'] = { fg = 'SpecialComment', underline = true },
+	['@markup.italic'] = 'Italic',
+	['@markup.strong'] = 'Bold',
+	['@markup.strikethrough'] = { strikethrough = true },
+
+	['@markup.heading'] = 'Title',
+	['@markup.heading.1'] = { bold = true, underdouble = true },
+	['@markup.heading.2'] = { bold = true, underdouble = true, italic = true },
+	['@markup.heading.3'] = { bold = true, underline = true },
+	['@markup.heading.4'] = { bold = true, underline = true, italic = true },
+	['@markup.heading.5'] = { underdouble = true },
+	['@markup.list'] = 'Delimiter',
+	['@markup.link'] = 'Delimiter',
+	['@markup.raw.delimiter'] = 'Delimiter',
+	['@conceal.markdown_inline'] = 'Delimiter',
+}

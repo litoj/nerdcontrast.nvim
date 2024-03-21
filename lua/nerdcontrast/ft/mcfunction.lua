@@ -48,4 +48,5 @@ return {
 	mcXpUnit = 'Type',
 	mcEnchantLevel = 'Number',
 	mcEBSDataModify = 'mcExecuteCond',
+	mcEBSDataRemove = 'mcExecuteCond',
 }

@@ -34,7 +34,7 @@ function M.update(cfg)
 			hl(0, k, v)
 		end
 	end
-	p.Bg0 = cfg.opacity and p.Bg1 or 'NONE'
+	p.Bg0 = cfg.opacity == true and p.Bg1 or 'NONE'
 
 	for _, tbl in ipairs { getTbl(cfg.theme.base, 'nerdcontrast.theme.'), cfg.theme.override } do
 		for k, v in pairs(type(tbl) == 'string' and require(tbl) or tbl) do
@@ -51,7 +51,7 @@ function M.update(cfg)
 	vim.g.terminal_color_5 = p.Magenta
 	vim.g.terminal_color_6 = p.Cyan
 	vim.g.terminal_color_7 = p.Fg4
-	vim.g.terminal_color_8 = p.Bg4
+	vim.g.terminal_color_8 = p.Fg5
 	vim.g.terminal_color_9 = p.LightRed
 	vim.g.terminal_color_10 = p.LightGreen
 	vim.g.terminal_color_11 = p.LightYellow
@@ -153,15 +153,21 @@ function M.setup(opts)
 				if package.loaded[mod] then
 					M.hi(require('nerdcontrast.plugs.' .. mod))
 				else
+					local old = package.preload[mod]
 					package.preload[mod] = function()
 						package.preload[mod] = nil
-						for _, loader in pairs(package.loaders) do
-							local ret = loader(mod)
-							if type(ret) == 'function' then
-								package.loaded[mod] = ret()
-								return M.hi(require('nerdcontrast.plugs.' .. mod))
+						if old then
+							old()
+						else
+							for _, loader in pairs(package.loaders) do
+								local ret = loader(mod)
+								if type(ret) == 'function' then
+									package.loaded[mod] = ret()
+									break
+								end
 							end
 						end
+						M.hi(require('nerdcontrast.plugs.' .. mod))
 					end
 				end
 			end
