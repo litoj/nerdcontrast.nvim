@@ -50,7 +50,7 @@ return {
 	SpecialKey = 'Orange',
 	SpecialChar = 'LightOrange',
 
-	Exception = 'FgViolet',
+	Exception = 'FgMagenta',
 	Directory = 'Green',
 	File = 'Yellow',
 }

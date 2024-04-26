@@ -159,13 +159,8 @@ function M.setup(opts)
 						if old then
 							old()
 						else
-							for _, loader in pairs(package.loaders) do
-								local ret = loader(mod)
-								if type(ret) == 'function' then
-									package.loaded[mod] = ret()
-									break
-								end
-							end
+							package.loaded[mod] = nil
+							package.loaded[mod] = package.loaders[2](mod)()
 						end
 						M.hi(require('nerdcontrast.plugs.' .. mod))
 					end

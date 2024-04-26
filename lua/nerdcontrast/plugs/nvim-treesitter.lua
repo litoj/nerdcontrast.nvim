@@ -19,6 +19,7 @@ return {
 	['@storageclass'] = 'Keyword',
 	['@keyword.conditional'] = 'Conditional',
 	['@keyword.repeat'] = 'Repeat',
+	['@keyword.return'] = 'Red',
 	['@string.special'] = 'LightOrange',
 	['@punctuation.special'] = 'Delimiter',
 	-- Java
