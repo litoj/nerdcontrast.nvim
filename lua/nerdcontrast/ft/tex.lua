@@ -1,3 +1,4 @@
+require('nerdcontrast').hi(require 'nerdcontrast.ft.markdown')
 return {
 	['@text.environment.latex'] = 'Keyword',
 	['@text.environment.name.latex'] = 'Constant',

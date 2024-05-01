@@ -14,11 +14,6 @@ return {
 
 	-- PLUGINS
 	DevIconMd = 'Fg1',
-	FzfLuaBorder = 'FloatBorder',
-	FzfLuaTitle = 'FloatTitle',
-	FzfLuaSearch = 'Search',
-	FzfLuaCursor = { fg = 'Ac2', bold = true, underline = true },
-	FzfLuaCursorLine = { bg = 'CursorLine', underline = true },
 	UfoFoldedBg = 'Pmenu',
 	UfoFoldedFg = 'Fg2',
 	UfoFoldedEllipsis = { fg = 'Conceal', bold = true },
