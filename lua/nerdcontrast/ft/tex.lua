@@ -7,4 +7,5 @@ return {
 	['@error.latex'] = 'String',
 	['@namespace.latex'] = 'Statement',
 	['@environment.latex'] = 'Statement',
+	['@markup.link.latex'] = '@text.uri',
 }

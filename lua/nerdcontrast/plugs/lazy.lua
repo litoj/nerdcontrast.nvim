@@ -9,7 +9,7 @@ return {
 	LazyReasonStart = 'Title',
 	LazyReasonPlugin = 'Magenta',
 	LazyReasonEvent = 'PreProc',
-	LazyReasonFt = 'String',
+	LazyReasonFt = 'File',
 	LazyReasonCmd = 'Statement',
 	LazyReasonSource = 'Orange',
 	LazyReasonImport = 'Parameter',

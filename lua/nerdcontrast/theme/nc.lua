@@ -52,5 +52,5 @@ return {
 
 	Exception = 'FgMagenta',
 	Directory = 'Green',
-	File = 'Yellow',
+	File = 'FgYellow',
 }
