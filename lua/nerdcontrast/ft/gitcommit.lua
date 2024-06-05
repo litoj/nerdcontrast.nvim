@@ -11,5 +11,6 @@ return {
 	gitcommitBranch = 'Green',
 	gitcommitType = 'Keyword',
 	['@markup.link.gitcommit'] = 'Variable',
+	['@markup.heading.gitcommit'] = 'Title',
 	['@string.special.url'] = 'File',
 }

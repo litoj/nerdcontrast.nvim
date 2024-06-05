@@ -2,7 +2,7 @@ return {
 	BufferCurrent = 'Bold',
 	BufferCurrentMod = { fg = 'LightRed', bold = true, italic = true },
 	BufferCurrentSign = 'Ac1',
-	BufferVisible = 'WinBar',
+	BufferVisible = { fg = 'WinBar', italic = true },
 	BufferVisibleMod = { fg = 'Red', bg = 'WinBar', italic = true },
 	BufferVisibleSign = { fg = 'Ac2', bg = 'WinBar' },
 	BufferInactive = { fg = 'Fg3', bg = 'WinBar' },

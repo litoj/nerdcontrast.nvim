@@ -22,6 +22,7 @@ return {
 	Substitute = { fg = 'Ac1b', bold = true, reverse = true },
 	Search = { fg = 'Ac1b', bold = true },
 	IncSearch = { fg = 'Ac1b', bold = true, reverse = true },
+	CurSearch = 'IncSearch',
 	MatchParen = { fg = 'Ac1b', italic = true, bold = true },
 	Folded = { bg = 'Pmenu', italic = true },
 	Title = { fg = 'Ac2b', bold = true },
