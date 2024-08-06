@@ -1,5 +1,7 @@
 -- for lazy-loading other groups that don't deserve a separate file
 return {
+	MoreMsg = 'Comment',
+	ModeMsg = 'Fg3',
 	-- Vim regex syntax
 	sqlType = 'String',
 	sqlOperator = 'Operator',
@@ -11,6 +13,8 @@ return {
 
 	diffAdded = 'DiffAdd',
 	diffRemoved = 'DiffDelete',
+
+	shOption = 'Parameter',
 
 	-- PLUGINS
 	DevIconMd = 'Fg1',

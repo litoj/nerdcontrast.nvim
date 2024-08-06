@@ -65,4 +65,5 @@ return {
 	['@lsp.typemod.class.declaration'] = 'TypeDef',
 	['@lsp.typemod.keyword.documentation'] = 'PreProc',
 	['@lsp.mod.declaration'] = { sp = 'Magenta', underline = true },
+	['@lsp.type.variable.typescript'] = '',
 }
