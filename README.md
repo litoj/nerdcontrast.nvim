@@ -12,7 +12,7 @@ A colorscheme helper with some default based on default theme of big java IDEs.
 
 ```lua
 return {
-  'JosefLitos/nerdcontrast.nvim',
+  'litoj/nerdcontrast.nvim',
   lazy = false,
   priority = 1000,
   opts = { -- use config = fun() to change vim.o.bg beforehand
