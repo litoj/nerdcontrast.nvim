@@ -11,6 +11,7 @@ return {
 	Pmenu = 'Bg1b',
 	CursorLine = 'Bg2',
 	Visual = 'Bg2b',
+	Title = 'Fg1',
 	-- Code
 	Comment = 'Fg4',
 	SpecialComment = 'Fg3',
