@@ -17,5 +17,6 @@ return {
 	['@markup.list'] = 'Delimiter',
 	['@markup.link'] = 'Delimiter',
 	['@markup.raw.delimiter'] = 'Delimiter',
+	['@markup.raw.block'] = { fg = 'Fg2' },
 	['@conceal.markdown_inline'] = 'Delimiter',
 }
