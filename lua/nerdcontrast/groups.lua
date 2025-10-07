@@ -27,7 +27,7 @@ return {
 	Folded = { bg = 'Pmenu', italic = true },
 	Title = { fg = 'Ac2b', bold = true },
 	Todo = { fg = 'Bg2', bg = 'Ac1', bold = true },
-	Conceal = { fg = 'SpecialKey', bg = 'Bg4' },
+	Conceal = { fg = 'SpecialKey', bg = 'Bg1b' },
 	NonText = { fg = 'Bg4' }, -- used for listchars (indent)
 	-- Messages
 	ErrorMsg = { fg = 'LightRed', bold = true },
