@@ -11,8 +11,8 @@ local ret = {
 		z = 'StatusLineDef',
 	},
 	insert = { a = { bg = bg, fg = p.Ac2 }, z = 'StatusLineDef' },
-	visual = { a = { bg = bg, fg = p.DiffText }, z = 'StatusLineDef' },
-	replace = { a = { bg = bg, fg = p.DiffDelete }, z = 'StatusLineDef' },
+	visual = { a = { bg = bg, fg = p.Yellow }, z = 'StatusLineDef' },
+	replace = { a = { bg = bg, fg = p.Red }, z = 'StatusLineDef' },
 	command = { a = { bg = bg, fg = p.BuiltinFn }, z = 'StatusLineDef' },
 	inactive = { a = { bg = bg, fg = p.Bg4 } },
 }

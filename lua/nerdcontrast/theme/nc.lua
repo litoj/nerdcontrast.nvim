@@ -2,8 +2,12 @@ return {
 	-- Accent colors
 	Ac1 = 'Magenta', -- underline/window decorations
 	Ac1b = 'LightMagenta', -- Search
+	Ac1c = 'FgMagenta',
+	Ac1d = 'BgMagenta',
 	Ac2 = 'Green', -- FloatTitle
 	Ac2b = 'LightGreen',
+	Ac2c = 'FgGreen',
+	Ac2d = 'BgGreen',
 	-- UI
 	WinBar = 'Bg0', -- 2 for overlay enabled
 	WinBarNC = 'Bg2', -- 3
@@ -15,10 +19,9 @@ return {
 	-- Code
 	Comment = 'Fg4',
 	SpecialComment = 'Fg3',
-	DiffAdd = 'Green',
-	DiffChange = 'Cyan',
-	DiffDelete = 'Red',
-	DiffText = 'Yellow',
+	Added = 'Green',
+	Changed = 'Cyan',
+	Removed = 'Red',
 	-- Variable types
 	Identifier = 'Fg1',
 	Variable = 'Green',

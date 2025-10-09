@@ -5,6 +5,7 @@ return {
 	['@markup.link.url'] = { fg = 'SpecialComment', underline = true },
 	['@markup.italic'] = 'Italic',
 	['@markup.strong'] = 'Bold',
+	['@markup.quote'] = { fg = 'Fg2', bg='Bg1b' },
 	['@markup.strikethrough'] = { strikethrough = true },
 	['@markup.heading'] = '', -- workaround for overwriting heading highlights
 	['@markup.heading.marker'] = { fg = 'Delimiter', bold = true },

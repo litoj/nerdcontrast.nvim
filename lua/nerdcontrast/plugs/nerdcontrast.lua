@@ -11,8 +11,12 @@ return {
 	xmlTag = 'Delimiter',
 	xmlTagName = 'Tag',
 
-	diffAdded = 'DiffAdd',
-	diffRemoved = 'DiffDelete',
+	DiffAdd = 'BgGreen',
+	DiffDelete = 'BgRed',
+	DiffText = 'BgYellow',
+	DiffChange = 'BgCyan',
+	diffAdded = 'Added',
+	diffRemoved = 'Removed',
 
 	shOption = 'Parameter',
 
