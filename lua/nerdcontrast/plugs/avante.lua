@@ -1,7 +1,5 @@
 return {
-	AvanteTaskCompleted = 'Title',
 	AvanteThinking = 'Todo',
-	AvanteTaskRunning = 'AvanteTaskCompleted',
 	AvanteStateSpinnerSucceeded = 'AvanteTaskCompleted',
 	AvanteToBeDeletedWOStrikethrough = 'DiffDelete',
 	AvanteConflictIncoming = 'DiffChange',

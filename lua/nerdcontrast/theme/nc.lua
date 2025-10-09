@@ -2,12 +2,12 @@ return {
 	-- Accent colors
 	Ac1 = 'Magenta', -- underline/window decorations
 	Ac1b = 'LightMagenta', -- Search
-	Ac1c = 'FgMagenta',
-	Ac1d = 'BgMagenta',
+	FgAc1 = 'FgMagenta',
+	BgAc1 = 'BgMagenta',
 	Ac2 = 'Green', -- FloatTitle
 	Ac2b = 'LightGreen',
-	Ac2c = 'FgGreen',
-	Ac2d = 'BgGreen',
+	FgAc2 = 'FgGreen',
+	BgAc2 = 'BgGreen',
 	-- UI
 	WinBar = 'Bg0', -- 2 for overlay enabled
 	WinBarNC = 'Bg2', -- 3
