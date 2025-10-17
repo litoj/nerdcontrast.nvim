@@ -1,4 +1,5 @@
 return {
+	NvimTreeOpenedHl = { bg = 'BgAc1', italic = true },
 	NvimTreeNormal = 'WinBar',
 	NvimTreeCursorLine = 'WinBarNC',
 	NvimTreeIndentMarker = 'Ac1',
