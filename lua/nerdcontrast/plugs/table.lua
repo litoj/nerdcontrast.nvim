@@ -1,4 +1,4 @@
--- cannot figure out a working hook for vim.lsp so using always-loaded 'table' to load lsp colors
+-- FIXME: cannot figure out a working hook for vim.lsp so using always-loaded 'table'
 vim.api.nvim_create_autocmd('LspTokenUpdate', {
 	group = vim.api.nvim_create_augroup('LspTokenHighlight', { clear = true }),
 	callback = function(args)
@@ -49,7 +49,8 @@ return {
 	['@lsp'] = '',
 	['@lsp.type.property'] = '@property',
 	['@lsp.type.variable'] = 'Variable',
-	['@lsp.type.variable.lua'] = '',
+	['@lsp.type.type.lua'] = '',
+	['@lsp.typemod.variable.global.lua'] = '@namespace',
 	['@lsp.type.parameter'] = 'Parameter',
 	['@lsp.type.typeParameter'] = { fg = 'FgGreen', bold = true },
 	['@lsp.type.macro'] = 'Macro',
@@ -68,26 +69,4 @@ return {
 	['@lsp.typemod.keyword.documentation'] = 'PreProc',
 	['@lsp.mod.declaration'] = { sp = 'Magenta', underline = true },
 	['@lsp.type.variable.typescript'] = '',
-
-	['@markup.list.checked'] = { fg = 'Green', bold = true },
-	['@markup.list.unchecked'] = 'Todo',
-	['@markup.link.label'] = 'Url',
-	['@markup.link.url'] = { fg = 'SpecialComment', underline = true },
-	['@markup.italic'] = 'Italic',
-	['@markup.strong'] = 'Bold',
-	['@markup.quote'] = { fg = 'Fg2', bg = 'Bg1b' },
-	['@markup.strikethrough'] = { strikethrough = true },
-	['@markup.heading'] = '', -- workaround for overwriting heading highlights
-	['@markup.heading.marker'] = { fg = 'Delimiter', bold = true },
-	['@markup.headingalt.1'] = { fg = 'Title', bold = true, underdouble = true },
-	['@markup.headingalt.2'] = { fg = 'Title', bold = true, underdouble = true, italic = true },
-	['@markup.headingalt.3'] = { fg = 'Title', bold = true, underline = true },
-	['@markup.headingalt.4'] = { fg = 'Title', bold = true, underline = true, italic = true },
-	['@markup.headingalt.5'] = { fg = 'Title', bold = true, underdashed = true },
-	['@markup.headingalt.6'] = { fg = 'Title', bold = true, underdashed = true, italic = true },
-	['@markup.list'] = 'Delimiter',
-	['@markup.link'] = 'Delimiter',
-	['@markup.raw.delimiter'] = 'Delimiter',
-	['@markup.raw.block'] = { fg = 'Fg2' },
-	['@conceal.markdown_inline'] = 'Delimiter',
 }
