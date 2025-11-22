@@ -1,13 +1,14 @@
 return {
 	-- Accent colors
 	Ac1 = 'Magenta', -- underline/window decorations
-	Ac1b = 'LightMagenta', -- Search
+	LightAc1 = 'LightMagenta', -- Search
 	FgAc1 = 'FgMagenta',
 	BgAc1 = 'BgMagenta',
 	Ac2 = 'Green', -- FloatTitle
-	Ac2b = 'LightGreen',
+	LightAc2 = 'LightGreen',
 	FgAc2 = 'FgGreen',
 	BgAc2 = 'BgGreen',
+
 	-- UI
 	WinBar = 'Bg0', -- 2 for overlay enabled
 	WinBarNC = 'Bg2', -- 3
@@ -16,38 +17,42 @@ return {
 	CursorLine = 'Bg2',
 	Visual = 'Bg2b',
 	Title = 'Fg1',
+
 	-- Code
 	Comment = 'Fg4',
 	SpecialComment = 'Fg3',
 	Added = 'Green',
 	Changed = 'Cyan',
 	Removed = 'Red',
+
 	-- Variable types
-	Identifier = 'Fg1',
-	Variable = 'Green',
-	Parameter = 'Olive',
-	Field = 'LightGreen',
-	BuiltinVar = 'Cyan',
 	Constant = 'Violet',
+	BuiltinVar = 'Cyan',
+	Field = 'Fg1',
+	Parameter = 'Olive',
+	Variable = 'Fg1',
+	Identifier = 'Fg1',
+
 	-- Control stmt
 	Keyword = 'Blue',
 	Statement = 'LightBlue',
 	Repeat = 'LightBlue',
 	Conditional = 'LightBlue',
-	PreProc = 'Cyan',
+	PreProc = 'FgCyan',
+	FlowControl = 'LightRed', -- custom for return and break statements (where possible)
 
-	Define = 'Cyan',
+	Define = 'Magenta',
 	Type = 'FgBlue',
-	Label = 'Cyan',
-	Tag = 'Blue',
+	Label = 'LightViolet',
+	Tag = 'LightViolet',
 
-	Operator = 'Red',
-	Delimiter = 'LightRed',
+	Operator = 'FgRed',
+	Delimiter = 'Fg1',
 	-- Data types
 	Function = 'Fg1',
 	BuiltinFn = 'LightBlue',
-	Number = 'FgRed',
-	Boolean = 'Blue',
+	Number = 'Yellow',
+	Boolean = 'Yellow',
 	String = 'Yellow',
 	Character = 'LightYellow',
 	Special = 'Magenta',

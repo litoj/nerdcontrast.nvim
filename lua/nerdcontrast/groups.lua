@@ -19,13 +19,13 @@ return {
 	FloatBorder = 'Ac1',
 	-- In edited file
 	Normal = { fg = 'Fg1', bg = 'Bg0' },
-	Substitute = { fg = 'Ac1b', bold = true, reverse = true },
-	Search = { fg = 'Ac1b', bold = true },
-	IncSearch = { fg = 'Ac1b', bold = true, reverse = true },
+	Substitute = { fg = 'LightAc1', bold = true, reverse = true },
+	Search = { fg = 'LightAc1', bold = true },
+	IncSearch = { fg = 'LightAc1', bold = true, reverse = true },
 	CurSearch = 'IncSearch',
-	MatchParen = { fg = 'Ac1b', italic = true, bold = true },
+	MatchParen = { fg = 'LightAc1', italic = true, bold = true },
 	Folded = { bg = 'Pmenu', italic = true },
-	Title = { fg = 'Ac2b', bold = true },
+	Title = { fg = 'Title', bold = true },
 	Todo = { fg = 'Bg2', bg = 'Ac1', bold = true },
 	Conceal = { fg = 'SpecialKey', bg = 'Bg1b' },
 	NonText = { fg = 'Bg4' }, -- used for listchars (indent)
@@ -40,5 +40,6 @@ return {
 	Include = 'Keyword',
 	Boolean = { fg = 'Boolean', italic = true },
 	Constant = { fg = 'Constant', italic = true },
-	TypeDef = 'Bold',
+	Typedef = 'Bold',
+	Define = { sp = 'Define', underline = true, bold = true },
 }

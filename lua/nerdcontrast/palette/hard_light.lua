@@ -18,7 +18,7 @@ return {
 	LightMagenta = { fg = '#cc22ff' },
 
 	FgRed = { fg = '#772222' },
-	FgYellow = { fg = '#664400' },
+	FgYellow = { fg = '#775500' },
 	FgGreen = { fg = '#114400' },
 	FgCyan = { fg = '#005566' },
 	FgBlue = { fg = '#000088' },

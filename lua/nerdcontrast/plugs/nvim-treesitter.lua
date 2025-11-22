@@ -9,19 +9,21 @@ local ret = {
 	['@variable.builtin'] = { fg = 'BuiltinVar', italic = true },
 	['@function.builtin'] = { fg = 'BuiltinFn', italic = true },
 
-	['@namespace'] = 'Label',
+	['@namespace'] = 'BuiltinVar',
 	['@keyword.directive'] = 'PreProc',
-	['@module'] = 'Label',
-	['@module.builtin'] = { fg = 'Label', italic = true },
+	['@function.macro'] = { fg = 'PreProc', underline = true, bold = true, sp = 'Define' },
+	['@module'] = '@namespace',
+	['@module.builtin'] = '@variable.builtin',
 	['@constructor'] = 'Type',
 	['@type.builtin'] = { fg = 'Type', italic = true },
 
 	['@storageclass'] = 'Keyword',
 	['@keyword.conditional'] = 'Conditional',
 	['@keyword.repeat'] = 'Repeat',
-	['@keyword.return'] = 'Red',
+	['@keyword.return'] = 'FlowControl',
+	['@keyword.operator'] = 'Operator',
 	['@string.special'] = 'LightOrange',
-	['@punctuation.special'] = 'Delimiter',
+	['@punctuation.special'] = 'LightRed',
 	-- Java
 	['@type.qualifier'] = 'Keyword',
 	['@attribute.java'] = 'PreProc',
@@ -40,6 +42,11 @@ local ret = {
 	['@symbol.make'] = 'Variable',
 	['@string.make'] = 'Variable',
 	['@operator.make'] = 'Delimiter',
+	-- Lua
+	['@constructor.lua'] = 'Delimiter',
+	-- ['@property.lua'] = '', -- false highlighting of table field definition via { [var-indexing] = xxx}
+	['@function.lua'] = 'Define',
+	['@function.call.lua'] = 'Function',
 	-- Markdown, LaTeX
 	['@markup.list.checked'] = { fg = 'Green', bold = true },
 	['@markup.list.unchecked'] = 'Todo',
@@ -47,17 +54,17 @@ local ret = {
 	['@markup.link.url'] = { fg = 'SpecialComment', underline = true },
 	['@markup.italic'] = 'Italic',
 	['@markup.strong'] = 'Bold',
-	['@markup.quote'] = { fg = 'Fg2', bg = 'Bg1b' },
+	['@markup.quote'] = { fg = 'Fg2', bg = 'Bg1b', italic = true },
 	['@markup.strikethrough'] = { strikethrough = true },
 	['@markup.heading'] = '', -- workaround for overwriting heading highlights
-	['@markup.heading.marker'] = { fg = 'Delimiter', bold = true },
-	['@markup.headingalt.1'] = { fg = 'Title', bold = true, underdouble = true },
-	['@markup.headingalt.2'] = { fg = 'Title', bold = true, underdouble = true, italic = true },
-	['@markup.headingalt.3'] = { fg = 'Title', bold = true, underline = true },
-	['@markup.headingalt.4'] = { fg = 'Title', bold = true, underline = true, italic = true },
-	['@markup.headingalt.5'] = { fg = 'Title', bold = true, underdashed = true },
-	['@markup.headingalt.6'] = { fg = 'Title', bold = true, underdashed = true, italic = true },
-	['@markup.list'] = 'Delimiter',
+	['@markup.heading.marker'] = { fg = 'FlowControl', bold = true },
+	['@markup.heading.1'] = { fg = 'Title', bold = true, underdouble = true },
+	['@markup.heading.2'] = { fg = 'Title', bold = true, underdouble = true, italic = true },
+	['@markup.heading.3'] = { fg = 'Title', bold = true, underline = true },
+	['@markup.heading.4'] = { fg = 'Title', bold = true, underline = true, italic = true },
+	['@markup.heading.5'] = { fg = 'Title', bold = true, underdashed = true },
+	['@markup.heading.6'] = { fg = 'Title', bold = true, underdashed = true, italic = true },
+	['@markup.list'] = 'Red',
 	['@markup.link'] = 'Delimiter',
 	['@conceal.markdown_inline'] = 'Delimiter',
 	['@markup.raw.delimiter'] = 'Delimiter',
@@ -72,15 +79,21 @@ local ret = {
 	['@module.typescript'] = 'Variable',
 	['@operator.regex'] = '@string.special',
 	['@type.query'] = 'Keyword',
-	['@constructor.lua'] = 'Delimiter',
-	['@keyword.luadoc'] = 'PreProc',
-	['@function.macro.luadoc'] = 'Constant',
 	['@keyword.jsdoc'] = 'PreProc',
+	['@keyword.doxygen'] = 'PreProc',
 	['@comment.note'] = 'Todo',
 }
 
 local has = require('nvim-treesitter.parsers').has_parser
 -- conditionally disable lsp highlighting in preference of parsers
-if has 'luadoc' then ret['@lsp.type.variable.lua'] = '' end
+if has 'luadoc' then
+	ret['@keyword.luadoc'] = 'PreProc'
+	ret['@function.macro.luadoc'] = { fg = 'Type', sp = 'Define', underline = true, bold = true }
+	ret['@lsp.type.variable.lua'] = ''
+	-- ret['@lsp.type.type.lua'] = ''
+	ret['@lsp.type.macro.lua'] = ''
+else
+	ret['@lsp.type.macro.lua'] = { fg = 'Type', sp = 'Define', underline = true, bold = true }
+end
 
 return ret

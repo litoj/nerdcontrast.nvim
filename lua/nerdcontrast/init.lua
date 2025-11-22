@@ -1,15 +1,21 @@
 vim.o.termguicolors = true
----@type nerdcontrast
----@diagnostic disable-next-line: missing-fields
+---@class nerdcontrast
+---@field lualine? table lualine theme override - specified parts will override nc defaults
+---@field palette nerdcontrast.Palette color palette + theme group/color definitions
+---@field loaded boolean
 local M = {
+	---@type nerdcontrast.Config
 	config = {
 		defer = 0,
 		export = false,
-		light = { palette = { base = 'nerdcontrast.palette.hard_light' } },
-		dark = { palette = { base = 'nerdcontrast.palette.hard_dark' } },
+		light = { palette = { base = 'hard_light' } },
+		dark = { palette = { base = 'hard_dark' } },
 	},
+	---@type table<string,nerdcontrast.Highlight>
 	deps = {},
 }
+
+---@type fun(cfg: nerdcontrast.Config) copy defaults to unspecified light/dark theme configs
 function M.setConfig(cfg)
 	local default = { palette = cfg.palette, theme = cfg.theme, opacity = cfg.opacity }
 	cfg.palette = nil
@@ -21,23 +27,27 @@ M.setConfig { theme = { base = 'nc' }, opacity = true }
 
 local hl = vim.api.nvim_set_hl
 
+---@type fun(cfg: nerdcontrast.ThemeConfig) update colors to set theme
 function M.update(cfg)
-	local function getTbl(val, prefix)
-		return type(val) == 'string' and require(val:match '%.' and val or prefix .. val) or val
-	end
-	-- TODO: make monochrome pre-theme → just give an array of consecutive color definition tables
+	local function getTbl(val, prefix) return type(val) == 'string' and require(prefix .. val) or val end
 	M.palette = {} -- set base color hex
 	local p = M.palette
-	for _, tbl in ipairs { getTbl(cfg.palette.base, 'nerdcontrast.palette.'), cfg.palette.custom } do
-		for k, v in pairs(type(tbl) == 'string' and require(tbl) or tbl) do
+	for _, tbl in ipairs {
+		getTbl(cfg.palette.base or cfg.palette, 'nerdcontrast.palette.'),
+		cfg.palette.override,
+	} do
+		for k, v in pairs(tbl) do
 			p[k] = v.fg or v.bg
 			hl(0, k, v)
 		end
 	end
 	p.Bg0 = cfg.opacity == true and p.Bg1 or 'NONE'
 
-	for _, tbl in ipairs { getTbl(cfg.theme.base, 'nerdcontrast.theme.'), cfg.theme.override } do
-		for k, v in pairs(type(tbl) == 'string' and require(tbl) or tbl) do
+	for _, tbl in ipairs {
+		getTbl(cfg.theme.base or cfg.theme, 'nerdcontrast.theme.'),
+		cfg.theme.override,
+	} do
+		for k, v in pairs(tbl) do
 			p[k] = p[v]
 			hl(0, k, { link = v })
 		end
@@ -69,6 +79,7 @@ function M.update(cfg)
 	end
 end
 
+---@type fun(tbl: table<string,nerdcontrast.Highlight|string>) highlight or link a color
 function M.hi(tbl)
 	local p = M.palette
 	for k, v in pairs(tbl) do
@@ -76,7 +87,7 @@ function M.hi(tbl)
 			hl(0, k, { link = v })
 		else
 			local c
-			if not v[1] then
+			if not v[1] then -- save original colour names and real object as subitem
 				c = { v }
 				M.deps[k] = c
 				if v.fg then
@@ -105,6 +116,7 @@ function M.hi(tbl)
 	end
 end
 
+---@type fun(opts?: nerdcontrast.Config) Plugin setup with optional configuration
 function M.setup(opts)
 	if opts then M.setConfig(opts) end
 

@@ -25,12 +25,12 @@ return {
 	FgBlue = { fg = '#bbddff' },
 	FgMagenta = { fg = '#ddbbff' },
 
-	BgRed = { bg = '#440e00' },
-	BgYellow = { bg = '#4a3a00' },
-	BgGreen = { bg = '#1c3300' },
-	BgCyan = { bg = '#003333' },
-	BgBlue = { bg = '#002244' },
-	BgMagenta = { bg = '#400033' },
+	BgMagenta = { bg = '#330055' },
+	BgRed = { bg = '#551100' },
+	BgYellow = { bg = '#554400' },
+	BgGreen = { bg = '#114400' },
+	BgCyan = { bg = '#004444' },
+	BgBlue = { bg = '#002255' },
 
 	Fg1 = { fg = '#ffffff' },
 	Fg2 = { fg = '#dddddd' },

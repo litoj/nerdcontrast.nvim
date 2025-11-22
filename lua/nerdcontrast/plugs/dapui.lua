@@ -24,7 +24,7 @@ return {
 	DapUIVariable = 'Variable',
 	DapUISource = 'Orange',
 	DapUIScope = 'Magenta',
-	DapUIWatchesValue = 'Fg1',
-	DapUIValue = 'Fg1',
+	DapUIValue = 'PreProc',
+	DapUIWatchesValue = 'DapUIValue',
 	DapUIDecoration = 'Fg1',
 }
