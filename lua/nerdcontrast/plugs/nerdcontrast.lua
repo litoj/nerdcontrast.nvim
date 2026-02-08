@@ -15,8 +15,6 @@ return {
 	DiffDelete = 'BgRed',
 	DiffText = 'BgYellow',
 	DiffChange = 'BgCyan',
-	diffAdded = 'Added',
-	diffRemoved = 'Removed',
 
 	shOption = 'Parameter',
 

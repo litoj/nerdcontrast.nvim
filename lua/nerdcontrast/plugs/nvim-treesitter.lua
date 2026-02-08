@@ -23,10 +23,19 @@ local ret = {
 	['@keyword.return'] = 'FlowControl',
 	['@keyword.operator'] = 'Operator',
 	['@string.special'] = 'LightOrange',
-	['@punctuation.special'] = 'LightRed',
-	-- Java
+	['@punctuation.special'] = '@punctuation',
+
+	--- custom definition for matches of definitions
+	['FnDecl'] = { fg = 'Function', sp = 'Define', underline = true, bold = true },
+	['@function.decl'] = 'FnDecl',
+	['@function.method.decl'] = 'FnDecl',
+
+	['@function.call'] = '@function',
+	['@function.method.call'] = '@function',
+	-- Java & C#
 	['@type.qualifier'] = 'Keyword',
 	['@attribute.java'] = 'PreProc',
+	['@attribute.c_sharp'] = 'PreProc',
 	-- HTML
 	['@tag'] = 'Tag',
 	['@tag.delimiter'] = 'Delimiter',
@@ -39,14 +48,14 @@ local ret = {
 	['@string.regex.vim'] = '@string.special',
 	['@string.special.vim'] = '@string',
 	-- Make
-	['@symbol.make'] = 'Variable',
+	['@string.special.symbol.make'] = 'Constant',
 	['@string.make'] = 'Variable',
-	['@operator.make'] = 'Delimiter',
 	-- Lua
+	['@function.lua'] = 'FnDecl',
 	['@constructor.lua'] = 'Delimiter',
-	-- ['@property.lua'] = '', -- false highlighting of table field definition via { [var-indexing] = xxx}
-	['@function.lua'] = 'Define',
-	['@function.call.lua'] = 'Function',
+	-- Bash
+	['@function.bash'] = 'FnDecl',
+	['@string.special.path'] = 'File',
 	-- Markdown, LaTeX
 	['@markup.list.checked'] = { fg = 'Green', bold = true },
 	['@markup.list.unchecked'] = 'Todo',
@@ -78,7 +87,7 @@ local ret = {
 	['@module.javascript'] = 'Variable',
 	['@module.typescript'] = 'Variable',
 	['@operator.regex'] = '@string.special',
-	['@type.query'] = 'Keyword',
+	['@type.query'] = 'Label',
 	['@keyword.jsdoc'] = 'PreProc',
 	['@keyword.doxygen'] = 'PreProc',
 	['@comment.note'] = 'Todo',

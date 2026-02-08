@@ -3,7 +3,7 @@ return {
 	diffChanged = 'DiffChange',
 	diffDiffer = 'DiffChange',
 	diffBDiffer = 'diffDiffer',
-	diffRemoved = 'DiffRemove',
+	diffRemoved = 'DiffDelete',
 	gitcommitSummary = 'Title',
 	gitcommitHeader = 'Title',
 	gitcommitFile = 'String',

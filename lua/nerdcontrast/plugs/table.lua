@@ -69,4 +69,6 @@ return {
 	['@lsp.typemod.keyword.documentation'] = 'PreProc',
 	['@lsp.mod.declaration'] = 'Define',
 	['@lsp.type.variable.typescript'] = '',
+	['@lsp.type.class.cs'] = '',
+	['@lsp.type.constantName'] = 'Constant',
 }

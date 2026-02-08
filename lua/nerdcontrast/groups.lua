@@ -12,7 +12,7 @@ return {
 	TabLineFill = '',
 	TabLineSel = 'Fg1',
 	PmenuSbar = 'Bg2',
-	PmenuSel = 'Visual',
+	PmenuSel = 'Bg2b',
 	PmenuThumb = 'Bg3',
 	NormalFloat = 'WinBar',
 	FloatTitle = { fg = 'Ac2', bold = true },
