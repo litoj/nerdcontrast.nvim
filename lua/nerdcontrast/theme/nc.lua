@@ -29,8 +29,8 @@ return {
 	Constant = 'Violet',
 	BuiltinVar = 'Cyan', -- includes modules, namespaces etc.
 	Field = 'Fg1',
-	Parameter = 'Olive',
-	Variable = 'FgGreen',
+	Parameter = 'Fg1',
+	Variable = 'Fg1',
 	Identifier = 'Fg1',
 
 	-- Control stmt

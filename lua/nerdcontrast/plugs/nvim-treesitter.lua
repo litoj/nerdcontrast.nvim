@@ -51,7 +51,6 @@ local ret = {
 	['@string.special.symbol.make'] = 'Constant',
 	['@string.make'] = 'Variable',
 	-- Lua
-	['@function.lua'] = 'FnDecl',
 	['@constructor.lua'] = 'Delimiter',
 	-- Bash
 	['@function.bash'] = 'FnDecl',
