@@ -39,7 +39,7 @@ return {
 	Repeat = 'LightBlue',
 	Conditional = 'LightBlue',
 	PreProc = 'FgCyan',
-	FlowControl = 'LightRed', -- custom for return and break statements (where possible)
+	FlowControl = 'LightRed', -- custom for return+break+continue statements
 
 	Define = 'Magenta',
 	Type = 'FgBlue',

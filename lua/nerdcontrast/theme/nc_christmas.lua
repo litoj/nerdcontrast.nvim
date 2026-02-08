@@ -2,6 +2,7 @@ return vim.tbl_extend('force', require'nerdcontrast.theme.nc', {
 	-- Variable types
 	Constant = 'Violet',
 	BuiltinVar = 'Cyan',
+	Parameter = 'Olive',
 	Field = 'LightGreen',
 	Variable = 'Green',
 
@@ -11,23 +12,19 @@ return vim.tbl_extend('force', require'nerdcontrast.theme.nc', {
 	Repeat = 'LightBlue',
 	Conditional = 'LightBlue',
 	PreProc = 'FgCyan',
-	FlowControl = 'Red', -- custom for return and break statements
+	FlowControl = 'LightRed', -- custom for return+break+continue statements
 
-	Define = 'BgRed',
+	Define = 'Magenta',
 	Type = 'FgBlue',
 	Label = 'LightViolet',
 	Tag = 'Blue',
 	Title = 'LightAc2',
 
-	Operator = 'Red',
+	Operator = 'FgRed',
 	Delimiter = 'LightRed',
 	-- Data types
 	Function = 'Fg1',
 	BuiltinFn = 'LightBlue',
-	Number = 'FgRed',
-	Boolean = 'Blue',
-	String = 'Yellow',
-	Character = 'LightYellow',
 	Special = 'Magenta',
 	SpecialKey = 'Orange',
 	SpecialChar = 'LightOrange',
