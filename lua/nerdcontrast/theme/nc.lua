@@ -12,6 +12,7 @@ return {
 	-- UI
 	WinBar = 'Bg0', -- 2 for overlay enabled
 	WinBarNC = 'Bg2', -- 3
+	NormalFloat = 'Bg1b',
 	StatusLine = 'Bg1b',
 	Pmenu = 'Bg1b',
 	PmenuSbar = 'Bg2',

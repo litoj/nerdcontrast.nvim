@@ -1,4 +1,3 @@
--- FIXME: cannot figure out a working hook for vim.lsp so using always-loaded 'table'
 vim.api.nvim_create_autocmd('LspTokenUpdate', {
 	group = vim.api.nvim_create_augroup('LspTokenHighlight', { clear = true }),
 	callback = function(args)

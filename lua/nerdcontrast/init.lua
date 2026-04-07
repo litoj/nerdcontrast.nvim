@@ -141,7 +141,7 @@ function M.load_plugs()
 	end
 	for hook, _ in vim.fs.dir(path .. 'plugs') do
 		hook = hook:sub(1, -5)
-		local mod = hook:gsub('_', '.')
+		local mod = hook:gsub('__', '.')
 		if package.loaded[mod] then
 			M.hi(require('nerdcontrast.plugs.' .. hook))
 		else

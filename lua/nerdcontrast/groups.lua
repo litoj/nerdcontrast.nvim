@@ -11,7 +11,6 @@ return {
 	VertSplit = 'Fg4',
 	TabLineFill = '',
 	TabLineSel = 'Fg1',
-	NormalFloat = 'WinBar',
 	FloatTitle = { fg = 'Ac2', bold = true },
 
 	FloatBorder = 'Ac1',

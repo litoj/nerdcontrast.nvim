@@ -1,5 +1,7 @@
 return {
 	BlinkCmpLabelMatch = 'PmenuMatch',
+	BlinkCmpDocBorder = 'Ac1',
+	BlinkCmpSignatureHelpBorder = 'Ac1',
 
 	BlinkCmpKindMethod = { fg = 'LightBlue', reverse = true },
 	BlinkCmpKindFunction = 'BlinkCmpKindMethod',
@@ -26,7 +28,7 @@ return {
 	BlinkCmpKindText = { fg = 'Yellow', reverse = true },
 	BlinkCmpKindUnit = { fg = 'FgRed', reverse = true },
 	BlinkCmpKindFile = { fg = 'Orange', reverse = true },
-	BlinkCmpKindFolder = { fg = 'Orange', reverse = true },
+	BlinkCmpKindFolder = 'BlinkCmpKindFile',
 	BlinkCmpKindCopilot = 'Bg4',
 	BlinkCmpKindTabNine = 'Bg4',
 }
