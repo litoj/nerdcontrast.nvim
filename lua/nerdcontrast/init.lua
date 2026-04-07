@@ -116,6 +116,15 @@ function M.hi(tbl)
 	end
 end
 
+local plug_hooks = {}
+function M.plug_loader(mod)
+	local hook = plug_hooks[mod]
+	if hook then
+		plug_hooks[mod] = nil
+		M.hi(require('nerdcontrast.plugs.' .. hook))
+	end
+end
+table.insert(package.loaders, 1, M.plug_loader)
 function M.load_plugs()
 	local path = debug.getinfo(1, 'S').source:sub(2, -9)
 	for ft, _ in vim.fs.dir(path .. 'ft') do
@@ -136,23 +145,7 @@ function M.load_plugs()
 		if package.loaded[mod] then
 			M.hi(require('nerdcontrast.plugs.' .. hook))
 		else
-			local old = package.preload[mod]
-			package.preload[mod] = function()
-				package.preload[mod] = nil
-				if old then
-					old()
-				else
-					package.loaded[mod] = nil
-					for i = 2, #package.loaders do
-						local ret = package.loaders[i](mod)
-						if type(ret) == 'function' then
-							package.loaded[mod] = ret()
-							break
-						end
-					end
-				end
-				M.hi(require('nerdcontrast.plugs.' .. hook))
-			end
+			plug_hooks[mod] = hook
 		end
 	end
 end
