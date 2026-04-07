@@ -116,6 +116,47 @@ function M.hi(tbl)
 	end
 end
 
+function M.load_plugs()
+	local path = debug.getinfo(1, 'S').source:sub(2, -9)
+	for ft, _ in vim.fs.dir(path .. 'ft') do
+		ft = ft:sub(1, -5)
+		if vim.bo.filetype == ft then
+			M.hi(require('nerdcontrast.ft.' .. ft))
+		else
+			vim.api.nvim_create_autocmd('FileType', {
+				once = true,
+				pattern = ft,
+				callback = function() M.hi(require('nerdcontrast.ft.' .. ft)) end,
+			})
+		end
+	end
+	for hook, _ in vim.fs.dir(path .. 'plugs') do
+		hook = hook:sub(1, -5)
+		local mod = hook:gsub('_', '.')
+		if package.loaded[mod] then
+			M.hi(require('nerdcontrast.plugs.' .. hook))
+		else
+			local old = package.preload[mod]
+			package.preload[mod] = function()
+				package.preload[mod] = nil
+				if old then
+					old()
+				else
+					package.loaded[mod] = nil
+					for i = 2, #package.loaders do
+						local ret = package.loaders[i](mod)
+						if type(ret) == 'function' then
+							package.loaded[mod] = ret()
+							break
+						end
+					end
+				end
+				M.hi(require('nerdcontrast.plugs.' .. hook))
+			end
+		end
+	end
+end
+
 ---@type fun(opts?: nerdcontrast.Config) Plugin setup with optional configuration
 function M.setup(opts)
 	if opts then M.setConfig(opts) end
@@ -146,49 +187,10 @@ function M.setup(opts)
 
 	if vim.g.colors_name ~= 'nerdcontrast' then
 		M.hi(require 'nerdcontrast.groups')
-		local function extraHl()
-			local path = debug.getinfo(1, 'S').source:sub(2, -9)
-			for ft, _ in vim.fs.dir(path .. 'ft') do
-				ft = ft:sub(1, -5)
-				if vim.bo.filetype == ft then
-					M.hi(require('nerdcontrast.ft.' .. ft))
-				else
-					vim.api.nvim_create_autocmd('FileType', {
-						once = true,
-						pattern = ft,
-						callback = function() M.hi(require('nerdcontrast.ft.' .. ft)) end,
-					})
-				end
-			end
-			for mod, _ in vim.fs.dir(path .. 'plugs') do
-				mod = mod:sub(1, -5)
-				if package.loaded[mod] then
-					M.hi(require('nerdcontrast.plugs.' .. mod))
-				else
-					local old = package.preload[mod]
-					package.preload[mod] = function()
-						package.preload[mod] = nil
-						if old then
-							old()
-						else
-							package.loaded[mod] = nil
-							for i = 2, #package.loaders do
-								local ret = package.loaders[i](mod)
-								if type(ret) == 'function' then
-									package.loaded[mod] = ret()
-									break
-								end
-							end
-						end
-						M.hi(require('nerdcontrast.plugs.' .. mod))
-					end
-				end
-			end
-		end
 		if M.config.defer then
-			vim.defer_fn(extraHl, M.config.defer)
+			vim.defer_fn(M.load_plugs, M.config.defer)
 		else
-			extraHl()
+			M.load_plugs()
 		end
 		vim.g.colors_name = 'nerdcontrast'
 	else

@@ -70,5 +70,7 @@ return {
 	['@lsp.mod.declaration'] = 'Define',
 	['@lsp.type.variable.typescript'] = '',
 	['@lsp.type.class.cs'] = '',
-	['@lsp.type.constantName'] = 'Constant',
+	['@lsp.type.xmlDocCommentName.cs'] = 'PreProc',
+	['@lsp.type.constantName.cs'] = 'Constant',
+	['@lsp.type.constant'] = 'Constant',
 }

@@ -14,6 +14,9 @@ return {
 	WinBarNC = 'Bg2', -- 3
 	StatusLine = 'Bg1b',
 	Pmenu = 'Bg1b',
+	PmenuSbar = 'Bg2',
+	PmenuSel = 'Bg2b',
+	PmenuThumb = 'Bg3',
 	CursorLine = 'Bg2',
 	Visual = 'Bg2b',
 	Title = 'Fg1',
