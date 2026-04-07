@@ -92,9 +92,9 @@ local ret = {
 	['@comment.note'] = 'Todo',
 }
 
-local has = require('nvim-treesitter.parsers').has_parser
+local has = require('nvim-treesitter').get_installed()
 -- conditionally disable lsp highlighting in preference of parsers
-if has 'luadoc' then
+if vim.list_contains(has, 'luadoc') then
 	ret['@keyword.luadoc'] = 'PreProc'
 	ret['@function.macro.luadoc'] = { fg = 'Type', sp = 'Define', underline = true, bold = true }
 	ret['@lsp.type.variable.lua'] = ''
