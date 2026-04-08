@@ -25,7 +25,7 @@ return {
 	BlinkCmpKindKeyword = { fg = 'Keyword', reverse = true },
 	BlinkCmpKindOperator = { fg = 'Operator', reverse = true },
 	BlinkCmpKindEvent = { fg = 'SpecialKey', reverse = true },
-	BlinkCmpKindSnippet = { fg = 'Comment', reverse = true },
+	BlinkCmpKindSnippet = 'Bg3',
 
 	BlinkCmpKindText = { fg = 'String', reverse = true },
 	BlinkCmpKindUnit = { fg = 'Number', reverse = true },
