@@ -1,8 +1,7 @@
 return {
 	BlinkCmpLabelMatch = 'PmenuMatch',
-	BlinkCmpDoc = 'Pmenu',
 	BlinkCmpDocBorder = 'FloatBorder',
-	BlinkCmpSignatureHelpBorder = 'Ac1',
+	BlinkCmpSignatureHelpBorder = 'FloatBorder',
 	BlinkCmpGhostText = { fg = 'Fg3', italic = true },
 
 	BlinkCmpKindMethod = { fg = 'Function', reverse = true },
