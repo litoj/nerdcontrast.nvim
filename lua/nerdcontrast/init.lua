@@ -70,7 +70,7 @@ function M.update(cfg)
 	vim.g.terminal_color_14 = p.Parameter
 	vim.g.terminal_color_15 = p.Fg1
 
-	for n, t in pairs(M.deps) do -- rehighlight dependant groups
+	for n, t in pairs(M.deps) do -- rehighlight dependent groups
 		local c = t[1]
 		if t.fg then c.fg = p[t.fg] end
 		if t.bg then c.bg = p[t.bg] end
@@ -79,48 +79,58 @@ function M.update(cfg)
 	end
 end
 
----@type fun(tbl: table<string,nerdcontrast.Highlight|string>) highlight or link a color
+---@param tbl table<string,nerdcontrast.Highlight|string> highlight or link a color
 function M.hi(tbl)
-	local p = M.palette
+	local plt = M.palette
 	for k, v in pairs(tbl) do
 		if type(v) == 'string' then
 			hl(0, k, { link = v })
 		else
 			local c
 			if not v[1] then -- save original colour names and real object as subitem
-				c = { v }
-				M.deps[k] = c
-				if v.fg then
-					c.fg = v.fg
-					v.fg = p[v.fg]
-				end
-				if v.bg then
-					c.bg = v.bg
-					v.bg = p[v.bg]
-				end
-				if v.sp then
-					c.sp = v.sp
-					v.sp = p[v.sp]
-				end
-				tbl[k] = c
 				c = v
+				v = { v }
+				tbl[k] = v
+				v.fg = c.fg
+				v.bg = c.bg
+				v.sp = c.sp
 			else
-				M.deps[k] = v
 				c = v[1]
-				if v.fg then c.fg = p[v.fg] end
-				if v.bg then c.bg = p[v.bg] end
-				if v.sp then c.sp = p[v.sp] end
 			end
+
+			M.deps[k] = v
+			if v.fg then c.fg = plt[v.fg] end
+			if v.bg then c.bg = plt[v.bg] end
+			if v.sp then c.sp = plt[v.sp] end
 			hl(0, k, c)
 		end
 	end
 end
 
-local plug_hooks = {}
+---@param tbl table<string,nerdcontrast.Highlight|string> highlight or link a color
+---@param theme nerdcontrast.InitPalette|string theme to inject the highlights with
+function M.hi_themed(tbl, theme)
+	if type(theme) == 'string' then theme = require('nerdcontrast.theme.' .. theme) end
+	for _, v in pairs(tbl) do
+		if type(v) == 'table' then
+			---@diagnostic disable-next-line: cast-local-type
+			if v[1] then v = v[1] end
+			---@diagnostic disable: need-check-nil, assign-type-mismatch
+			if v.fg then v.fg = theme[v.fg] end
+			if v.bg then v.bg = theme[v.bg] end
+			if v.sp then v.sp = theme[v.sp] end
+			---@diagnostic enable: need-check-nil, assign-type-mismatch
+		end
+	end
+	return M.hi(tbl)
+end
+
+M.plug_hooks = {}
+---@param mod string module to load highlights for
 function M.plug_loader(mod)
-	local hook = plug_hooks[mod]
+	local hook = M.plug_hooks[mod]
 	if hook then
-		plug_hooks[mod] = nil
+		M.plug_hooks[mod] = nil
 		M.hi(require('nerdcontrast.plugs.' .. hook))
 	end
 end
@@ -142,10 +152,12 @@ function M.load_plugs()
 	for hook, _ in vim.fs.dir(path .. 'plugs') do
 		hook = hook:sub(1, -5)
 		local mod = hook:gsub('__', '.')
-		if package.loaded[mod] then
-			M.hi(require('nerdcontrast.plugs.' .. hook))
-		else
-			plug_hooks[mod] = hook
+		if M.plug_hooks[mod] == nil then
+			if package.loaded[mod] then
+				M.hi(require('nerdcontrast.plugs.' .. hook))
+			else
+				M.plug_hooks[mod] = hook
+			end
 		end
 	end
 end
